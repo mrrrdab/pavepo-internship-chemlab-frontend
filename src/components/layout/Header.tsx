@@ -9,9 +9,10 @@ import shoppingBagIcon from '@assets/icons/shopping-bag.svg';
 
 type HeaderProps = { isHomePage?: boolean };
 
+// TODO: Sticky
 const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
-  const textColor = isHomePage ? 'text-white' : 'text-neutral-900';
-  const placeholderColor = isHomePage ? 'placeholder:text-white' : 'placeholder:text-neutral-900';
+  const textColor = isHomePage ? 'text-white' : '';
+  const placeholderColor = isHomePage ? 'placeholder:text-white' : '';
   const borderColor = isHomePage ? 'border-white' : 'border-black';
 
   return (
@@ -24,25 +25,23 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
           <nav>
             <ul className="flex gap-6">
               <li className="flex gap-2.5">
-                <Link to="/" className={`${textColor} text-xl font-semibold hover:text-primary`}>
-                  Каталог
-                </Link>
-                <Button variant="ghost" className="p-0">
+                <Button variant="text" className="flex items-center gap-2.5 p-0">
+                  <p className={`${textColor} text-xl font-semibold`}>Каталог</p>
                   <img src={arrowDownIcon} alt="Arrow Down" />
                 </Button>
               </li>
               <li>
-                <Link to="/" className={`${textColor} text-xl hover:text-primary`}>
+                <Link to="/catalog/lab-equipment" className={`${textColor} text-xl hover:text-primary`}>
                   Акции
                 </Link>
               </li>
               <li>
-                <Link to="/" className={`${textColor} text-xl hover:text-primary`}>
+                <Link to="/delivery" className={`${textColor} text-xl hover:text-primary`}>
                   Доставка
                 </Link>
               </li>
               <li>
-                <Link to="/" className={`${textColor} text-xl hover:text-primary`}>
+                <Link to="/about" className={`${textColor} text-xl hover:text-primary`}>
                   О Нас
                 </Link>
               </li>
@@ -69,13 +68,15 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
                     className={`bg-transparent text-xl border ${borderColor} rounded-lg ${placeholderColor} px-13 py-2.5`}
                   />
                 </div>
-                <Button type="submit" className="font-medium text-white">
+                <Button type="submit" className="font-medium">
                   Найти
                 </Button>
               </div>
             </form>
             <div>
-              <img src={shoppingBagIcon} alt="Shopping Bag" />
+              <Link to="/shopping-cart">
+                <img src={shoppingBagIcon} alt="Shopping Bag" />
+              </Link>
             </div>
           </div>
         </div>

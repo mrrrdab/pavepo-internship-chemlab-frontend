@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      "@constants/*": ["src/constants/*"],
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
       "@assets/*": ["src/assets/*"],
@@ -39,6 +40,6 @@
     "esModuleInterop": true
   },
 
-  "include": ["src", "postcss.config.js", "tailwind.config.js", "vite.config.js"],
-  "exclude": ["node_modules"]
+  "include": ["src", "postcss.config.js", "tailwind.config.js", "vite.config.js", "ProductItem.tsx"],
+  "exclude": ["node_modules", "dist"]
 }

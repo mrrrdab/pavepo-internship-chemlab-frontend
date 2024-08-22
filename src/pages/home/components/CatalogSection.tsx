@@ -1,4 +1,6 @@
-import { Button } from '@components/.';
+import { Link } from 'react-router-dom';
+
+import { ROUTES } from '@/constants';
 import arrowRightWhiteIcon from '@assets/icons/arrow-right-white.svg';
 import catalogImageFirst from '@assets/images/catalog-1.png';
 import catalogImageSecond from '@assets/images/catalog-2.png';
@@ -9,13 +11,16 @@ const CatalogSection = () => {
   return (
     <section className="px-26">
       <div className="flex justify-between items-center mb-16">
-        <h2 className="text-neutral-900 text-5xl">Каталог</h2>
-        <Button className="flex justify-center items-center gap-4 w-1/6 h-15">
+        <h2 className="text-5xl">Каталог</h2>
+        <Link
+          to={ROUTES.HOME}
+          className="bg-primary text-white text-xl rounded-lg flex justify-center items-center gap-4 w-1/6 h-15"
+        >
           <p className="font-medium">Смотреть еще</p>
           <img src={arrowRightWhiteIcon} alt="Arrow Right" />
-        </Button>
+        </Link>
       </div>
-      <div className="grid auto-rows-70 grid-cols-4 gap-x-5 gap-y-6">
+      <div className="grid auto-rows-[17.5rem] grid-cols-4 gap-x-5 gap-y-6">
         <div className="col-span-1">
           <CatalogCard title="Оборудование и Приборы" />
         </div>

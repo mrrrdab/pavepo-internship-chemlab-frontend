@@ -7,7 +7,7 @@ import { ContactDetailsCard } from './ContactDetailsCard';
 
 const ContactsSection = () => {
   return (
-    <section className="flex flex-col gap-30 px-26">
+    <section className="flex flex-col gap-30">
       <div className="flex flex-col gap-8">
         <ContactDetailsItem
           title="Контакты | Москва"
@@ -26,20 +26,20 @@ const ContactsSection = () => {
         <div className="flex-1 min-w-0">
           <ContactDetailsCard imgSrc={centralOfficeImage} title="Центральный офис">
             <div className="flex flex-col gap-2.5">
-              <h4 className="text-neutral-900 text-2xl">Адрес:</h4>
-              <p className="text-neutral-900 text-xl">
+              <h4 className="text-2xl">Адрес:</h4>
+              <p className="text-xl">
                 115230, Москва, Каширское шоссе, дом 3, корпус 2, строение 4/9, Бизнес центр &quot;Сириус Парк&quot;
               </p>
             </div>
             <div className="flex flex-col gap-2.5">
-              <h4 className="text-neutral-900 text-2xl">Телефон:</h4>
-              <a href="tel: +7 (965) 380-89-38" className="text-neutral-900 text-xl underline">
+              <h4 className="text-2xl">Телефон:</h4>
+              <a href="tel: +7 (965) 380-89-38" className="text-xl underline">
                 +7 (965) 380-89-38
               </a>
             </div>
             <div className="flex flex-col gap-2.5">
-              <h4 className="text-neutral-900 text-2xl">Email:</h4>
-              <a href={`mailto: mail38@chimmed.ru`} className="text-neutral-900 text-xl">
+              <h4 className="text-2xl">Email:</h4>
+              <a href={`mailto: mail38@chimmed.ru`} className="text-xl">
                 mail38@chimmed.ru
               </a>
             </div>
@@ -48,20 +48,20 @@ const ContactsSection = () => {
         <div className="flex-1 min-w-0">
           <ContactDetailsCard imgSrc={warehouseImage} title="Склад">
             <div className="flex flex-col gap-2.5">
-              <h4 className="text-neutral-900 text-2xl">Адрес:</h4>
-              <p className="text-neutral-900 text-xl">142103, г. Подольск Московской области, ул. Бронницкая, д. 5</p>
+              <h4 className="text-2xl">Адрес:</h4>
+              <p className="text-xl">142103, г. Подольск Московской области, ул. Бронницкая, д. 5</p>
             </div>
             <div className="flex flex-col gap-2.5">
-              <h4 className="text-neutral-900 text-2xl">Телефон:</h4>
-              <a href="tel: +7 (905) 777-41-39" className="text-neutral-900 text-xl underline">
+              <h4 className="text-2xl">Телефон:</h4>
+              <a href="tel: +7 (905) 777-41-39" className="text-xl underline">
                 +7 (905) 777-41-39
               </a>
             </div>
             <div className="flex flex-col gap-2.5">
-              <h4 className="text-neutral-900 text-2xl">Телефон для заказа пропуска:</h4>
+              <h4 className="text-2xl">Телефон для заказа пропуска:</h4>
               <div className="flex gap-2">
                 {['+7 (905) 777-59-15', '+7 (495) 721-49-61'].map((phone, index, array) => (
-                  <div key={index} className="text-neutral-900 text-xl">
+                  <div key={index} className="text-xl">
                     <a href={`tel:${phone}`} className="underline">
                       {phone}
                     </a>

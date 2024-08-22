@@ -36,15 +36,13 @@ const config = {
       },
       height: {
         15: '3.625rem',
+        18: '4.5rem',
         70: '17.5rem',
         100: '32.5rem',
       },
-      gridAutoRows: {
-        70: '17.5rem',
-      },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };
 
 export default config;

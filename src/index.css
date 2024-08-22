@@ -6,6 +6,7 @@
 
 @layer base {
   html {
-    font-family: 'Fira Sans', system-ui, sans-serif;
+    @apply font-fira-sans;
+    @apply text-neutral-900;
   }
 }

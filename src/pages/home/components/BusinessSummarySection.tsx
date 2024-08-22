@@ -1,7 +1,7 @@
 const BusinessSummarySection = () => {
   return (
     <section>
-      <h2 className="text-neutral-900 text-5xl px-26 mb-16">Мы предлагаем</h2>
+      <h2 className="text-5xl px-26 mb-16">Мы предлагаем</h2>
       <div className="bg-primary flex gap-5 px-26 py-14">
         <div className="flex-1 flex flex-col gap-6">
           <p className="text-white text-2xl border-b border-b-white">01</p>

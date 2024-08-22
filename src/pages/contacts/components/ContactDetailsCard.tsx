@@ -13,7 +13,7 @@ const ContactDetailsCard: React.FC<ContactDetailsCardProps> = ({ imgSrc, title, 
     <Card className="border border-black rounded-xl flex h-full">
       <div className="flex flex-col gap-8 w-2/3 px-5 py-6">
         <CardHeader>
-          <CardTitle className="text-neutral-900 text-2xl font-medium">{title}</CardTitle>
+          <CardTitle className="text-2xl font-medium">{title}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">{children}</CardContent>
       </div>

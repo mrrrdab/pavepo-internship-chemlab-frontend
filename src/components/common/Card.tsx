@@ -28,4 +28,3 @@ const CardFooter: React.FC<CardFooterProps> = ({ className, ...props }) => (
 );
 
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };
-export type { CardProps };

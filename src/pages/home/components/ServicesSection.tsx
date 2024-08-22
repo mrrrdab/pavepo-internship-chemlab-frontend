@@ -4,7 +4,7 @@ import { ServiceCard } from './ServiceCard';
 const ServicesSection = () => {
   return (
     <section className="px-26">
-      <h2 className="text-neutral-900 text-5xl mb-16">Наши услуги</h2>
+      <h2 className="text-5xl mb-16">Наши услуги</h2>
       <div className="flex flex-col gap-6">
         <ServiceCard
           title="Производственные  услуги"

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cn } from '@utils/cn';
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'text';
 type ButtonSize = 'default' | 'sm' | 'lg';
 type ButtonBorderRadius = 'default' | 'lg' | 'full';
 
@@ -18,7 +18,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary: 'bg-primary text-white',
   secondary: 'bg-secondary text-neutral-900',
   outline: 'bg-white border border-black text-neutral-900',
-  ghost: 'bg-transparent text-black',
+  text: 'bg-transparent text-black',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -46,7 +46,11 @@ const Button: React.FC<ButtonProps> = ({
   const borderRadiusStyles = borderRadiusClasses[borderRadius];
 
   return (
-    <button className={cn(baseClasses, variantStyles, sizeStyles, borderRadiusStyles, className)} {...props}>
+    <button
+      className={cn(baseClasses, variantStyles, sizeStyles, borderRadiusStyles, className)}
+      type="button"
+      {...props}
+    >
       {children}
     </button>
   );

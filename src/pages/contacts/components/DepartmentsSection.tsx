@@ -2,8 +2,8 @@ import { DepartmentButton } from './DepartmentCollapse';
 
 const DepartmentsSection = () => {
   return (
-    <section className="px-26">
-      <h2 className="text-neutral-900 text-5xl mb-16">Департаменты</h2>
+    <section>
+      <h2 className="text-5xl mb-16">Департаменты</h2>
       <div className="flex gap-5">
         <div className="flex-1 flex flex-col gap-5">
           <DepartmentButton title="Биохимии и Биотехнологии" />

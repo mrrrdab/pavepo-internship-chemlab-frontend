@@ -1,7 +1,7 @@
 import React from 'react';
 
+import arrowRightBlackIcon from '@assets/icons/arrow-right-black-sm.svg';
 import { Card, CardHeader, CardTitle, CardContent, Button } from '@components/.';
-import arrowRightBlackIcon from '@assets/icons/arrow-right-black.svg';
 
 type ServiceCardProps = { title: string; description: string };
 

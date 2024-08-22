@@ -13,7 +13,7 @@ const TopBar: React.FC<TopBarProps> = ({ isHomePage = false }) => {
   return (
     <div className="px-26">
       <div className={`flex justify-between items-center py-6 ${border} ${paddingBottom}`}>
-        <Button variant="ghost" className="flex gap-2 p-0">
+        <Button variant="text" className="flex gap-2 p-0">
           <img src={languageIcon} alt="Language" />
           <p>RUS</p>
           <img src={arrowDownIcon} alt="Arrow Down" />

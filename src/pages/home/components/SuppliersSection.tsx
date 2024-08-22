@@ -1,19 +1,19 @@
 /* eslint-disable max-len */
-import { Card, CardContent, CardFooter, Button } from '@components/.';
-import arrowRightBlackIcon from '@assets/icons/arrow-right-black.svg';
+import arrowRightBlackIcon from '@assets/icons/arrow-right-black-sm.svg';
 import abclonalLogo from '@assets/images/supplier-abclonal.png';
 import edomLogo from '@assets/images/supplier-edom.png';
 import ekanLogo from '@assets/images/supplier-ekan.png';
 import hellmaLogo from '@assets/images/supplier-hellma.png';
 import ikaLogo from '@assets/images/supplier-ika.png';
 import merckLogo from '@assets/images/supplier-merck.png';
+import { Card, CardContent, CardFooter, Button } from '@components/.';
 
 import { SupplierCard } from './SupplierCard';
 
 const SuppliersSection = () => {
   return (
     <section className="px-26">
-      <h2 className="text-neutral-900 text-5xl mb-16">Поставщики</h2>
+      <h2 className="text-5xl mb-16">Поставщики</h2>
       <div className="flex gap-5">
         <Card className="flex-1 self-stretch bg-primary rounded-xl flex flex-col px-5 py-6">
           <CardContent>

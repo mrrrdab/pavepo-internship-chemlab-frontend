@@ -1,7 +1,7 @@
 import React from 'react';
 
+import arrowRightBlackIcon from '@assets/icons/arrow-right-black-sm.svg';
 import { Card, CardTitle, CardDescription, CardContent, CardFooter, Button } from '@components/.';
-import arrowRightBlackIcon from '@assets/icons/arrow-right-black.svg';
 
 type CatalogCardProps = {
   imgSrc: string;
@@ -16,9 +16,10 @@ const SpecialOfferCard: React.FC<CatalogCardProps> = ({ imgSrc, title, descripti
         <img src={imgSrc} alt={title} className="object-contain w-full h-full" />
       </CardContent>
       <CardFooter className="flex justify-between items-center">
+        {/* TODO: Width */}
         <div className="flex flex-col gap-2 w-[45%]">
-          <CardTitle className="text-neutral-900 text-2xl">{title}</CardTitle>
-          {description && <CardDescription className="text-neutral-900/65 text-xl">{description}</CardDescription>}
+          <CardTitle className="text-2xl">{title}</CardTitle>
+          {description && <CardDescription className="opacity-65 text-xl">{description}</CardDescription>}
         </div>
         <Button variant="outline" borderRadius="lg" className="flex justify-between items-center w-1/2 h-16">
           <p>Подробнее</p>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button } from '@/components';
-import addIcon from '@assets/icons/add-icon.svg';
+import addIcon from '@assets/icons/add.svg';
 
 type DepartmentButtonProps = { title: string };
 

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
+import arrowRightBlackIcon from '@assets/icons/arrow-right-black-sm.svg';
 import { Button } from '@components/.';
-import arrowRightBlackIcon from '@assets/icons/arrow-right-black.svg';
 
 const FeedbackSection = () => {
   return (
