@@ -1,11 +1,15 @@
 import React from 'react';
 
-import catalogBackground from '@assets/images/catalog-background.png';
+import catalogBackground from '@/assets/images/catalog-background.png';
 
 import BaseLayout from '../layout';
 import { CategorySection } from './components';
 
-const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
+type LayoutProps = {
+  children: React.ReactNode;
+};
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <React.Fragment>
       <BaseLayout>

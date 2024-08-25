@@ -1,11 +1,13 @@
-import aboutImageFirst from '@assets/images/about-1.png';
-import aboutImageSecond from '@assets/images/about-2.png';
-import aboutImageThird from '@assets/images/about-3.png';
-import aboutImageFourth from '@assets/images/about-4.png';
-import aboutImageFifth from '@assets/images/about-5.png';
-import aboutImageSixth from '@assets/images/about-6.png';
+import React from 'react';
 
-const AboutSection = () => {
+import aboutImageFirst from '@/assets/images/about-1.png';
+import aboutImageSecond from '@/assets/images/about-2.png';
+import aboutImageThird from '@/assets/images/about-3.png';
+import aboutImageFourth from '@/assets/images/about-4.png';
+import aboutImageFifth from '@/assets/images/about-5.png';
+import aboutImageSixth from '@/assets/images/about-6.png';
+
+const AboutSection: React.FC = () => {
   return (
     <section className="px-26">
       <h1 className="text-5xl mb-16">О Нас</h1>

@@ -1,4 +1,6 @@
-const AdvantagesSection = () => {
+import React from 'react';
+
+const AdvantagesSection: React.FC = () => {
   return (
     <section>
       <h1 className="text-5xl px-26 mb-16">Преимущества</h1>

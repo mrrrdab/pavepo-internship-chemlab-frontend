@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { AboutSection, AdvantagesSection, LicensesSection, PartnersSection } from './components';
 import Layout from '../layout';
+import { AboutSection, AdvantagesSection, LicensesSection, PartnersSection } from './components';
 
-const AboutPage = () => {
+const AboutPage: React.FC = () => {
   return (
     <React.Fragment>
       <Layout>

@@ -1,15 +1,6 @@
-type GetLabEquipmentProductDTO = {
-  id: string;
-  imgUrl: string;
-  productType: string;
-  model: string;
-  manufacturer: string;
-  originCountries: string[];
-  weight: number;
-  measurementUnit: string;
-  price: number;
-};
+import { Product } from '@/types';
 
-type GetLabEquipmentProductsDTO = { products: GetLabEquipmentProductDTO[]; totalCount: number | null };
+type GetLabEquipmentProductDTO = Product;
+type GetLabEquipmentProductsDTO = { products: Product[]; totalCount: number | null };
 
 export type { GetLabEquipmentProductDTO, GetLabEquipmentProductsDTO };

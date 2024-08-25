@@ -1,59 +1,99 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useQuery } from 'react-query';
+import { Oval } from 'react-loader-spinner';
 
-// TODO: Scroll width
-import arrowLeftIcon from '@assets/icons/arrow-left-black.svg';
-import arrowRightIcon from '@assets/icons/arrow-right-black-md.svg';
-import { getLicenses, GetLicensesDTO } from '@/api/licenses';
+import arrowLeftDarkIcon from '@/assets/icons/arrow-left-dark.svg';
+import arrowRightDarkMediumIcon from '@/assets/icons/arrow-right-dark-md.svg';
+import { getLicenses } from '@/api';
 import { Button } from '@/components';
 
 import { LicenseItem } from './LicenseItem';
 
-const SCROLL_OFFSET = 200;
+const LIMIT = 10;
 
-const LicensesSection = () => {
-  const [licenses, setLicenses] = useState<GetLicensesDTO>([]);
+// TODO: Scroll buttons
+const LicensesSection: React.FC = () => {
+  const {
+    isLoading,
+    isError,
+    data: licenses,
+  } = useQuery(['licenses'], () => getLicenses({ limit: LIMIT }), {
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+    retry: 2,
+  });
+
+  const firstItemRef = useRef<HTMLDivElement | null>(null);
+  const [itemWidth, setItemWidth] = useState<number>(0);
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
-    const fetchLicenses = async () => {
-      try {
-        const fetchedLicenses = await getLicenses();
-        setLicenses(fetchedLicenses);
-      } catch (error) {
-        console.error('Failed to fetch licenses:', error);
+    const updateItemWidth = () => {
+      if (firstItemRef.current) {
+        setItemWidth(firstItemRef.current.getBoundingClientRect().width);
       }
     };
 
-    fetchLicenses();
-  }, []);
+    updateItemWidth();
+    window.addEventListener('resize', updateItemWidth);
+    return () => {
+      window.removeEventListener('resize', updateItemWidth);
+    };
+  }, [licenses]);
 
   const handleScroll = (offset: number) => {
-    const newScrollPosition = scrollPosition + offset;
-    setScrollPosition(newScrollPosition);
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft = newScrollPosition;
+      const container = scrollContainerRef.current;
+      const containerWidth = container.clientWidth;
+      const scrollWidth = container.scrollWidth;
+
+      const newScrollPosition = container.scrollLeft + offset * itemWidth;
+
+      if (newScrollPosition < 0) {
+        container.scrollLeft = 0;
+      } else if (newScrollPosition > scrollWidth - containerWidth) {
+        container.scrollLeft = scrollWidth - containerWidth;
+      } else {
+        container.scrollLeft = newScrollPosition;
+      }
     }
   };
 
   return (
     <section>
       <h1 className="text-5xl px-26 mb-16">Лицензии</h1>
-      <div className="flex mx-12">
-        <Button variant="text" onClick={() => handleScroll(-SCROLL_OFFSET)} className="flex-shrink-0 p-0">
-          <img src={arrowLeftIcon} alt="Arrow Left" />
-        </Button>
-        <div ref={scrollContainerRef} className="whitespace-nowrap overflow-x-auto scroll-smooth">
-          {licenses.map(license => (
-            <div key={license.id} className="inline-block whitespace-normal w-1/6 pl-5">
-              <LicenseItem imgUrl={license.imgUrl} title={license.title} />
-            </div>
-          ))}
+      {isLoading ? (
+        <div className="w-fit mx-auto">
+          <Oval height="40" width="40" color="#2196F3" secondaryColor="#F1F1F1" strokeWidth={4} />
         </div>
-        <Button variant="text" onClick={() => handleScroll(SCROLL_OFFSET)} className="flex-shrink-0 p-0 ml-5">
-          <img src={arrowRightIcon} alt="Arrow Right" />
-        </Button>
-      </div>
+      ) : isError ? (
+        <div className="w-fit mx-auto">
+          <p className="text-error text-2xl">Ошибка загрузки лицензий</p>
+        </div>
+      ) : (
+        licenses && (
+          <div className="flex mx-12">
+            <Button variant="text" onClick={() => handleScroll(-1)} className="flex-shrink-0 p-0">
+              <img src={arrowLeftDarkIcon} alt="Arrow Left" />
+            </Button>
+            <div ref={scrollContainerRef} className="whitespace-nowrap overflow-x-auto scroll-smooth">
+              {licenses.map((license, index) => (
+                <div
+                  key={license.id}
+                  className="inline-block whitespace-normal w-1/6 min-h-96 pl-5"
+                  ref={index === 0 ? firstItemRef : null}
+                >
+                  <LicenseItem image={license.image} title={license.title} />
+                </div>
+              ))}
+            </div>
+            <Button variant="text" onClick={() => handleScroll(1)} className="flex-shrink-0 p-0 ml-5">
+              <img src={arrowRightDarkMediumIcon} alt="Arrow Right" />
+            </Button>
+          </div>
+        )
+      )}
     </section>
   );
 };

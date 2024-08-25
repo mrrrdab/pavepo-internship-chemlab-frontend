@@ -1,15 +1,17 @@
+/* eslint-disable max-len */
+import React from 'react';
 import { Link } from 'react-router-dom';
 
+import arrowRightWhiteIcon from '@/assets/icons/arrow-right-white.svg';
+import aboutImage from '@/assets/images/home-about.png';
 import { ROUTES } from '@/constants';
-import arrowRightWhiteIcon from '@assets/icons/arrow-right-white.svg';
-import aboutImage from '@assets/images/about-home.png';
 
-const AboutSection = () => {
+const AboutSection: React.FC = () => {
   return (
     <section className="px-26">
       <h2 className="text-5xl mb-16">О Нас</h2>
       <div className="flex justify-between">
-        {/* TODO: Width */}
+        {/* TODO-L: Width */}
         <div id="1" className="w-[45%]">
           <div className="flex flex-col gap-10 w-3/4">
             <div className="flex flex-col gap-6">
@@ -42,7 +44,7 @@ const AboutSection = () => {
             </div>
             <Link
               to={ROUTES.ABOUT}
-              className="bg-primary text-white text-xl rounded-lg flex justify-center items-center gap-4 w-1/2 h-15"
+              className="bg-primary text-white text-xl rounded-lg flex justify-center items-center gap-4 hover:bg-primary-dark w-1/2 h-15"
             >
               <p className="font-medium">Читать еще</p>
               <img src={arrowRightWhiteIcon} alt="Arrow Right" />

@@ -1,4 +1,6 @@
-const BusinessSummarySection = () => {
+import React from 'react';
+
+const BusinessSummarySection: React.FC = () => {
   return (
     <section>
       <h2 className="text-5xl px-26 mb-16">Мы предлагаем</h2>

@@ -1,11 +1,14 @@
-import { Layout } from '../layout';
-import { ProductsSection, FiltersSection } from './components';
+import React from 'react';
 
-const LabEquipmentPage = () => {
+import { Layout } from '../layout';
+import { ProductsSection } from '../components';
+import { FiltersSection } from './components';
+
+const LabEquipmentPage: React.FC = () => {
   return (
     <Layout>
       <div className="flex gap-5">
-        <div className="w-1/4">
+        <div className="w-[22%]">
           <FiltersSection />
         </div>
         <div className="flex-1">

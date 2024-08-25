@@ -5,7 +5,9 @@ const config = {
     extend: {
       colors: {
         primary: '#2196F3',
+        'primary-dark': '#13588F',
         secondary: '#F1F1F1',
+        error: '#FF4646',
         neutral: {
           900: '#121212',
         },
@@ -34,11 +36,16 @@ const config = {
         30: '7.5rem',
         50: '12.5rem',
       },
+      width: {
+        98: '25rem',
+        100: '30rem',
+      },
       height: {
         15: '3.625rem',
         18: '4.5rem',
         70: '17.5rem',
-        100: '32.5rem',
+        84: '22rem',
+        104: '32.5rem',
       },
     },
   },

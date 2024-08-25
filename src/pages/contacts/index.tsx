@@ -1,17 +1,17 @@
 import React from 'react';
 
-import contactsBackground from '@assets/images/contacts-background.png';
+import contactsBackground from '@/assets/images/contacts-background.png';
 
 import Layout from '../layout';
-import { ContactsSection, DepartmentsSection } from './components';
+import { PrimaryContactsSection, DepartmentsSection } from './components';
 
-const ContactsPage = () => {
+const ContactsPage: React.FC = () => {
   return (
     <React.Fragment>
       <Layout>
         <img src={contactsBackground} alt="Background" className="mb-16" />
         <main className="flex flex-col gap-30 px-26">
-          <ContactsSection />
+          <PrimaryContactsSection />
           <DepartmentsSection />
         </main>
       </Layout>

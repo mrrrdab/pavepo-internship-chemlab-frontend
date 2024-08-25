@@ -1,7 +1,9 @@
-import rhtuLogo from '@assets/images/partner-rhtu.png';
-import rudnLogo from '@assets/images/partner-rudn.png';
+import React from 'react';
 
-const PartnersSection = () => {
+import rhtuLogo from '@/assets/images/partner-rhtu.png';
+import rudnLogo from '@/assets/images/partner-rudn.png';
+
+const PartnersSection: React.FC = () => {
   return (
     <section className="px-26">
       <h1 className="text-5xl mb-16">Наши партнеры</h1>

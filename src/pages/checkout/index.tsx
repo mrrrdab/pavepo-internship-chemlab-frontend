@@ -1,7 +1,9 @@
-import Layout from '../layout';
-import { CheckoutForm, SummaryCard } from './components';
+import React from 'react';
 
-const CheckoutPage = () => {
+import Layout from '../layout';
+import { CheckoutForm } from './components';
+
+const CheckoutPage: React.FC = () => {
   return (
     <Layout>
       <main className="px-26 mb-16">
@@ -10,9 +12,6 @@ const CheckoutPage = () => {
           <div className="flex gap-5">
             <div className="grow-[2]">
               <CheckoutForm />
-            </div>
-            <div className="grow">
-              <SummaryCard price={10} vat={10} delivery={10} total={10} />
             </div>
           </div>
         </div>

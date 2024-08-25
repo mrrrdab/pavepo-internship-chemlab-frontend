@@ -1,23 +1,49 @@
-import { DepartmentButton } from './DepartmentCollapse';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { Oval } from 'react-loader-spinner';
 
-const DepartmentsSection = () => {
+import { getDepartmentsContacts } from '@/api';
+
+import { DepartmentCollapse } from './DepartmentCollapse';
+
+// TODO
+const DepartmentsSection: React.FC = () => {
+  const {
+    isLoading,
+    isError,
+    data: departments,
+  } = useQuery(['department-contacts'], () => getDepartmentsContacts(), {
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+    retry: 2,
+  });
+
   return (
     <section>
       <h2 className="text-5xl mb-16">Департаменты</h2>
-      <div className="flex gap-5">
-        <div className="flex-1 flex flex-col gap-5">
-          <DepartmentButton title="Биохимии и Биотехнологии" />
-          <DepartmentButton title="Ветеринария" />
-          <DepartmentButton title="Материалов для микроэлектроники" />
-          <DepartmentButton title="Оборудования для лабораторий" />
+      {isLoading ? (
+        <div className="w-fit mx-auto">
+          <Oval height="40" width="40" color="#2196F3" secondaryColor="#F1F1F1" strokeWidth={4} />
         </div>
-        <div className="flex-1 flex flex-col gap-5">
-          <DepartmentButton title="Фармацевтики" />
-          <DepartmentButton title="Растворителей" />
-          <DepartmentButton title="Химических реактивов" />
-          <DepartmentButton title="Хромотографии" />
+      ) : isError ? (
+        <div className="w-fit mx-auto">
+          <p className="text-error text-2xl">Ошибка загрузки контаков</p>
         </div>
-      </div>
+      ) : (
+        departments && (
+          <div className="grid grid-cols-2 gap-5">
+            {departments.map(contact => (
+              <DepartmentCollapse
+                key={contact.id}
+                label={contact.label}
+                phoneNumber={contact.phoneNumber}
+                extensionPhoneNumbers={contact.extensionPhoneNumbers}
+                email={contact.email}
+              />
+            ))}
+          </div>
+        )
+      )}
     </section>
   );
 };

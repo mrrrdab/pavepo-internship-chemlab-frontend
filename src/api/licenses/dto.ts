@@ -1,9 +1,7 @@
-type GetLicenseDTO = {
-  id: string;
-  imgUrl: string;
-  title: string;
-};
+import { License } from '@/types';
 
-type GetLicensesDTO = GetLicenseDTO[];
+type GetLicenseDTO = License;
+
+type GetLicensesDTO = License[];
 
 export type { GetLicenseDTO, GetLicensesDTO };

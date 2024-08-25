@@ -1,14 +1,15 @@
 import React from 'react';
 
-import { GetLicenseDTO } from '@/api/licenses';
+import { License } from '@/types';
 
-type LicenseItemProps = Omit<GetLicenseDTO, 'id'>;
+type LicenseItemProps = Pick<License, 'title' | 'image'>;
 
-const LicenseItem: React.FC<LicenseItemProps> = ({ imgUrl, title }) => {
+// TODO-L: Jumping on loading
+const LicenseItem: React.FC<LicenseItemProps> = ({ title, image }) => {
   return (
-    <div className="flex flex-col gap-2">
-      <img src={imgUrl} alt={title} className="object-contain w-full h-full" />
-      <p className="opacity-90 text-xl text-center">{title}</p>
+    <div className="flex flex-col gap-2 h-full">
+      <img src={image} alt={title} className="w-full h-3/4 object-contain" />
+      <p className="opacity-90 text-xl text-center h-1/4">{title}</p>
     </div>
   );
 };

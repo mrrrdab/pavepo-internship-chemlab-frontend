@@ -1,2 +1,3 @@
 export * from './CheckoutForm';
-export * from './SummaryCard';
+export * from './OrderSuccessModal';
+export * from './OrderSummary';

@@ -1,2 +1,2 @@
-export * from './EmptyCartContents';
 export * from './CartContents';
+export * from './EmptyCartContents';

@@ -1,16 +1,18 @@
 /* eslint-disable max-len */
-import arrowRightBlackIcon from '@assets/icons/arrow-right-black-sm.svg';
-import abclonalLogo from '@assets/images/supplier-abclonal.png';
-import edomLogo from '@assets/images/supplier-edom.png';
-import ekanLogo from '@assets/images/supplier-ekan.png';
-import hellmaLogo from '@assets/images/supplier-hellma.png';
-import ikaLogo from '@assets/images/supplier-ika.png';
-import merckLogo from '@assets/images/supplier-merck.png';
-import { Card, CardContent, CardFooter, Button } from '@components/.';
+import React from 'react';
 
-import { SupplierCard } from './SupplierCard';
+import arrowRightDarkSmallIcon from '@/assets/icons/arrow-right-dark-sm.svg';
+import abclonalLogo from '@/assets/images/supplier-abclonal.png';
+import edomLogo from '@/assets/images/supplier-edom.png';
+import ekanLogo from '@/assets/images/supplier-ekan.png';
+import hellmaLogo from '@/assets/images/supplier-hellma.png';
+import ikaLogo from '@/assets/images/supplier-ika.png';
+import merckLogo from '@/assets/images/supplier-merck.png';
+import { Card, CardContent, CardFooter, Button } from '@/components';
 
-const SuppliersSection = () => {
+import { SupplierItem } from './SupplierItem';
+
+const SuppliersSection: React.FC = () => {
   return (
     <section className="px-26">
       <h2 className="text-5xl mb-16">Поставщики</h2>
@@ -22,25 +24,25 @@ const SuppliersSection = () => {
             </p>
           </CardContent>
           <CardFooter className="mt-auto">
-            <Button variant="outline" borderRadius="lg" className="flex justify-between items-center w-full h-15">
+            <Button variant="outline" borderRadius="lg" className="group flex justify-between items-center w-full h-15">
               <p>Подробнее</p>
-              <div className="bg-white border border-black rounded-3xl p-2.5">
-                <img src={arrowRightBlackIcon} alt="Arrow Right" />
+              <div className="bg-white border border-black rounded-3xl group-hover:bg-neutral-300 p-2.5">
+                <img src={arrowRightDarkSmallIcon} alt="Arrow Right" />
               </div>
             </Button>
           </CardFooter>
         </Card>
         <div className="flex-1 flex flex-col gap-8">
-          <SupplierCard imgSrc={ekanLogo} title="EKAN" />
-          <SupplierCard imgSrc={abclonalLogo} title="ABclonal" />
+          <SupplierItem image={ekanLogo} title="EKAN" />
+          <SupplierItem image={abclonalLogo} title="ABclonal" />
         </div>
         <div className="flex-1 flex flex-col gap-8">
-          <SupplierCard imgSrc={merckLogo} title="merck" />
-          <SupplierCard imgSrc={ikaLogo} title="IKA" />
+          <SupplierItem image={merckLogo} title="merck" />
+          <SupplierItem image={ikaLogo} title="IKA" />
         </div>
         <div className="flex-1 flex flex-col gap-8">
-          <SupplierCard imgSrc={hellmaLogo} title="Hellma" />
-          <SupplierCard imgSrc={edomLogo} title="edom" />
+          <SupplierItem image={hellmaLogo} title="Hellma" />
+          <SupplierItem image={edomLogo} title="edom" />
         </div>
       </div>
     </section>

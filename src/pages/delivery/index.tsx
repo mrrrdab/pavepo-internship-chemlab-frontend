@@ -1,11 +1,11 @@
 import React from 'react';
 
-import deliveryImage from '@assets/images/delivery.png';
+import deliveryImage from '@/assets/images/delivery.png';
 
 import Layout from '../layout';
 import { DeliveryInfoSection, DirectionsSection } from './components';
 
-const DeliveryPage = () => {
+const DeliveryPage: React.FC = () => {
   return (
     <React.Fragment>
       <Layout>

@@ -13,11 +13,8 @@ import {
 } from './components';
 
 // TODO: Chat
-// TODO: Header + background content centering
-// TODO: All hovers + all focuses
-// TODO: Catalog pop-up
-// TODO: All forms
-const HomePage = () => {
+// TODO: Imgs Alts
+const HomePage: React.FC = () => {
   return (
     <React.Fragment>
       <Layout>

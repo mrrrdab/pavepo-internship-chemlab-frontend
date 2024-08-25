@@ -6,7 +6,18 @@
 
 @layer base {
   html {
+    @apply min-h-screen;
     @apply font-fira-sans;
     @apply text-neutral-900;
+  }
+
+  body,
+  #root,
+  #main-wrapper {
+    @apply min-h-screen;
+  }
+
+  #main-wrapper {
+    @apply overflow-auto;
   }
 }
