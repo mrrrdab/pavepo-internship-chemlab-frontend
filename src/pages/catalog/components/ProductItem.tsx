@@ -6,7 +6,7 @@ import { CatalogProductRecord, ProductCartRecord } from '@/types';
 import { useCart } from '@/hooks';
 import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components';
 
-// TODO-L: Count reset on adding another product to cart
+// TODO: Count reset on adding another product to cart
 const ProductItem: React.FC<CatalogProductRecord> = ({
   id,
   productType,

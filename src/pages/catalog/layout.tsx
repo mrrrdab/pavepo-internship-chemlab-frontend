@@ -13,7 +13,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <React.Fragment>
       <BaseLayout>
-        <img src={catalogBackground} alt="Background" className="w-full h-80 object-cover px-26 mb-16" />
+        <img src={catalogBackground} alt="Catalog Background" className="w-full h-80 object-cover px-26 mb-16" />
         <div className="px-26 mb-50">
           <CategorySection />
         </div>

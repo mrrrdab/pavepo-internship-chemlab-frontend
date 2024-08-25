@@ -4,3 +4,4 @@ export * from './lab-equipment';
 export * from './licenses';
 export * from './news';
 export * from './taxes';
+export * from './types';

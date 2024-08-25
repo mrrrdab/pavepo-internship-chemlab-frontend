@@ -4,7 +4,7 @@ import { License } from '@/types';
 
 type LicenseItemProps = Pick<License, 'title' | 'image'>;
 
-// TODO-L: Jumping on loading
+// TODO: Jumping on loading
 const LicenseItem: React.FC<LicenseItemProps> = ({ title, image }) => {
   return (
     <div className="flex flex-col gap-2 h-full">

@@ -6,7 +6,6 @@ import { getDepartmentsContacts } from '@/api';
 
 import { DepartmentCollapse } from './DepartmentCollapse';
 
-// TODO
 const DepartmentsSection: React.FC = () => {
   const {
     isLoading,
@@ -31,16 +30,29 @@ const DepartmentsSection: React.FC = () => {
         </div>
       ) : (
         departments && (
-          <div className="grid grid-cols-2 gap-5">
-            {departments.map(contact => (
-              <DepartmentCollapse
-                key={contact.id}
-                label={contact.label}
-                phoneNumber={contact.phoneNumber}
-                extensionPhoneNumbers={contact.extensionPhoneNumbers}
-                email={contact.email}
-              />
-            ))}
+          <div className="flex gap-5">
+            <div className="flex-1 flex flex-col gap-5">
+              {departments.slice(0, departments.length / 2).map(contact => (
+                <DepartmentCollapse
+                  key={contact.id}
+                  label={contact.label}
+                  phoneNumber={contact.phoneNumber}
+                  extensionPhoneNumbers={contact.extensionPhoneNumbers}
+                  email={contact.email}
+                />
+              ))}
+            </div>
+            <div className="flex-1 flex flex-col gap-5">
+              {departments.slice(departments.length / 2).map(contact => (
+                <DepartmentCollapse
+                  key={contact.id}
+                  label={contact.label}
+                  phoneNumber={contact.phoneNumber}
+                  extensionPhoneNumbers={contact.extensionPhoneNumbers}
+                  email={contact.email}
+                />
+              ))}
+            </div>
           </div>
         )
       )}

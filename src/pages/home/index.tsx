@@ -12,8 +12,6 @@ import {
   BusinessSummarySection,
 } from './components';
 
-// TODO: Chat
-// TODO: Imgs Alts
 const HomePage: React.FC = () => {
   return (
     <React.Fragment>

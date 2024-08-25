@@ -1,4 +1,4 @@
-const ROUTES = {
+const ROUTES: Record<string, string> = {
   HOME: '/',
   CATALOG: '/catalog',
   SPECIAL_OFFERS: '/catalog/special-offers',

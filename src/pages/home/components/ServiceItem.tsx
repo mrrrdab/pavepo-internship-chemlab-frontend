@@ -1,7 +1,6 @@
 import React from 'react';
 
-import arrowRightDarkSmallIcon from '@/assets/icons/arrow-right-dark-sm.svg';
-import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components';
 
 type ServiceItemProps = { title: string; description: string };
 
@@ -14,18 +13,6 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ title, description }) => {
       <CardContent className="flex items-center">
         <div className="flex-1">
           <p className="text-white/90 text-xl">{description}</p>
-        </div>
-        <div className="flex-1">
-          <Button
-            variant="outline"
-            borderRadius="lg"
-            className="group flex justify-between items-center w-1/3 h-15 ml-auto"
-          >
-            <p>Подробнее</p>
-            <div className="bg-white border border-black rounded-3xl group-hover:bg-neutral-300 p-2.5">
-              <img src={arrowRightDarkSmallIcon} alt="Arrow Right" />
-            </div>
-          </Button>
         </div>
       </CardContent>
     </Card>

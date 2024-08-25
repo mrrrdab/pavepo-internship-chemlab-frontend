@@ -1,32 +1,38 @@
+/* eslint-disable max-len */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import arrowRightDarkSmallIcon from '@/assets/icons/arrow-right-dark-sm.svg';
-import { Card, CardTitle, CardDescription, CardContent, CardFooter, Button } from '@/components';
+import { ROUTES } from '@/constants';
+import { ProductBaseRecord } from '@/types';
+import { Card, CardTitle, CardDescription, CardContent, CardFooter } from '@/components';
 
-type SpecialOfferProps = {
-  image: string;
-  title: string;
-  description?: string;
-};
-
-const SpecialOfferItem: React.FC<SpecialOfferProps> = ({ image, title, description }) => {
+const SpecialOfferItem: React.FC<ProductBaseRecord> = ({ id, productType, manufacturer, model, images }) => {
   return (
     <Card className="flex flex-col gap-6">
       <CardContent className="bg-secondary rounded-xl flex justify-center items-center h-104 px-8 py-12">
-        <img src={image} alt={title} className="object-contain w-full h-full" />
+        <img
+          src={images.sort((a, b) => a.priority - b.priority)[0].url}
+          alt={`${productType} ${model} ${manufacturer}`}
+          className="w-full h-full object-contain"
+        />
       </CardContent>
       <CardFooter className="flex justify-between items-center">
-        {/* TODO-L: Width */}
-        <div className="flex flex-col gap-2 w-[45%]">
-          <CardTitle className="text-2xl">{title}</CardTitle>
-          {description && <CardDescription className="opacity-65 text-xl">{description}</CardDescription>}
+        <div className="flex flex-col gap-2 w-fit">
+          <CardTitle className="text-2xl">{productType}</CardTitle>
+          <CardDescription className="opacity-65 text-xl">
+            {manufacturer} {model}
+          </CardDescription>
         </div>
-        <Button variant="outline" borderRadius="lg" className="group flex justify-between items-center w-1/2 h-16">
+        <Link
+          to={`${ROUTES.SPECIAL_OFFERS}/${id}`}
+          className="group text-xl bg-white border border-black rounded-xl flex justify-between items-center hover:bg-neutral-200 w-60 h-15 px-5 py-2.5"
+        >
           <p>Подробнее</p>
-          <div className="bg-white border border-black rounded-3xl group-hover:bg-neutral-300 p-2.5">
+          <div className="bg-white border border-black text-neutral-900 rounded-3xl group-hover:bg-neutral-300 p-2.5">
             <img src={arrowRightDarkSmallIcon} alt="Arrow Right" />
           </div>
-        </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

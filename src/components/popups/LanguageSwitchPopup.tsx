@@ -1,8 +1,7 @@
-/* eslint-disable max-len */
 import React from 'react';
 import { Popup } from 'reactjs-popup';
 
-import { Radio } from '../base/Radio';
+import { Radio } from '../base';
 
 type LanguageSwitchPopupProps = { trigger: JSX.Element };
 

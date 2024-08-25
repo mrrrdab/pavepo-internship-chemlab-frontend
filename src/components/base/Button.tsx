@@ -31,15 +31,15 @@ const sizeClasses: Record<ButtonSize, string> = {
 const borderRadiusClasses: Record<ButtonBorderRadius, string> = {
   default: 'rounded-lg',
   lg: 'rounded-xl',
-  full: 'rounded-3xl',
+  full: 'rounded-full',
   none: 'rounded-none',
 };
 
 const hoverClasses: Record<ButtonVariant, string> = {
   primary: 'hover:bg-primary-dark',
-  secondary: 'hover:bg-neutral-200 hover:text-neutral-900',
-  outline: 'hover:bg-neutral-200 hover:text-neutral-900',
-  text: 'hover:bg-neutral-200 hover:text-neutral-900',
+  secondary: 'hover:bg-neutral-200 hover:opacity-100',
+  outline: 'hover:bg-neutral-200 hover:opacity-100',
+  text: 'hover:bg-neutral-200 hover:opacity-100',
 };
 
 const disabledClasses: Record<ButtonVariant, string> = {

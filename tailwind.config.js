@@ -39,13 +39,18 @@ const config = {
       width: {
         98: '25rem',
         100: '30rem',
+        104: '32.5rem',
       },
       height: {
         15: '3.625rem',
         18: '4.5rem',
         70: '17.5rem',
         84: '22rem',
+        100: '30rem',
         104: '32.5rem',
+      },
+      flexGrow: {
+        2: '2',
       },
     },
   },

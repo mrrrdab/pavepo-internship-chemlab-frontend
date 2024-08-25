@@ -64,41 +64,14 @@ const PrimaryContactsSection: React.FC = () => {
         <div className="flex gap-5">
           {businessPremisesContacts.map(contact => (
             <div key={contact.id} className="flex-1 min-w-0">
-              <BusinessPremiseContactItem image={contact.image} label={contact.label}>
-                <div className="flex flex-col gap-2.5">
-                  <h4 className="text-2xl">Адрес:</h4>
-                  <p className="text-xl">{contact.address}</p>
-                </div>
-                <div className="flex flex-col gap-2.5">
-                  <h4 className="text-2xl">Телефон:</h4>
-                  <a href={`tel: ${contact.phoneNumber}`} className="text-xl underline">
-                    {contact.phoneNumber}
-                  </a>
-                </div>
-                {contact.email && (
-                  <div className="flex flex-col gap-2.5">
-                    <h4 className="text-2xl">Email:</h4>
-                    <a href={`mailto: ${contact.email}`} className="text-xl">
-                      {contact.email}
-                    </a>
-                  </div>
-                )}
-                {contact.orderPassPhoneNumbers && (
-                  <div className="flex flex-col gap-2.5">
-                    <h4 className="text-2xl">Телефон для заказа пропуска:</h4>
-                    <div className="flex gap-2">
-                      {contact.orderPassPhoneNumbers.map((phone, index, orderPassPhoneNumbers) => (
-                        <div key={phone.id} className="text-xl">
-                          <a href={`tel:${phone.phone}`} className="underline">
-                            {phone.phone}
-                          </a>
-                          {index < orderPassPhoneNumbers.length - 1 && <span>, </span>}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </BusinessPremiseContactItem>
+              <BusinessPremiseContactItem
+                image={contact.image}
+                label={contact.label}
+                address={contact.address}
+                phoneNumber={contact.phoneNumber}
+                email={contact.email}
+                orderPassPhoneNumbers={contact.orderPassPhoneNumbers}
+              />
             </div>
           ))}
         </div>

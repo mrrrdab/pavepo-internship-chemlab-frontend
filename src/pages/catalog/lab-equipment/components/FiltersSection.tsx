@@ -4,11 +4,11 @@ import { useForm, Controller } from 'react-hook-form';
 import chevronDownDarkIcon from '@/assets/icons/chevron-down-dark.svg';
 import chevronUpDarkIcon from '@/assets/icons/chevron-up-dark.svg';
 import tickWhiteIcon from '@/assets/icons/tick-white.svg';
-import crossDarkIcon from '@/assets/icons/cross-dark.svg';
+import crossDarkSmallIcon from '@/assets/icons/cross-dark-sm.svg';
 import filterDarkIcon from '@/assets/icons/filter-dark.svg';
 import { Button, Radio, ColorCheckbox } from '@/components';
 
-// TODO-L
+// TODO
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUWXYZ'.split('');
 const WEIGHTS = ['1-5 кг', '5-10 кг', '10-25 кг', '25-50 кг'];
 const COLORS = ['primary', '#000000', '#2196F3', '#A50000', '#D8C200', '#0C8E21', '#505050', '#432B2B'];
@@ -39,10 +39,10 @@ const FiltersSection: React.FC = () => {
           onClick={() => setShowFilters(!showFilters)}
         >
           <div className="flex gap-2">
-            <img src={filterDarkIcon} alt="Arrow Down" />
+            <img src={filterDarkIcon} alt="Filter" />
             <p>Фильтр</p>
           </div>
-          <img src={showFilters ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Arrow Icon" />
+          <img src={showFilters ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
         </Button>
         {showFilters && (
           <div className="flex flex-col gap-12">
@@ -56,7 +56,7 @@ const FiltersSection: React.FC = () => {
                   onClick={() => setShowBrands(!showBrands)}
                 >
                   <p>Бренды</p>
-                  <img src={showBrands ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Arrow Icon" />
+                  <img src={showBrands ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                 </Button>
                 {showBrands && (
                   <div className="flex flex-col gap-5">
@@ -66,7 +66,7 @@ const FiltersSection: React.FC = () => {
                       onClick={() => setShowBrandStartLetters(!showBrandStartLetters)}
                     >
                       <p>Выберите букву</p>
-                      <img src={showBrandStartLetters ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Arrow Icon" />
+                      <img src={showBrandStartLetters ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                     </Button>
                     {showBrandStartLetters && (
                       <div className="self-center grid grid-flow-col grid-rows-5 grid-cols-5 gap-x-8 gap-y-2.5">
@@ -103,7 +103,7 @@ const FiltersSection: React.FC = () => {
                   onClick={() => setShowWeights(!showWeights)}
                 >
                   <p>Вес</p>
-                  <img src={showWeights ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Arrow Icon" />
+                  <img src={showWeights ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                 </Button>
                 {showWeights && (
                   <div className="self-center grid grid-flow-col grid-rows-2 grid-cols-2 gap-x-8 gap-y-2.5">
@@ -138,7 +138,7 @@ const FiltersSection: React.FC = () => {
                   onClick={() => setShowColors(!showColors)}
                 >
                   <p>Цвет</p>
-                  <img src={showColors ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Arrow Icon" />
+                  <img src={showColors ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                 </Button>
                 {showColors && (
                   <div className="self-center flex gap-2.5">
@@ -174,7 +174,7 @@ const FiltersSection: React.FC = () => {
               </Button>
               <Button variant="outline" className="flex justify-center items-center gap-4 h-15" onClick={() => reset()}>
                 <p>Сбросить все</p>
-                <img src={crossDarkIcon} alt="Cross" />
+                <img src={crossDarkSmallIcon} alt="Cross" />
               </Button>
             </div>
           </div>

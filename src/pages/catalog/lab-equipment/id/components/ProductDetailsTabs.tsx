@@ -50,7 +50,7 @@ const ProductDetailsTabs: React.FC<ProductDetailsTabsProps> = ({
             <div className="grid grid-cols-2 gap-x-16 gap-y-5 w-3/4">
               {files.map(file => (
                 <div key={file.id} className="flex gap-6 w-full">
-                  <img src={file.previewUrl} alt={file.id} className="min-w-28 w-28 h-36 object-cover" />
+                  <img src={file.previewUrl} alt={file.label} className="min-w-28 w-28 h-36 object-cover" />
                   <div className="flex flex-col justify-between">
                     <p>{file.label}</p>
                     <a href="" className="border-b border-b-white flex gap-2 w-fit">

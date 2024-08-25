@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
 import React from 'react';
 
+import chatDarkMediumIcon from '@/assets/icons/chat-dark-md.svg';
 import arrowRightDarkSmallIcon from '@/assets/icons/arrow-right-dark-sm.svg';
-import { Button, Footer, Header, TopBar } from '@/components';
+import { Button, ChatPopup, Footer, Header, TopBar } from '@/components';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -60,8 +61,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </div>
       <div>{children}</div>
-      <div className="mt-50">
+      <div className="mt-50 mb-28">
         <Footer />
+      </div>
+      <div className="fixed bottom-6 right-5">
+        <ChatPopup
+          trigger={
+            <Button borderRadius="full" className="p-6">
+              <img src={chatDarkMediumIcon} alt="Cross" />
+            </Button>
+          }
+        />
       </div>
     </React.Fragment>
   );

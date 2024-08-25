@@ -11,7 +11,6 @@ import { LicenseItem } from './LicenseItem';
 
 const LIMIT = 10;
 
-// TODO: Scroll buttons
 const LicensesSection: React.FC = () => {
   const {
     isLoading,

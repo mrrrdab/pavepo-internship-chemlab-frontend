@@ -9,7 +9,7 @@ import { Button } from '../base';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="px-26 pb-28">
+    <footer className="px-26">
       <div className="flex flex-col">
         <div className="mb-5">
           <h4 className="text-3xl font-medium uppercase">Химлаб</h4>

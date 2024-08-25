@@ -16,6 +16,8 @@ type Product = {
   transportation: [{ id: string; name: string; value: string; measurementUnit?: string }];
 };
 
+type ProductBaseRecord = Pick<Product, 'id' | 'productType' | 'manufacturer' | 'model' | 'images'>;
+
 type CatalogProductRecord = Pick<
   Product,
   'id' | 'productType' | 'model' | 'manufacturer' | 'originCountries' | 'weight' | 'images' | 'price' | 'discount'
@@ -34,4 +36,11 @@ type UpdateProductCartRecord = Pick<ProductCartRecord, 'id'> &
 
 type DeleteProductCartRecord = Pick<ProductCartRecord, 'id'>;
 
-export type { Product, CatalogProductRecord, ProductCartRecord, UpdateProductCartRecord, DeleteProductCartRecord };
+export type {
+  Product,
+  ProductBaseRecord,
+  CatalogProductRecord,
+  ProductCartRecord,
+  UpdateProductCartRecord,
+  DeleteProductCartRecord,
+};

@@ -46,7 +46,7 @@ const NewsSection: React.FC = () => {
         </div>
       )}
       {news && (
-        <div className="grid auto-rows-[1.75] grid-cols-4 gap-5">
+        <div className="grid grid-cols-4 gap-5">
           {news.map(newsItem => (
             <NewsItem
               key={newsItem.id}

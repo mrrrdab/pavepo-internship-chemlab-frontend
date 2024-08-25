@@ -68,7 +68,7 @@ type CatalogPopupProps = { isHomePage?: boolean; trigger: JSX.Element };
 
 const CatalogPopup: React.FC<CatalogPopupProps> = ({ isHomePage = false, trigger }) => {
   return (
-    <Popup trigger={trigger} position="bottom left">
+    <Popup trigger={trigger} arrow={false} position="bottom left">
       <div
         className={cn(
           'bg-white border rounded-xl grid grid-flow-col grid-rows-7 grid-cols-2 gap-4 px-5 py-6',

@@ -24,7 +24,7 @@ const DepartmentCollapse: React.FC<DepartmentCollapseProps> = ({
         className={cn('group flex justify-between items-center w-full', visible ? 'rounded-b-none' : '')}
         onClick={() => setVisible(!visible)}
       >
-        <p>{label}</p>
+        <p className="text-2xl">{label}</p>
         <div className="bg-white border border-black rounded-3xl p-2.5 group-hover:bg-neutral-300">
           <img src={addDarkIcon} alt="Add" />
         </div>
@@ -33,7 +33,7 @@ const DepartmentCollapse: React.FC<DepartmentCollapseProps> = ({
         <div className="text-white bg-primary flex justify-between items-center px-5 py-6">
           <div className="flex flex-col gap-2.5">
             <h4 className="text-2xl">Телефон/факс:</h4>
-            <a href={`tel: ${phoneNumber}`} className="text-xl underline">
+            <a href={`tel: ${phoneNumber}`} className="text-xl hover:text-neutral-200 underline">
               {phoneNumber}
             </a>
           </div>
@@ -42,7 +42,9 @@ const DepartmentCollapse: React.FC<DepartmentCollapseProps> = ({
             <div className="flex gap-2">
               {extensionPhoneNumbers.map((phone, index) => (
                 <div key={phone.id} className="text-xl">
-                  <a href={`tel:${phone.phone}`}>{phone.phone}</a>
+                  <a href={`tel:${phone.phone}`} className="hover:text-neutral-200">
+                    {phone.phone}
+                  </a>
                   {index < extensionPhoneNumbers.length - 1 && <span>, </span>}
                 </div>
               ))}
@@ -50,7 +52,7 @@ const DepartmentCollapse: React.FC<DepartmentCollapseProps> = ({
           </div>
           <div className="flex flex-col gap-2.5">
             <h4 className="text-2xl">Email:</h4>
-            <a href={`mailto: ${email}`} className="text-xl">
+            <a href={`mailto: ${email}`} className="text-xl hover:text-neutral-200">
               {email}
             </a>
           </div>

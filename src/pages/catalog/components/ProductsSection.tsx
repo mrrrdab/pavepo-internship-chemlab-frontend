@@ -76,7 +76,7 @@ const ProductsSection: React.FC = () => {
           </div>
         ) : (
           <div className="flex flex-col gap-20">
-            <div className="grid auto-rows-[1.75] grid-cols-3 gap-x-5 gap-y-6">
+            <div className="grid grid-cols-3 gap-x-5 gap-y-6">
               {data.products.map(product => (
                 <ProductItem
                   key={product.id}

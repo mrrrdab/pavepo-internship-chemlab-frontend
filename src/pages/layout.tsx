@@ -1,8 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
+import chatDarkMediumIcon from '@/assets/icons/chat-dark-md.svg';
 import { ROUTE_SEGMENTS_LABELS } from '@/constants';
-import { Footer, Header, TopBar } from '@/components';
+import { Button, ChatPopup, Footer, Header, TopBar } from '@/components';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -34,8 +35,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </p>
         </div>
         <div className="grow">{children}</div>
-        <div className="mt-50">
+        <div className="mt-50 mb-28">
           <Footer />
+        </div>
+        <div className="fixed bottom-6 right-5">
+          <ChatPopup
+            trigger={
+              <Button borderRadius="full" className="p-6">
+                <img src={chatDarkMediumIcon} alt="Cross" />
+              </Button>
+            }
+          />
         </div>
       </div>
     </React.Fragment>

@@ -5,7 +5,7 @@ import chevronUpDarkIcon from '@/assets/icons/chevron-up-dark.svg';
 import languageDarkIcon from '@/assets/icons/language-dark.svg';
 import { cn } from '@/utils';
 
-import { Button } from '../base/Button';
+import { Button } from '../base';
 import { LanguageSwitchPopup } from '../popups';
 
 type TopBarProps = { isHomePage?: boolean };
@@ -29,12 +29,14 @@ const TopBar: React.FC<TopBarProps> = ({ isHomePage = false }) => {
             >
               <img src={languageDarkIcon} alt="Language" />
               <p>RUS</p>
-              <img src={showLanguageSwitchPopup ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Arrow" />
+              <img src={showLanguageSwitchPopup ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
             </Button>
           }
         />
         <div>
-          <p className="text-xl">+ 7 (499) 490-51-07</p>
+          <a href={`tel: + 7 (499) 490-51-07`} className="text-xl hover:text-neutral-600">
+            + 7 (499) 490-51-07
+          </a>
         </div>
       </div>
     </div>

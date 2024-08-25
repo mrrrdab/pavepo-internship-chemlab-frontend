@@ -8,7 +8,7 @@ const LabEquipmentPage: React.FC = () => {
   return (
     <Layout>
       <div className="flex gap-5">
-        <div className="w-[22%]">
+        <div className="w-1/5">
           <FiltersSection />
         </div>
         <div className="flex-1">

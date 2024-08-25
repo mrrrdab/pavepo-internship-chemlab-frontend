@@ -11,8 +11,7 @@ const AboutSection: React.FC = () => {
     <section className="px-26">
       <h2 className="text-5xl mb-16">О Нас</h2>
       <div className="flex justify-between">
-        {/* TODO-L: Width */}
-        <div id="1" className="w-[45%]">
+        <div className="flex-1">
           <div className="flex flex-col gap-10 w-3/4">
             <div className="flex flex-col gap-6">
               <h4 className="text-2xl">Компания «ХИММЕД» надежный поставщик на химическом рынке</h4>
@@ -51,7 +50,7 @@ const AboutSection: React.FC = () => {
             </Link>
           </div>
         </div>
-        <div id="2" className="self-stretch flex-1">
+        <div id="2" className="flex-1 self-stretch">
           <img src={aboutImage} alt="About Image" className="w-full h-full" />
         </div>
       </div>

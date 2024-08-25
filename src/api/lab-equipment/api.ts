@@ -1,5 +1,5 @@
 import { GetLabEquipmentProductsDTO, GetLabEquipmentProductDTO } from './dto';
-import { GetProductsQueryParams } from './types';
+import { GetProductsQueryParams } from '../types';
 
 const getLabEquipmentProduct = async (id: string): Promise<GetLabEquipmentProductDTO> => {
   const response = await fetch(`${import.meta.env.VITE_LAB_EQUIPMENT_PRODUCTS_API_URL}/${id}`);
@@ -8,9 +8,7 @@ const getLabEquipmentProduct = async (id: string): Promise<GetLabEquipmentProduc
     throw new Error(`Failed to fetch product. Status: ${response.status}`);
   }
 
-  const data = await response.json();
-
-  return data;
+  return await response.json();
 };
 
 const getLabEquipmentProducts = async (params: GetProductsQueryParams): Promise<GetLabEquipmentProductsDTO> => {

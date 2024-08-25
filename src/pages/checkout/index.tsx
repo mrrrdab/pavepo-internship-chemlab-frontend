@@ -10,7 +10,7 @@ const CheckoutPage: React.FC = () => {
         <div className="flex flex-col gap-16">
           <h1 className="text-5xl">Оформление заказа</h1>
           <div className="flex gap-5">
-            <div className="grow-[2]">
+            <div className="grow-2">
               <CheckoutForm />
             </div>
           </div>

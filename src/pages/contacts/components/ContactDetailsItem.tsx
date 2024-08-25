@@ -15,13 +15,13 @@ const ContactDetailsItem: React.FC<ContactDetailsItemProps> = ({ label, address,
         </div>
         <div className="basis-1/6 flex flex-col gap-2.5">
           <h4 className="text-2xl">Телефон:</h4>
-          <a href={`tel: ${phoneNumber}`} className="text-xl underline">
+          <a href={`tel: ${phoneNumber}`} className="text-xl hover:text-neutral-600 underline">
             {phoneNumber}
           </a>
         </div>
         <div className="basis-1/6 flex flex-col gap-2.5">
           <h4 className="text-2xl">Email:</h4>
-          <a href={`mailto: ${email}`} className="text-xl">
+          <a href={`mailto: ${email}`} className="text-xl hover:text-neutral-600">
             {email}
           </a>
         </div>

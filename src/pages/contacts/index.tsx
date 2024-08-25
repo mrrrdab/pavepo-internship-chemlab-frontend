@@ -9,7 +9,7 @@ const ContactsPage: React.FC = () => {
   return (
     <React.Fragment>
       <Layout>
-        <img src={contactsBackground} alt="Background" className="mb-16" />
+        <img src={contactsBackground} alt="Contacts Background" className="mb-16" />
         <main className="flex flex-col gap-30 px-26">
           <PrimaryContactsSection />
           <DepartmentsSection />

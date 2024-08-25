@@ -24,7 +24,6 @@ type ProductInfoProps = Pick<
 
 type Image = Product['images'][0];
 
-// TODO: Scroll buttons
 const ProductInfo: React.FC<ProductInfoProps> = ({
   id,
   productType,
@@ -166,12 +165,11 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             <img src={arrowDownDarkMediumIcon} alt="Arrow Down" />
           </Button>
         </div>
-
-        <div className="border-[0.5px] border-neutral-900/25 rounded-xl w-5/6">
+        <div className="border-[0.5px] border-neutral-900/25 rounded-xl w-104">
           <img
             src={mainImage.url}
             alt={`${productType} ${model} ${manufacturer}`}
-            className="w-full h-full object-cover rounded-xl"
+            className="w-full h-full object-contain rounded-xl"
           />
         </div>
       </div>

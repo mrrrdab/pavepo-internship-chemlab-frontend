@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
                       onClick={() => setShowCatalogPopup(!showCatalogPopup)}
                     >
                       <p className={cn('text-xl font-semibold hover:text-primary', textColor)}>Каталог</p>
-                      <img src={showCatalogPopup ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Arrow" />
+                      <img src={showCatalogPopup ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                     </Button>
                   }
                 />

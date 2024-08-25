@@ -44,7 +44,7 @@ const SimilarProductsSection: React.FC = () => {
           <img src={arrowRightWhiteIcon} alt="Arrow Right" />
         </Link>
       </div>
-      <div className="grid auto-rows-[1.75] grid-cols-4 gap-5">
+      <div className="grid grid-cols-4 gap-5">
         {SIMILAR_PRODUCTS.map(product => (
           <ProductItem
             key={product.id}

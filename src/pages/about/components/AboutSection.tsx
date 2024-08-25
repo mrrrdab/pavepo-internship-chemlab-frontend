@@ -12,17 +12,17 @@ const AboutSection: React.FC = () => {
     <section className="px-26">
       <h1 className="text-5xl mb-16">О Нас</h1>
       <div className="grid grid-rows-[245px_215px_275px_145px] grid-cols-4 gap-5">
-        <img src={aboutImageFirst} alt="Image" className="row-span-2 rounded w-full h-full object-cover" />
-        <img src={aboutImageSecond} alt="Image" className="row-start-3 rounded w-full h-full object-cover" />
+        <img src={aboutImageFirst} alt="About Image-1" className="row-span-2 rounded w-full h-full object-cover" />
+        <img src={aboutImageSecond} alt="About Image-2" className="row-start-3 rounded w-full h-full object-cover" />
         <img
           src={aboutImageThird}
           alt="Image"
           className="row-start-2 col-start-2 row-span-2 rounded w-full h-full object-cover"
         />
         <div className="row-start-4 col-start-3 col-span-2 grid grid-rows-1 grid-cols-3 gap-5">
-          <img src={aboutImageFourth} alt="Image" className="rounded w-full h-full object-cover" />
-          <img src={aboutImageFifth} alt="Image" className="rounded w-full h-full object-cover" />
-          <img src={aboutImageSixth} alt="Image" className="rounded w-full h-full object-cover" />
+          <img src={aboutImageFourth} alt="About Image-3" className="rounded w-full h-full object-cover" />
+          <img src={aboutImageFifth} alt="About Image-4" className="rounded w-full h-full object-cover" />
+          <img src={aboutImageSixth} alt="About Image-5" className="rounded w-full h-full object-cover" />
         </div>
         <div className="row-start-2 col-start-3 row-span-2 col-span-2 flex flex-col">
           <p className="opacity-90 text-xl">

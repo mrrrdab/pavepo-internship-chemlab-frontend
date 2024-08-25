@@ -22,7 +22,7 @@ type FormDataType = z.infer<typeof validationSchema>;
 const FeedbackSection: React.FC = () => {
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
     reset,
   } = useForm({
@@ -94,7 +94,6 @@ const FeedbackSection: React.FC = () => {
             type="submit"
             variant="outline"
             borderRadius="lg"
-            disabled={!isValid}
             className="group flex justify-between items-center w-2/5 h-15"
           >
             <p>Отправить</p>
