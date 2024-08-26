@@ -5,6 +5,7 @@ import chatDarkSmallIcon from '@/assets/icons/chat-dark-sm.svg';
 import chatDarkMediumIcon from '@/assets/icons/chat-dark-md.svg';
 import { ROUTE_SEGMENTS_LABELS } from '@/constants';
 import { Button, ChatPopup, Footer, Header, TopBar } from '@/components';
+import { cn } from '@/utils';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -29,7 +30,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               const isFinalRoute = index === pathParts.length - 1;
               return (
                 <React.Fragment key={segment}>
-                  <span className={isFinalRoute ? '' : 'opacity-65'}>{breadcrumb}</span>
+                  <span className={cn('', isFinalRoute ? '' : 'opacity-65')}>{breadcrumb}</span>
                   {!isFinalRoute && <span> / </span>}
                 </React.Fragment>
               );
