@@ -48,7 +48,7 @@ const ProductsSection: React.FC = () => {
   if (isError) {
     return (
       <div className="w-fit mx-auto">
-        <p className="text-error text-xl 2xl:text-2xl">Ошибка загрузки продуктов</p>
+        <p className="text-error text-base 2xl:text-xl">Ошибка загрузки продуктов</p>
       </div>
     );
   }
@@ -59,7 +59,7 @@ const ProductsSection: React.FC = () => {
         (data.products.length === 0 ? (
           <div className="flex flex-col gap-8 w-2/5 mx-auto">
             <div className="flex flex-col text-center gap-6">
-              <h2 className="text-2xl">В настоящий момент в данной категории нет товаров</h2>
+              <h2 className="text-xl 2xl:text-xl">В настоящий момент в данной категории нет товаров</h2>
             </div>
             <Link to={ROUTES.HOME} className="w-full">
               <Button
@@ -75,8 +75,8 @@ const ProductsSection: React.FC = () => {
             </Link>
           </div>
         ) : (
-          <div className="flex flex-col gap-20">
-            <div className="grid grid-cols-3 gap-x-5 gap-y-6">
+          <div className="flex flex-col gap-10 2xl:gap-20">
+            <div className="grid grid-cols-1 xl:grid-cols-2 3xl:grid-cols-3 gap-x-5 gap-y-6">
               {data.products.map(product => (
                 <ProductItem
                   key={product.id}
@@ -93,7 +93,7 @@ const ProductsSection: React.FC = () => {
               ))}
             </div>
             <div className="flex flex-col items-center gap-5">
-              <div className="flex items-center w-1/3">
+              <div className="flex items-center">
                 <Button
                   variant="text"
                   className={cn('flex-shrink-0 p-0 mr-5', page === 1 ? 'invisible' : '')}
@@ -107,7 +107,7 @@ const ProductsSection: React.FC = () => {
                       key={num}
                       variant={num === page ? 'primary' : 'outline'}
                       className={cn(
-                        'flex-shrink-0 flex items-center justify-center w-28 h-16',
+                        'flex-shrink-0 flex items-center justify-center w-16 h-12 md:w-20 lg:h-14 xl:w-24 2xl:w-28 2xl:h-16',
                         num === page ? 'text-white' : '',
                       )}
                       onClick={() => setPage(num)}

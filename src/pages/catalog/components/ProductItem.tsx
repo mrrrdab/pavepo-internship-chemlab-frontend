@@ -80,7 +80,7 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
   };
 
   return (
-    <div className="bg-secondary border-[0.5px] border-black/20 rounded-xl flex flex-col">
+    <div className="bg-secondary border-[0.5px] border-black/20 rounded-xl flex flex-col overflow-hidden">
       <img
         src={images.sort((a, b) => a.priority - b.priority)[0].url}
         alt={`${productType} ${model} ${manufacturer}`}
@@ -89,7 +89,7 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
       <Card className="flex flex-col gap-5 px-5 py-6">
         <CardHeader className="flex flex-col gap-2.5">
           <Link to={`${ROUTES.LAB_EQUIPMENT}/${id}`} className="block">
-            <CardTitle className="text-2xl hover:text-primary">{productType}</CardTitle>
+            <CardTitle className="text-xl 2xl:text-2xl hover:text-primary">{productType}</CardTitle>
           </Link>
           <p className="opacity-65 text-base">
             {manufacturer} {model}
@@ -113,27 +113,27 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
           </p>
           <div className="flex justify-between items-center">
             <p className="text-base">Цена:</p>
-            <p className="text-2xl font-medium">{price} ₽</p>
+            <p className="text-xl 2xl:text-2xl font-medium">{price} ₽</p>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between items-stretch">
           <div className="border border-black rounded-xl flex justify-center items-center gap-4 w-24 h-12 px-2">
-            <Button variant="text" className="text-2xl p-0" onClick={handleRemoveProduct}>
+            <Button variant="text" className="text-xl 2xl:text-2xl p-0" onClick={handleRemoveProduct}>
               -
             </Button>
-            <p className="text-xl">{count}</p>
-            <Button variant="text" className="text-2xl p-0" onClick={handleAddProduct}>
+            <p className="text-base 2xl:text-xl">{count}</p>
+            <Button variant="text" className="text-xl 2xl:text-2xl p-0" onClick={handleAddProduct}>
               +
             </Button>
           </div>
           <div className="w-fit">
             {isInCart ? (
-              <div className="flex gap-4">
-                <Button variant="text" className="p-0 px-2" onClick={handleRemoveFromCart}>
-                  Удалить
-                </Button>
+              <div className="flex flex-col gap-4">
                 <Button variant="outline" disabled={!isEditing} className="bg-white" onClick={handleSave}>
                   Сохранить
+                </Button>
+                <Button variant="text" className="p-0 px-2" onClick={handleRemoveFromCart}>
+                  Удалить
                 </Button>
               </div>
             ) : (

@@ -29,7 +29,7 @@ const FiltersSection: React.FC = () => {
   });
 
   return (
-    <aside>
+    <aside className="overflow-hidden">
       <form name="filters" className="flex flex-col gap-9" onSubmit={handleSubmit(data => console.log(data))}>
         <Button
           variant="outline"
@@ -38,9 +38,9 @@ const FiltersSection: React.FC = () => {
           className="flex justify-between items-center gap-2 h-18"
           onClick={() => setShowFilters(!showFilters)}
         >
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <img src={filterDarkIcon} alt="Filter" />
-            <p>Фильтр</p>
+            <p className="text-base 2xl:text-xl">Фильтр</p>
           </div>
           <img src={showFilters ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
         </Button>
@@ -55,17 +55,17 @@ const FiltersSection: React.FC = () => {
                   className="flex justify-between items-center gap-2 h-18"
                   onClick={() => setShowBrands(!showBrands)}
                 >
-                  <p>Бренды</p>
+                  <p className="text-base 2xl:text-xl">Бренды</p>
                   <img src={showBrands ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                 </Button>
                 {showBrands && (
                   <div className="flex flex-col gap-5">
                     <Button
                       variant="text"
-                      className="flex gap-2 p-0"
+                      className="flex items-center gap-2 p-0"
                       onClick={() => setShowBrandStartLetters(!showBrandStartLetters)}
                     >
-                      <p>Выберите букву</p>
+                      <p className="text-base 2xl:text-xl">Выберите букву</p>
                       <img src={showBrandStartLetters ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                     </Button>
                     {showBrandStartLetters && (
@@ -84,7 +84,7 @@ const FiltersSection: React.FC = () => {
                                 />
                               )}
                             />
-                            <label htmlFor={letter} className="text-xl cursor-pointer">
+                            <label htmlFor={letter} className="text-base 2xl:text-xl cursor-pointer">
                               {letter}
                             </label>
                           </div>
@@ -102,7 +102,7 @@ const FiltersSection: React.FC = () => {
                   className="flex justify-between items-center gap-2 h-18"
                   onClick={() => setShowWeights(!showWeights)}
                 >
-                  <p>Вес</p>
+                  <p className="text-base 2xl:text-xl">Вес</p>
                   <img src={showWeights ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                 </Button>
                 {showWeights && (
@@ -121,7 +121,7 @@ const FiltersSection: React.FC = () => {
                             />
                           )}
                         />
-                        <label htmlFor={weight} className="text-xl cursor-pointer">
+                        <label htmlFor={weight} className="text-base 2xl:text-xl cursor-pointer">
                           {weight}
                         </label>
                       </div>
@@ -137,7 +137,7 @@ const FiltersSection: React.FC = () => {
                   className="flex justify-between items-center gap-2 h-18"
                   onClick={() => setShowColors(!showColors)}
                 >
-                  <p>Цвет</p>
+                  <p className="text-base 2xl:text-xl">Цвет</p>
                   <img src={showColors ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                 </Button>
                 {showColors && (
