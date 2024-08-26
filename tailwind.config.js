@@ -17,6 +17,7 @@ const config = {
         xl: ['1.25rem', '1.5rem'],
         '2xl': ['1.5rem', '1.8rem'],
         '3xl': ['2rem', '2.4rem'],
+        '4xl': ['2.5rem', '3rem'],
         '5xl': ['3rem', '3.6rem'],
       },
       fontFamily: {
@@ -51,6 +52,10 @@ const config = {
       },
       flexGrow: {
         2: '2',
+      },
+      screens: {
+        xs: '390px',
+        '3xl': '1920px',
       },
     },
   },

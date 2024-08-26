@@ -24,13 +24,13 @@ const SpecialOffersSection: React.FC = () => {
   });
 
   return (
-    <section className="px-26">
-      <div className="flex justify-between items-center mb-16">
-        <h2 className="text-5xl">Специальные предложения</h2>
+    <section className="px-8 md:px-14 lg:px-20 2xl:px-26">
+      <div className="flex justify-between items-center mb-16 overflow-hidden">
+        <h2 className="text-3xl md:text-4xl 2xl:text-5xl">Специальные предложения</h2>
         {specialOffers && (
           <Link
             to={ROUTES.SPECIAL_OFFERS}
-            className="bg-primary text-white text-xl rounded-lg flex justify-center items-center gap-4 hover:bg-primary-dark w-1/6 h-15"
+            className="hidden 2xl:flex bg-primary text-white text-xl rounded-lg justify-center items-center gap-4 hover:bg-primary-dark w-1/6 h-15"
           >
             <p className="font-medium">Смотреть еще</p>
             <img src={arrowRightWhiteIcon} alt="Arrow Right" />
@@ -47,19 +47,29 @@ const SpecialOffersSection: React.FC = () => {
         </div>
       ) : (
         specialOffers && (
-          <div className="grid grid-cols-3 gap-5">
+          <div className="flex flex-nowrap gap-5 overflow-x-auto">
             {specialOffers.products.map(offer => (
-              <SpecialOfferItem
-                key={offer.id}
-                id={offer.id}
-                productType={offer.productType}
-                manufacturer={offer.manufacturer}
-                model={offer.model}
-                images={offer.images}
-              />
+              <div key={offer.id} className="flex-1 min-w-96">
+                <SpecialOfferItem
+                  id={offer.id}
+                  productType={offer.productType}
+                  manufacturer={offer.manufacturer}
+                  model={offer.model}
+                  images={offer.images}
+                />
+              </div>
             ))}
           </div>
         )
+      )}
+      {specialOffers && (
+        <Link
+          to={ROUTES.SPECIAL_OFFERS}
+          className="flex 2xl:hidden bg-primary text-white text-xl rounded-lg justify-center items-center gap-4 hover:bg-primary-dark w-1/2 md:w-1/3 2xl:w-1/6 h-15 mx-auto mt-8"
+        >
+          <p className="hidden xs:block font-medium">Смотреть еще</p>
+          <img src={arrowRightWhiteIcon} alt="Arrow Right" />
+        </Link>
       )}
     </section>
   );

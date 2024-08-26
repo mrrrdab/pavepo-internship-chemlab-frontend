@@ -17,8 +17,8 @@ const SpecialOfferItem: React.FC<ProductBaseRecord> = ({ id, productType, manufa
           className="w-full h-full object-contain"
         />
       </CardContent>
-      <CardFooter className="flex justify-between items-center">
-        <div className="flex flex-col gap-2 w-fit">
+      <CardFooter className="flex xl:gap-6 3xl:justify-between items-center">
+        <div className="flex flex-col gap-2 w-full 3xl:w-fit">
           <CardTitle className="text-2xl">{productType}</CardTitle>
           <CardDescription className="opacity-65 text-xl">
             {manufacturer} {model}
@@ -26,10 +26,10 @@ const SpecialOfferItem: React.FC<ProductBaseRecord> = ({ id, productType, manufa
         </div>
         <Link
           to={`${ROUTES.SPECIAL_OFFERS}/${id}`}
-          className="group text-xl bg-white border border-black rounded-xl flex justify-between items-center hover:bg-neutral-200 w-60 h-15 px-5 py-2.5"
+          className="group text-xl bg-white border border-black rounded-xl flex justify-center 2xl:justify-between items-center hover:bg-neutral-200 w-fit 2xl:w-full 3xl:w-60 h-15 px-5 py-2.5"
         >
-          <p>Подробнее</p>
-          <div className="bg-white border border-black text-neutral-900 rounded-3xl group-hover:bg-neutral-300 p-2.5">
+          <p className="hidden 2xl:block">Подробнее</p>
+          <div className="flex-shrink-0 bg-white border border-black text-neutral-900 rounded-3xl group-hover:bg-neutral-300 p-2.5">
             <img src={arrowRightDarkSmallIcon} alt="Arrow Right" />
           </div>
         </Link>

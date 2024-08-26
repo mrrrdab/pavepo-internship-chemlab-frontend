@@ -18,7 +18,7 @@ const TopBar: React.FC<TopBarProps> = ({ isHomePage = false }) => {
   const paddingBottom = isHomePage ? '' : 'pb-2.5';
 
   return (
-    <div className="px-26">
+    <div className="hidden lg:block lg:px-20 2xl:px-26">
       <div className={cn('flex justify-between items-center py-6', border, paddingBottom)}>
         <LanguageSwitchPopup
           trigger={
@@ -33,11 +33,9 @@ const TopBar: React.FC<TopBarProps> = ({ isHomePage = false }) => {
             </Button>
           }
         />
-        <div>
-          <a href={`tel: + 7 (499) 490-51-07`} className="text-xl hover:text-neutral-600">
-            + 7 (499) 490-51-07
-          </a>
-        </div>
+        <a href={`tel: + 7 (499) 490-51-07`} className="block text-xl hover:text-neutral-600">
+          + 7 (499) 490-51-07
+        </a>
       </div>
     </div>
   );

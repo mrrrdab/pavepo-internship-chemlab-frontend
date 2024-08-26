@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
+import chatDarkSmallIcon from '@/assets/icons/chat-dark-sm.svg';
 import chatDarkMediumIcon from '@/assets/icons/chat-dark-md.svg';
 import { ROUTE_SEGMENTS_LABELS } from '@/constants';
 import { Button, ChatPopup, Footer, Header, TopBar } from '@/components';
@@ -35,14 +36,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </p>
         </div>
         <div className="grow">{children}</div>
-        <div className="mt-50 mb-28">
+        <div className="mt-50 mb-24 md:mb-28">
           <Footer />
         </div>
         <div className="fixed bottom-6 right-5">
           <ChatPopup
             trigger={
-              <Button borderRadius="full" className="p-6">
-                <img src={chatDarkMediumIcon} alt="Cross" />
+              <Button borderRadius="full" className="p-4 md:p-5">
+                <img src={chatDarkSmallIcon} alt="Chat" className="block md:hidden" />
+                <img src={chatDarkMediumIcon} alt="Chat" className="hidden md:block" />
               </Button>
             }
           />

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
+import menuDarkIcon from '@/assets/icons/menu-dark.svg';
 import chevronUpDarkIcon from '@/assets/icons/chevron-up-dark.svg';
 import chevronDownDarkIcon from '@/assets/icons/chevron-down-dark.svg';
 import searchDarkIcon from '@/assets/icons/search-dark.svg';
@@ -11,7 +12,7 @@ import { ROUTES } from '@/constants';
 import { cn } from '@/utils';
 
 import { Button } from '../base';
-import { CatalogPopup } from '../popups';
+import { CatalogPopup, NavPopup } from '../popups';
 
 type HeaderProps = { isHomePage?: boolean };
 
@@ -26,15 +27,15 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
   const borderColor = isHomePage ? 'border-white' : 'border-black';
 
   return (
-    <header className="px-26 py-6">
-      <div className="flex">
-        <div className="flex items-center gap-16">
+    <header className="px-8 md:px-14 lg:px-20 2xl:px-26 py-6 mt-6 lg:mt-0">
+      <div className="flex flex-col gap-8 2xl:flex-row 2xl:gap-0">
+        <div className="flex flex-col gap-2.5 xs:flex-row xs:justify-between xs:items-center lg:gap-16">
           <h4 className={cn('text-2xl font-medium uppercase hover:text-primary', textColor)}>
             <Link to={ROUTES.HOME}>Химлаб</Link>
           </h4>
-          <nav>
-            <ul className="flex gap-6">
-              <li className="flex gap-2.5">
+          <nav className="hidden lg:block lg:w-max">
+            <ul className="flex items-center gap-6">
+              <li>
                 <CatalogPopup
                   isHomePage={isHomePage}
                   trigger={
@@ -50,59 +51,69 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
                 />
               </li>
               <li>
-                <Link to={ROUTES.SPECIAL_OFFERS} className={cn('text-xl hover:text-primary', textColor)}>
+                <Link to={ROUTES.SPECIAL_OFFERS} className={cn('block text-xl hover:text-primary', textColor)}>
                   Акции
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.DELIVERY} className={cn('text-xl hover:text-primary', textColor)}>
+                <Link to={ROUTES.DELIVERY} className={cn('block text-xl hover:text-primary', textColor)}>
                   Доставка
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.ABOUT} className={cn('text-xl hover:text-primary', textColor)}>
+                <Link to={ROUTES.ABOUT} className={cn('block text-xl hover:text-primary w-fit', textColor)}>
                   О Нас
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.CONTACTS} className={cn('text-xl hover:text-primary', textColor)}>
+                <Link to={ROUTES.CONTACTS} className={cn('block text-xl hover:text-primary', textColor)}>
                   Контакты
+                </Link>
+              </li>
+              <li className="hidden md:block 2xl:hidden">
+                <Link to={ROUTES.SHOPPING_CART}>
+                  <img src={shoppingBagDarkIcon} alt="Shopping Bag" />
                 </Link>
               </li>
             </ul>
           </nav>
-        </div>
-        <div className="flex-1 flex justify-end">
-          <div className="flex items-center gap-16">
-            <form autoComplete="off" onSubmit={handleSubmit(data => console.log(data))}>
-              <div className="flex gap-2">
-                <div className="relative">
-                  <div className={cn('absolute inset-y-0 flex items-center pl-5 pointer-events-none', textColor)}>
-                    <img src={searchDarkIcon} alt="Search Icon" />
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Поиск"
-                    {...register('search')}
-                    className={cn(
-                      'bg-transparent text-xl border rounded-lg w-100 px-13 py-2.5',
-                      textColor,
-                      borderColor,
-                      placeholderColor,
-                    )}
-                  />
-                </div>
-                <Button type="submit" className="font-medium">
-                  Найти
+          <div className="mx-auto xs:mx-0 lg:hidden">
+            <NavPopup
+              trigger={
+                <Button variant="text" className="p-0">
+                  <img src={menuDarkIcon} alt="Menu" />
                 </Button>
-              </div>
-            </form>
-            <div>
-              <Link to={ROUTES.SHOPPING_CART}>
-                <img src={shoppingBagDarkIcon} alt="Shopping Bag" />
-              </Link>
-            </div>
+              }
+            />
           </div>
+        </div>
+        <div className="lg:flex lg:items-center 2xl:gap-12 lg:ml-auto 3xl:gap-16">
+          <form autoComplete="off" onSubmit={handleSubmit(data => console.log(data))} className="w-full">
+            <div className="w-full lg:flex lg:gap-2">
+              <div className="relative">
+                <div className={cn('absolute inset-y-0 flex items-center pl-5 pointer-events-none', textColor)}>
+                  <img src={searchDarkIcon} alt="Search Icon" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Поиск"
+                  {...register('search')}
+                  className={cn(
+                    'bg-transparent text-base 2xl:text-xl border rounded-lg w-full 2xl:w-96 3xl:w-100 px-16 lg:px-13 py-2.5',
+                    textColor,
+                    borderColor,
+                    placeholderColor,
+                  )}
+                />
+              </div>
+              <Button type="submit" className="hidden lg:block font-medium">
+                Найти
+              </Button>
+            </div>
+          </form>
+          <Link to={ROUTES.SHOPPING_CART} className="hidden 2xl:block 2xl:flex-shrink-0">
+            <img src={shoppingBagDarkIcon} alt="Shopping Bag" />
+          </Link>
         </div>
       </div>
     </header>

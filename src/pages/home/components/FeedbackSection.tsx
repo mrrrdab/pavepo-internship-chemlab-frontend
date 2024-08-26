@@ -42,9 +42,9 @@ const FeedbackSection: React.FC = () => {
   };
 
   return (
-    <section className="bg-[url('/src/assets/images/feedback-background.png')] bg-cover bg-center w-full px-26 py-12">
-      <div className="w-2/5">
-        <h2 className="text-white text-5xl mb-12">Оставьте заявку на обратный звонок</h2>
+    <section className="bg-[url('/src/assets/images/feedback-background.png')] bg-cover bg-center w-full px-8 md:px-14 lg:px-20 2xl:px-26 py-12">
+      <div className="w-full sm:w-3/4 2xl:w-2/5">
+        <h2 className="text-white text-3xl md:text-4xl 2xl:text-5xl mb-12">Оставьте заявку на обратный звонок</h2>
         <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-5 mb-7">
             <div>
@@ -52,7 +52,7 @@ const FeedbackSection: React.FC = () => {
                 type="text"
                 placeholder="Имя"
                 {...register('name')}
-                className="text-white text-xl bg-transparent border border-white rounded-xl placeholder:text-white placeholder:text-xl w-full px-6 py-5"
+                className="text-white text-base 2xl:text-xl bg-transparent border border-white rounded-xl placeholder:text-white placeholder:text-base 2xl:placeholder:text-xl w-full px-6 py-5"
               />
               {errors.name && (
                 <div className="bg-error w-fit ml-auto">
@@ -65,7 +65,7 @@ const FeedbackSection: React.FC = () => {
                 type="text"
                 placeholder="Телефон"
                 {...register('phoneNumber')}
-                className="text-white text-xl bg-transparent border border-white rounded-xl placeholder:text-white placeholder:text-xl w-full px-6 py-5"
+                className="text-white text-base 2xl:text-xl bg-transparent border border-white rounded-xl placeholder:text-white placeholder:text-base 2xl:placeholder:text-xl w-full px-6 py-5"
               />
               {errors.phoneNumber && (
                 <div className="bg-error w-fit ml-auto">
@@ -78,7 +78,7 @@ const FeedbackSection: React.FC = () => {
                 type="text"
                 placeholder="Email"
                 {...register('email')}
-                className="text-white text-xl bg-transparent border border-white rounded-xl placeholder:text-white placeholder:text-xl w-full px-6 py-5"
+                className="text-white text-base 2xl:text-xl bg-transparent border border-white rounded-xl placeholder:text-white placeholder:text-base 2xl:placeholder:text-xl w-full px-6 py-5"
               />
               {errors.email && (
                 <div className="bg-error w-fit ml-auto">
@@ -94,9 +94,9 @@ const FeedbackSection: React.FC = () => {
             type="submit"
             variant="outline"
             borderRadius="lg"
-            className="group flex justify-between items-center w-2/5 h-15"
+            className="group flex justify-between items-center w-fit xs:w-1/2 2xl:w-2/5 h-15"
           >
-            <p>Отправить</p>
+            <p className="hidden xs:block">Отправить</p>
             <div className="bg-white border border-black rounded-3xl group-disabled:bg-neutral-300 group-hover:bg-neutral-300 p-2.5">
               <img src={arrowRightDarkSmallIcon} alt="Arrow Right" />
             </div>
