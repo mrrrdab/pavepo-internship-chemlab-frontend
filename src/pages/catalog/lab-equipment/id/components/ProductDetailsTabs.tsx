@@ -21,7 +21,7 @@ const ProductDetailsTabs: React.FC<ProductDetailsTabsProps> = ({
     <div>
       <TabList>
         <TabItem label="Описание">
-          <div className="text-white text-xl bg-primary flex flex-col gap-8 px-16 pt-8 pb-20">
+          <div className="text-white text-base 2xl:text-xl bg-primary flex flex-col gap-8 px-16 pt-8 pb-20">
             <p>{description}</p>
             {advantages.map(advantage => (
               <div key={advantage.id} className="flex flex-col gap-2.5">
@@ -32,10 +32,10 @@ const ProductDetailsTabs: React.FC<ProductDetailsTabsProps> = ({
           </div>
         </TabItem>
         <TabItem label="Характеристики">
-          <div className="text-white text-xl bg-primary px-16 pt-8 pb-20">
-            <div className="grid grid-cols-2 gap-x-16 gap-y-5 w-3/4">
+          <div className="text-white text-base 2xl:text-xl bg-primary px-16 pt-8 pb-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-5 w-3/4">
               {specs.map(spec => (
-                <div key={spec.id} className="border-b border-b-white flex justify-between items-center pb-1">
+                <div key={spec.id} className="border-b border-b-white flex gap-8 justify-between items-center pb-1">
                   <p>{spec.spec}</p>
                   <p>
                     {spec.value} {spec.measurementUnit && <span>{spec.measurementUnit}</span>}
@@ -46,12 +46,12 @@ const ProductDetailsTabs: React.FC<ProductDetailsTabsProps> = ({
           </div>
         </TabItem>
         <TabItem label="Документы">
-          <div className="text-white text-xl bg-primary px-16 pt-8 pb-20">
-            <div className="grid grid-cols-2 gap-x-16 gap-y-5 w-3/4">
+          <div className="text-white text-base 2xl:text-xl bg-primary px-16 pt-8 pb-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-5 w-3/4">
               {files.map(file => (
                 <div key={file.id} className="flex gap-6 w-full">
                   <img src={file.previewUrl} alt={file.label} className="min-w-28 w-28 h-36 object-cover" />
-                  <div className="flex flex-col justify-between">
+                  <div className="flex flex-col gap-8 justify-between">
                     <p>{file.label}</p>
                     <a href="" className="border-b border-b-white flex gap-2 w-fit">
                       <p className="opacity-65">Скачать</p>
@@ -64,10 +64,13 @@ const ProductDetailsTabs: React.FC<ProductDetailsTabsProps> = ({
           </div>
         </TabItem>
         <TabItem label="Комплект">
-          <div className="text-white text-xl bg-primary px-16 pt-8 pb-20">
-            <div className="grid grid-cols-2 gap-x-16 gap-y-5 w-3/4">
+          <div className="text-white text-base 2xl:text-xl bg-primary px-16 pt-8 pb-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-5 w-3/4">
               {accessories.map(accessory => (
-                <div key={accessory.id} className="border-b border-b-white flex justify-between items-center pb-1">
+                <div
+                  key={accessory.id}
+                  className="border-b border-b-white flex gap-8 justify-between items-center pb-1"
+                >
                   <p>{accessory.name}</p>
                   <p>{accessory.quantity}</p>
                 </div>
@@ -76,10 +79,10 @@ const ProductDetailsTabs: React.FC<ProductDetailsTabsProps> = ({
           </div>
         </TabItem>
         <TabItem label="Данные о транспортировке">
-          <div className="text-white text-xl bg-primary px-16 pt-8 pb-20">
-            <div className="grid grid-cols-2 gap-x-16 gap-y-5 w-3/4">
+          <div className="text-white text-base 2xl:text-xl bg-primary px-16 pt-8 pb-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-5 w-3/4">
               {transportation.map(data => (
-                <div key={data.id} className="border-b border-b-white flex justify-between items-center pb-1">
+                <div key={data.id} className="border-b border-b-white flex gap-8 justify-between items-center pb-1">
                   <p>{data.name}</p>
                   <p>
                     {data.value} {data.measurementUnit && <span>{data.measurementUnit}</span>}

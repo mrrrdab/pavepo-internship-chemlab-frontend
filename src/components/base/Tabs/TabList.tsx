@@ -13,7 +13,7 @@ type TabListProps = {
   children: React.ReactNode;
 };
 
-const baseClasses = 'text-2xl uppercase border-b w-full';
+const baseClasses = 'text-base xl:text-xl 3xl:text-2xl uppercase border-b w-full';
 
 const variantClasses: Record<TabListVariant, string> = {
   primary: 'bg-primary text-white border-b-white',
@@ -42,9 +42,9 @@ const TabList: React.FC<TabListProps> = ({ variant = 'primary', activeTabIndex =
   return (
     <div>
       <nav>
-        <ul className="flex">
+        <ul className="flex flex-col 2xl:flex-row h-max">
           {tabs.map((tab, index) => (
-            <li key={index} className="grow">
+            <li key={index} className="grow flex">
               <Button
                 size="xl"
                 borderRadius="none"

@@ -101,7 +101,7 @@ const ProductsSection: React.FC = () => {
                 >
                   <img src={arrowLeftDarkIcon} alt="Arrow Left" />
                 </Button>
-                <div className="flex gap-5 flex-grow justify-center">
+                <div className="grow flex gap-5 justify-center">
                   {pageNumbers.map(num => (
                     <Button
                       key={num}

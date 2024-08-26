@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -132,15 +133,15 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   };
 
   return (
-    <div className="flex gap-36 h-104">
+    <div className="flex flex-col xl:flex-row gap-10 xl:gap-20 3xl:gap-36 xl:h-104">
       <div className="grow flex gap-5">
-        <div className="min-w-28 w-28 flex flex-col">
+        <div className="hidden w-20 min-w-20 3xl:min-w-28 3xl:w-28 xl:flex flex-col">
           <Button
             variant="text"
-            className="flex justify-center items-center h-[calc((100%-3*1.25rem)/5)] p-0"
+            className="flex justify-center items-center h-[calc((100%-3*1.25rem)/4)] p-0"
             onClick={() => handleScroll(-1)}
           >
-            <img src={arrowUpDarkMediumIcon} alt="Arrow Down" />
+            <img src={arrowUpDarkMediumIcon} alt="Arrow Up" />
           </Button>
           <div ref={imageContainerRef} className="flex-1 flex flex-col gap-5 overflow-y-auto">
             {images
@@ -165,28 +166,43 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             <img src={arrowDownDarkMediumIcon} alt="Arrow Down" />
           </Button>
         </div>
-        <div className="border-[0.5px] border-neutral-900/25 rounded-xl w-104">
+        <div className="hidden border-[0.5px] border-neutral-900/25 rounded-xl w-96 2xl:w-100 xl:block 3xl:w-104">
           <img
             src={mainImage.url}
             alt={`${productType} ${model} ${manufacturer}`}
             className="w-full h-full object-contain rounded-xl"
           />
         </div>
+        <div className="xl:hidden rounded-xl w-full">
+          <div className="flex flex-nowrap gap-5 h-80 overflow-auto">
+            {images.map(image => (
+              <img
+                key={image.id}
+                src={image.url}
+                alt={`${productType} ${model} ${manufacturer}`}
+                className="border-[0.5px] border-neutral-900/25 min-w-80 w-80 h-auto object-contain rounded-xl flex-shrink-0"
+              />
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="grow flex flex-col justify-between">
+      <div className="grow flex flex-col gap-10 justify-between">
         <div>
           <div className="flex flex-col gap-2 mb-6">
-            <h1 className="text-5xl">{productType}</h1>
-            <p className="text-xl opacity-65 border-b-[0.5px] border-b-black pb-2">
+            <h1 className="text-3xl md:text-4xl 2xl:text-5xl">{productType}</h1>
+            <p className="text-base 2xl:text-xl opacity-65 border-b-[0.5px] border-b-black pb-2">
               {manufacturer} {model}
             </p>
           </div>
           <div className="flex flex-col gap-5 mb-10">
-            <h3 className="text-primary text-2xl">{price} ₽</h3>
-            <p className="opacity-80 text-xl">{description.split('.')[0]}</p>
+            <h3 className="text-primary text-xl 2xl:text-2xl">{price} ₽</h3>
+            {/* TODO: */}
+            <div className="h-30 overflow-auto">
+              <p className="opacity-80 text-xl">{description.split('.')[0]}</p>
+            </div>
           </div>
           <div className="flex flex-col gap-2.5">
-            <p className="opacity-80 text-xl">
+            <p className="opacity-80 text-base 2xl:text-xl">
               <span className="mr-2">Производитель:</span>
               {originCountries.map((country, index, originCountries) => (
                 <span key={country} className="opacity-65">
@@ -195,7 +211,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
                 </span>
               ))}
             </p>
-            <p className="opacity-80 text-xl">
+            <p className="opacity-80 text-base 2xl:text-xl">
               Вес:
               <span className="ml-2">
                 {weight.value} {weight.measurementUnit}
@@ -203,26 +219,28 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             </p>
           </div>
         </div>
-        <div className="flex justify-between items-stretch">
-          <div className="border border-black rounded-xl flex justify-center items-center gap-4 min-w-24 h-12 px-2">
-            <Button variant="text" className="text-2xl p-0" onClick={handleRemoveProduct}>
+        <div className="flex flex-col sm:flex-row gap-2.5 sm:justify-between sm:items-stretch">
+          <div className="border border-black rounded-xl flex justify-center items-center gap-4 min-w-24 max-w-24 h-12 px-2">
+            <Button variant="text" className="text-xl 2xl:text-2xl p-0" onClick={handleRemoveProduct}>
               -
             </Button>
-            <p className="text-xl">{count}</p>
-            <Button variant="text" className="text-2xl p-0" onClick={handleAddProduct}>
+            <p className="text-base 2xl:text-xl">{count}</p>
+            <Button variant="text" className="text-xl 2xl:text-2xl p-0" onClick={handleAddProduct}>
               +
             </Button>
           </div>
-          <div className="w-fit flex gap-5">
+          <div className="w-fit flex flex-col 2xl:flex-row gap-2.5 sm:gap-5">
             <div className="w-60">
               {isInCart ? (
-                <div className="flex gap-4">
-                  <Button variant="text" className="p-0 px-2 ml-auto" onClick={handleRemoveFromCart}>
-                    Удалить
-                  </Button>
-                  <Button variant="outline" disabled={!isEditing} className="bg-white " onClick={handleSave}>
-                    Сохранить
-                  </Button>
+                <div className="w-max sm:ml-auto">
+                  <div className="flex flex-row sm:flex-col gap-4">
+                    <Button variant="outline" disabled={!isEditing} className="bg-white" onClick={handleSave}>
+                      Сохранить
+                    </Button>
+                    <Button variant="text" className="p-0 px-2" onClick={handleRemoveFromCart}>
+                      Удалить
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <Button

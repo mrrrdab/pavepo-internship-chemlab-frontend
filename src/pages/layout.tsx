@@ -10,6 +10,7 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
+// TODO
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const pathParts = location.pathname.split('/');

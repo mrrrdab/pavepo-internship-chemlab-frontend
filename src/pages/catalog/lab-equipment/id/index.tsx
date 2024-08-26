@@ -26,7 +26,7 @@ const LabEquipmentProductPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="px-26">
+      <div className="px-8 md:px-14 lg:px-20 2xl:px-26">
         {isLoading ? (
           <div className="w-fit mx-auto">
             <Oval height="40" width="40" color="#2196F3" secondaryColor="#F1F1F1" strokeWidth={4} />
@@ -51,8 +51,8 @@ const LabEquipmentProductPage: React.FC = () => {
           </div>
         ) : (
           product && (
-            <div className="flex flex-col gap-50">
-              <div className="flex flex-col gap-16">
+            <div className="flex flex-col gap-20 md:gap-32 xl:gap-42 2xl:gap-50">
+              <div className="flex flex-col gap-12 3xl:gap-16">
                 <ProductInfo {...product} />
                 <ProductDetailsTabs {...product} />
               </div>

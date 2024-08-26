@@ -33,33 +33,43 @@ const SIMILAR_PRODUCTS = Array.from({ length: 4 }, (_, index) => ({
 
 const SimilarProductsSection: React.FC = () => {
   return (
-    <section className="flex flex-col gap-16">
-      <div className="flex justify-between items-center">
-        <h2 className="text-5xl">Похожие товары</h2>
+    <section className="flex flex-col">
+      <div className="flex justify-between items-center mb-10 2xl:mb-16">
+        <h2 className="text-3xl md:text-4xl 2xl:text-5xl">Похожие товары</h2>
         <Link
           to={ROUTES.HOME}
-          className="bg-primary text-white text-xl rounded-lg flex justify-center items-center gap-4 hover:bg-primary-dark w-1/6 h-15"
+          className="hidden 2xl:flex bg-primary text-white text-xl rounded-lg justify-center items-center gap-4 hover:bg-primary-dark w-1/6 h-15"
         >
           <p className="font-medium">Смотреть еще</p>
           <img src={arrowRightWhiteIcon} alt="Arrow Right" />
         </Link>
       </div>
-      <div className="grid grid-cols-4 gap-5">
+      <div className="flex flex-nowrap gap-5 overflow-x-auto">
         {SIMILAR_PRODUCTS.map(product => (
-          <ProductItem
-            key={product.id}
-            id={product.id}
-            productType={product.productType}
-            model={product.model}
-            manufacturer={product.manufacturer}
-            originCountries={product.originCountries}
-            weight={product.weight}
-            images={product.images}
-            price={product.price}
-            discount={product.discount}
-          />
+          <div key={product.id} className="flex-1 min-w-96">
+            <ProductItem
+              id={product.id}
+              productType={product.productType}
+              model={product.model}
+              manufacturer={product.manufacturer}
+              originCountries={product.originCountries}
+              weight={product.weight}
+              images={product.images}
+              price={product.price}
+              discount={product.discount}
+            />
+          </div>
         ))}
       </div>
+      {SIMILAR_PRODUCTS && (
+        <Link
+          to={ROUTES.HOME}
+          className="flex 2xl:hidden bg-primary text-white text-xl rounded-lg justify-center items-center gap-4 hover:bg-primary-dark w-1/2 md:w-1/3 2xl:w-1/6 h-15 mx-auto mt-8"
+        >
+          <p className="hidden xs:block font-medium">Смотреть еще</p>
+          <img src={arrowRightWhiteIcon} alt="Arrow Right" />
+        </Link>
+      )}
     </section>
   );
 };

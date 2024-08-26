@@ -10,7 +10,7 @@ import { Button } from '../base';
 
 type ChatPopupProps = { trigger: JSX.Element };
 
-// TODO md
+// TODO MD
 const ChatPopup: React.FC<ChatPopupProps> = ({ trigger }) => {
   const popupRef = useRef(null);
 

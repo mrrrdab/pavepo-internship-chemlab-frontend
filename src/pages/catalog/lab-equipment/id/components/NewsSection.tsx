@@ -24,12 +24,12 @@ const NewsSection: React.FC = () => {
   });
 
   return (
-    <section className="flex flex-col gap-16">
-      <div className="flex justify-between items-center">
-        <h2 className="text-5xl">Новости</h2>
+    <section className="flex flex-col">
+      <div className="flex justify-between items-center mb-10 2xl:mb-16">
+        <h2 className="text-3xl md:text-4xl 2xl:text-5xl">Новости</h2>
         <Link
           to={ROUTES.HOME}
-          className="bg-primary text-white text-xl rounded-lg flex justify-center items-center gap-4 hover:bg-primary-dark w-1/6 h-15"
+          className="hidden 2xl:flex bg-primary text-white text-xl rounded-lg justify-center items-center gap-4 hover:bg-primary-dark w-1/6 h-15"
         >
           <p className="font-medium">Смотреть еще</p>
           <img src={arrowRightWhiteIcon} alt="Arrow Right" />
@@ -46,17 +46,22 @@ const NewsSection: React.FC = () => {
         </div>
       )}
       {news && (
-        <div className="grid grid-cols-4 gap-5">
+        <div className="flex flex-nowrap gap-5 overflow-x-auto">
           {news.map(newsItem => (
-            <NewsItem
-              key={newsItem.id}
-              title={newsItem.title}
-              date={newsItem.date}
-              image={newsItem.image}
-              content={newsItem.content}
-            />
+            <div key={newsItem.id} className="flex-1 min-w-96">
+              <NewsItem title={newsItem.title} date={newsItem.date} image={newsItem.image} content={newsItem.content} />
+            </div>
           ))}
         </div>
+      )}
+      {news && (
+        <Link
+          to={ROUTES.HOME}
+          className="flex 2xl:hidden bg-primary text-white text-xl rounded-lg justify-center items-center gap-4 hover:bg-primary-dark w-1/2 md:w-1/3 2xl:w-1/6 h-15 mx-auto mt-8"
+        >
+          <p className="hidden xs:block font-medium">Смотреть еще</p>
+          <img src={arrowRightWhiteIcon} alt="Arrow Right" />
+        </Link>
       )}
     </section>
   );
