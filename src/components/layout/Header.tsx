@@ -6,7 +6,8 @@ import { useForm } from 'react-hook-form';
 import menuDarkIcon from '@/assets/icons/menu-dark.svg';
 import chevronUpDarkIcon from '@/assets/icons/chevron-up-dark.svg';
 import chevronDownDarkIcon from '@/assets/icons/chevron-down-dark.svg';
-import searchDarkIcon from '@/assets/icons/search-dark.svg';
+import searchDarkMediumIcon from '@/assets/icons/search-dark-md.svg';
+import searchDarkSmallIcon from '@/assets/icons/search-dark-sm.svg';
 import shoppingBagDarkIcon from '@/assets/icons/shopping-bag-dark.svg';
 import { ROUTES } from '@/constants';
 import { cn } from '@/utils';
@@ -92,14 +93,15 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
             <div className="w-full lg:flex lg:gap-2">
               <div className="relative">
                 <div className={cn('absolute inset-y-0 flex items-center pl-5 pointer-events-none', textColor)}>
-                  <img src={searchDarkIcon} alt="Search Icon" />
+                  <img src={searchDarkMediumIcon} alt="Search Icon" className="hidden md:block" />
+                  <img src={searchDarkSmallIcon} alt="Search Icon" className="md:hidden" />
                 </div>
                 <input
                   type="text"
                   placeholder="Поиск"
                   {...register('search')}
                   className={cn(
-                    'bg-transparent text-base 2xl:text-xl border rounded-lg w-full 2xl:w-96 3xl:w-100 px-16 lg:px-13 py-2.5',
+                    'bg-transparent text-base 2xl:text-xl border rounded-lg w-full 2xl:w-96 3xl:w-100 px-13 md:px-16 py-2.5',
                     textColor,
                     borderColor,
                     placeholderColor,

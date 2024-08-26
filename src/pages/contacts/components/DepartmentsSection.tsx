@@ -19,7 +19,7 @@ const DepartmentsSection: React.FC = () => {
 
   return (
     <section>
-      <h2 className="text-5xl mb-16">Департаменты</h2>
+      <h2 className="text-3xl md:text-4xl 2xl:text-5xl mb-10 2xl:mb-16">Департаменты</h2>
       {isLoading ? (
         <div className="w-fit mx-auto">
           <Oval height="40" width="40" color="#2196F3" secondaryColor="#F1F1F1" strokeWidth={4} />
@@ -30,9 +30,33 @@ const DepartmentsSection: React.FC = () => {
         </div>
       ) : (
         departments && (
-          <div className="flex gap-5">
-            <div className="flex-1 flex flex-col gap-5">
-              {departments.slice(0, departments.length / 2).map(contact => (
+          <React.Fragment>
+            <div className="hidden xl:flex gap-5">
+              <div className="flex-1 flex flex-col gap-5">
+                {departments.slice(0, departments.length / 2).map(contact => (
+                  <DepartmentCollapse
+                    key={contact.id}
+                    label={contact.label}
+                    phoneNumber={contact.phoneNumber}
+                    extensionPhoneNumbers={contact.extensionPhoneNumbers}
+                    email={contact.email}
+                  />
+                ))}
+              </div>
+              <div className="flex-1 flex flex-col gap-5">
+                {departments.slice(departments.length / 2).map(contact => (
+                  <DepartmentCollapse
+                    key={contact.id}
+                    label={contact.label}
+                    phoneNumber={contact.phoneNumber}
+                    extensionPhoneNumbers={contact.extensionPhoneNumbers}
+                    email={contact.email}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-col gap-2.5 xl:hidden">
+              {departments.map(contact => (
                 <DepartmentCollapse
                   key={contact.id}
                   label={contact.label}
@@ -42,18 +66,7 @@ const DepartmentsSection: React.FC = () => {
                 />
               ))}
             </div>
-            <div className="flex-1 flex flex-col gap-5">
-              {departments.slice(departments.length / 2).map(contact => (
-                <DepartmentCollapse
-                  key={contact.id}
-                  label={contact.label}
-                  phoneNumber={contact.phoneNumber}
-                  extensionPhoneNumbers={contact.extensionPhoneNumbers}
-                  email={contact.email}
-                />
-              ))}
-            </div>
-          </div>
+          </React.Fragment>
         )
       )}
     </section>

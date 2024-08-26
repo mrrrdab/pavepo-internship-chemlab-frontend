@@ -46,9 +46,9 @@ const PrimaryContactsSection: React.FC = () => {
   }
 
   return (
-    <section className="flex flex-col gap-30">
+    <section className="flex flex-col gap-10 lg:gap-16 xl:gap-24 2xl:gap-30">
       {contacts && (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-4 sm:gap-8">
           {contacts.map(contact => (
             <ContactDetailsItem
               key={contact.id}
@@ -61,7 +61,7 @@ const PrimaryContactsSection: React.FC = () => {
         </div>
       )}
       {businessPremisesContacts && (
-        <div className="flex gap-5">
+        <div className="flex flex-col xl:flex-row gap-5">
           {businessPremisesContacts.map(contact => (
             <div key={contact.id} className="flex-1 min-w-0">
               <BusinessPremiseContactItem
