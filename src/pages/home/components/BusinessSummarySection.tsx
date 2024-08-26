@@ -7,7 +7,7 @@ const BusinessSummarySection: React.FC = () => {
         Мы предлагаем
       </h2>
       <div className="bg-primary flex flex-col xl:flex-row gap-8 xl:gap-5 px-8 md:px-14 lg:px-20 2xl:px-26 py-14">
-        <div className="flex-1 flex flex-col gap-6">
+        <div className="flex-1 flex flex-col gap-4 2xl:gap-6">
           <p className="text-white text-xl 2xl:text-2xl border-b border-b-white">01</p>
           <div className="flex flex-col gap-6">
             <h4 className="text-white text-xl 2xl:text-2xl">Органические растворители собственного производства:</h4>
@@ -21,7 +21,7 @@ const BusinessSummarySection: React.FC = () => {
         </div>
         <div className="flex-1 flex flex-col gap-6">
           <p className="text-white text-xl 2xl:text-2xl border-b border-b-white">02</p>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 2xl:gap-6">
             <div className="flex flex-col gap-2.5">
               <h4 className="text-white text-xl 2xl:text-2xl">Перекристаллизация и очистка химических реактивов</h4>
               <p className="text-white/90 text-base 2xl:text-xl">(органические и неорганические вещества)</p>
@@ -40,7 +40,7 @@ const BusinessSummarySection: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 flex flex-col gap-6">
+        <div className="flex-1 flex flex-col gap-4 2xl:gap-6">
           <p className="text-white text-xl 2xl:text-2xl border-b border-b-white">03</p>
           <div>
             <h4 className="text-white text-xl 2xl:text-2xl">Растворы химических реактивов необходимой концентрации</h4>

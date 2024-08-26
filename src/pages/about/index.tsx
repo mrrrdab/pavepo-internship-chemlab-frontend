@@ -7,7 +7,7 @@ const AboutPage: React.FC = () => {
   return (
     <React.Fragment>
       <Layout>
-        <main className="flex flex-col gap-50">
+        <main className="flex flex-col gap-20 md:gap-32 xl:gap-42 2xl:gap-50">
           <AboutSection />
           <AdvantagesSection />
           <LicensesSection />

@@ -12,7 +12,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   borderRadius?: ButtonBorderRadius;
 };
 
-const baseClasses = 'text-xl';
+const baseClasses = 'text-base 2xl:text-xl';
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: 'bg-primary text-white',

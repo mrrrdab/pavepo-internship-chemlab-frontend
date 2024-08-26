@@ -60,8 +60,8 @@ const LicensesSection: React.FC = () => {
   };
 
   return (
-    <section>
-      <h1 className="text-5xl px-26 mb-16">Лицензии</h1>
+    <section className="hidden xs:block">
+      <h1 className="text-3xl md:text-4xl 2xl:text-5xl px-8 md:px-14 lg:px-20 2xl:px-26 mb-10 2xl:mb-16">Лицензии</h1>
       {isLoading ? (
         <div className="w-fit mx-auto">
           <Oval height="40" width="40" color="#2196F3" secondaryColor="#F1F1F1" strokeWidth={4} />
@@ -72,7 +72,7 @@ const LicensesSection: React.FC = () => {
         </div>
       ) : (
         licenses && (
-          <div className="flex mx-12">
+          <div className="flex sm:mx-4 lg:mx-8 2xl:mx-12">
             <Button variant="text" onClick={() => handleScroll(-1)} className="flex-shrink-0 p-0">
               <img src={arrowLeftDarkIcon} alt="Arrow Left" />
             </Button>
@@ -80,7 +80,7 @@ const LicensesSection: React.FC = () => {
               {licenses.map((license, index) => (
                 <div
                   key={license.id}
-                  className="inline-block whitespace-normal w-1/6 min-h-96 pl-5"
+                  className="inline-block whitespace-normal xs:w-1/2 sm:w-1/3 lg:w-1/4 2xl:w-1/6 min-h-96 pl-5"
                   ref={index === 0 ? firstItemRef : null}
                 >
                   <LicenseItem image={license.image} title={license.title} />

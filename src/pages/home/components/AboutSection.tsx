@@ -9,7 +9,7 @@ import { ROUTES } from '@/constants';
 const AboutSection: React.FC = () => {
   return (
     <section className="px-8 md:px-14 lg:px-20 2xl:px-26">
-      <h2 className="text-3xl md:text-4xl 2xl:text-5xl mb-16">О Нас</h2>
+      <h2 className="text-3xl md:text-4xl 2xl:text-5xl mb-10 2xl:mb-16">О Нас</h2>
       <div className="flex flex-col 2xl:flex-row 2xl:justify-between">
         <div className="flex-1">
           <div className="flex flex-col gap-10 w-full 2xl:w-3/4">
