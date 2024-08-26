@@ -66,7 +66,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </div>
       <div>{children}</div>
-      <div className="mt-50 mb-24 md:mb-28">
+      <div className="mt-28 xl:mt-40 2xl:mt-50 mb-24 md:mb-28">
         <Footer />
       </div>
       <div className="fixed bottom-6 right-5">

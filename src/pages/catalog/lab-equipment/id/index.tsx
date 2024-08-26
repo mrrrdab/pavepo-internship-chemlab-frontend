@@ -34,7 +34,7 @@ const LabEquipmentProductPage: React.FC = () => {
         ) : isError ? (
           <div className="flex flex-col gap-8 w-1/3 mx-auto">
             <div className="flex flex-col text-center gap-6">
-              <h2 className="text-error text-2xl">Ошибка загрузки данных товара</h2>
+              <h2 className="text-error text-xl 2xl:text-2xl">Ошибка загрузки данных товара</h2>
             </div>
             <Link to={ROUTES.LAB_EQUIPMENT} className="w-full">
               <Button

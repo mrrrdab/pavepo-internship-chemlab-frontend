@@ -67,7 +67,7 @@ const CheckoutForm: React.FC = () => {
   if (!deliveryOptions) {
     return (
       <div className="w-full">
-        <p className="text-error text-2xl text-center px-4 py-2.5">Ошибка сервера. Вернитесь позже</p>
+        <p className="text-error text-xl 2xl:text-2xl text-center px-4 py-2.5">Ошибка сервера. Вернитесь позже</p>
       </div>
     );
   }
@@ -82,14 +82,14 @@ const CheckoutForm: React.FC = () => {
               <div className="relative flex flex-col gap-1">
                 <label
                   htmlFor="fullName"
-                  className={cn('text-xl', errors.fullName ? 'text-error' : 'text-neutral-900/65')}
+                  className={cn('text-xl 2xl:text-2xl', errors.fullName ? 'text-error' : 'text-neutral-900/65')}
                 >
                   ФИО
                 </label>
                 <input
                   id="fullName"
                   type="text"
-                  className="text-xl border border-neutral-900/65 rounded h-12"
+                  className="text-xl 2xl:text-2xl border border-neutral-900/65 rounded h-12"
                   {...register('fullName')}
                 />
                 {errors.fullName && (
@@ -99,14 +99,14 @@ const CheckoutForm: React.FC = () => {
               <div className="relative flex flex-col gap-1">
                 <label
                   htmlFor="phoneNumber"
-                  className={cn('text-xl', errors.phoneNumber ? 'text-error' : 'text-neutral-900/65')}
+                  className={cn('text-xl 2xl:text-2xl', errors.phoneNumber ? 'text-error' : 'text-neutral-900/65')}
                 >
                   Телефон
                 </label>
                 <input
                   id="phoneNumber"
                   type="text"
-                  className="text-xl border border-neutral-900/65 rounded h-12"
+                  className="text-xl 2xl:text-2xl border border-neutral-900/65 rounded h-12"
                   {...register('phoneNumber')}
                 />
                 {errors.phoneNumber && (
@@ -114,13 +114,16 @@ const CheckoutForm: React.FC = () => {
                 )}
               </div>
               <div className="relative flex flex-col gap-1">
-                <label htmlFor="email" className={cn('text-xl', errors.email ? 'text-error' : 'text-neutral-900/65')}>
+                <label
+                  htmlFor="email"
+                  className={cn('text-xl 2xl:text-2xl', errors.email ? 'text-error' : 'text-neutral-900/65')}
+                >
                   Email
                 </label>
                 <input
                   id="email"
                   type="text"
-                  className="text-xl border border-neutral-900/65 rounded h-12"
+                  className="text-xl 2xl:text-2xl border border-neutral-900/65 rounded h-12"
                   {...register('email')}
                 />
                 {errors.email && <p className="absolute right-0 top-1 text-error text-base">{errors.email.message}</p>}
@@ -129,7 +132,7 @@ const CheckoutForm: React.FC = () => {
           </div>
           <div className="row-start-2 flex flex-col gap-5">
             <div className="flex flex-col gap-8">
-              <h2 className="text-2xl">Способ доставки</h2>
+              <h2 className="text-xl 2xl:text-2xl">Способ доставки</h2>
               <div className="flex flex-col gap-2.5">
                 {deliveryOptions.map(option => (
                   <div key={option.id} className="flex items-center gap-5">
@@ -145,22 +148,22 @@ const CheckoutForm: React.FC = () => {
                         />
                       )}
                     />
-                    <label htmlFor={option.id} className="opacity-65 text-xl">
+                    <label htmlFor={option.id} className="opacity-65 text-xl 2xl:text-2xl">
                       {option.label}
                     </label>
                   </div>
                 ))}
               </div>
-              {deliveryMethod === 'pickup' && <p className="text-xl">Москва и Московская область</p>}
+              {deliveryMethod === 'pickup' && <p className="text-xl 2xl:text-2xl">Москва и Московская область</p>}
             </div>
             <div className="relative flex flex-col gap-1">
-              <label htmlFor="comment" className="opacity-65 text-xl">
+              <label htmlFor="comment" className="opacity-65 text-xl 2xl:text-2xl">
                 Комментарий
               </label>
               <input
                 id="comment"
                 type="text"
-                className="text-xl border border-neutral-900/65 rounded h-12"
+                className="text-xl 2xl:text-2xl border border-neutral-900/65 rounded h-12"
                 {...register('comment')}
               />
             </div>
@@ -182,7 +185,7 @@ const CheckoutForm: React.FC = () => {
                 )}
               />
               <div>
-                <label htmlFor="personalData" className="text-xl opacity-65 underline">
+                <label htmlFor="personalData" className="text-xl 2xl:text-2xl opacity-65 underline">
                   Я согласен(на) на обработку персональных данных
                 </label>
                 {errors.personalData && <p className="text-error text-base">{errors.personalData?.message}</p>}

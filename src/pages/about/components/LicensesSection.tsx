@@ -68,7 +68,7 @@ const LicensesSection: React.FC = () => {
         </div>
       ) : isError ? (
         <div className="w-fit mx-auto">
-          <p className="text-error text-2xl">Ошибка загрузки лицензий</p>
+          <p className="text-error text-xl 2xl:text-2xl">Ошибка загрузки лицензий</p>
         </div>
       ) : (
         licenses && (

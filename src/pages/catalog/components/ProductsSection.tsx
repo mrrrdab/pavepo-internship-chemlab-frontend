@@ -48,7 +48,7 @@ const ProductsSection: React.FC = () => {
   if (isError) {
     return (
       <div className="w-fit mx-auto">
-        <p className="text-error text-2xl">Ошибка загрузки продуктов</p>
+        <p className="text-error text-xl 2xl:text-2xl">Ошибка загрузки продуктов</p>
       </div>
     );
   }

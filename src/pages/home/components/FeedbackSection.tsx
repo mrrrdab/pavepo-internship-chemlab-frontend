@@ -44,7 +44,9 @@ const FeedbackSection: React.FC = () => {
   return (
     <section className="bg-[url('/src/assets/images/feedback-background.png')] bg-cover bg-center w-full px-8 md:px-14 lg:px-20 2xl:px-26 py-12">
       <div className="w-full sm:w-3/4 2xl:w-2/5">
-        <h2 className="text-white text-3xl md:text-4xl 2xl:text-5xl mb-12">Оставьте заявку на обратный звонок</h2>
+        <h2 className="text-white text-3xl md:text-4xl 2xl:text-5xl mb-8 2xl:mb-12">
+          Оставьте заявку на обратный звонок
+        </h2>
         <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-5 mb-7">
             <div>

@@ -18,7 +18,7 @@ import { SupplierItem } from './SupplierItem';
 const SuppliersSection: React.FC = () => {
   return (
     <section className="px-8 md:px-14 lg:px-20 2xl:px-26 overflow-hidden">
-      <h2 className="text-3xl md:text-4xl 2xl:text-5xl mb-16">Поставщики</h2>
+      <h2 className="text-3xl md:text-4xl 2xl:text-5xl mb-10 2xl:mb-16">Поставщики</h2>
       <div className="flex flex-col sm:flex-row gap-5">
         <Card className="hidden 2xl:flex flex-1 self-stretch bg-primary rounded-xl flex-col px-5 py-6">
           <CardContent>

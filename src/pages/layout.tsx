@@ -21,7 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <TopBar />
           <Header />
         </div>
-        <div className="px-26 py-16">
+        <div className="px-8 md:px-14 lg:px-20 2xl:px-26 py-10 2xl:py-16">
           <p className="text-xl">
             {pathParts.map((segment, index) => {
               const breadcrumb = ROUTE_SEGMENTS_LABELS[segment];
@@ -36,7 +36,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </p>
         </div>
         <div className="grow">{children}</div>
-        <div className="mt-50 mb-24 md:mb-28">
+        <div className="mt-28 xl:mt-40 2xl:mt-50 mb-24 md:mb-28">
           <Footer />
         </div>
         <div className="fixed bottom-6 right-5">

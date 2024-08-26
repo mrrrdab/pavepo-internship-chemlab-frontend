@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
   return (
     <React.Fragment>
       <Layout>
-        <main className="flex flex-col gap-50 mt-50">
+        <main className="flex flex-col gap-28 xl:gap-40 2xl:gap-50 mt-28 xl:mt-40 2xl:mt-50">
           <SpecialOffersSection />
           <CatalogSection />
           <BusinessSummarySection />

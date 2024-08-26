@@ -13,7 +13,7 @@ import { CatalogItem } from './CatalogItem';
 const CatalogSection: React.FC = () => {
   return (
     <section className="px-8 md:px-14 lg:px-20 2xl:px-26">
-      <div className="flex justify-between items-center mb-16 overflow-hidden">
+      <div className="flex justify-between items-center mb-10 2xl:mb-16 overflow-hidden">
         <h2 className="text-5xl">Каталог</h2>
         <Link
           to={ROUTES.SPECIAL_OFFERS}

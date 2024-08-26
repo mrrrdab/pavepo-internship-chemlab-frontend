@@ -10,7 +10,7 @@ import aboutImageSixth from '@/assets/images/about-6.png';
 const AboutSection: React.FC = () => {
   return (
     <section className="px-26">
-      <h1 className="text-5xl mb-16">О Нас</h1>
+      <h1 className="text-5xl mb-10 2xl:mb-16">О Нас</h1>
       <div className="grid grid-rows-[245px_215px_275px_145px] grid-cols-4 gap-5">
         <img src={aboutImageFirst} alt="About Image-1" className="row-span-2 rounded w-full h-full object-cover" />
         <img src={aboutImageSecond} alt="About Image-2" className="row-start-3 rounded w-full h-full object-cover" />

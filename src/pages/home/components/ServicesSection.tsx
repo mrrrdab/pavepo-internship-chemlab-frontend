@@ -6,7 +6,7 @@ import { ServiceItem } from './ServiceItem';
 const ServicesSection: React.FC = () => {
   return (
     <section className="px-8 md:px-14 lg:px-20 2xl:px-26">
-      <h2 className="text-3xl md:text-4xl 2xl:text-5xl mb-16">Наши услуги</h2>
+      <h2 className="text-3xl md:text-4xl 2xl:text-5xl mb-10 2xl:mb-16">Наши услуги</h2>
       <div className="flex flex-row flex-nowrap overflow-auto 2xl:flex-col gap-6">
         <div className="flex-1 min-w-96">
           <ServiceItem

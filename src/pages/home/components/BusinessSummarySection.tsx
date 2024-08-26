@@ -3,7 +3,9 @@ import React from 'react';
 const BusinessSummarySection: React.FC = () => {
   return (
     <section className="overflow-hidden">
-      <h2 className="text-3xl md:text-4xl 2xl:text-5xl px-8 md:px-14 lg:px-20 2xl:px-26 mb-16">Мы предлагаем</h2>
+      <h2 className="text-3xl md:text-4xl 2xl:text-5xl px-8 md:px-14 lg:px-20 2xl:px-26 mb-10 2xl:mb-16">
+        Мы предлагаем
+      </h2>
       <div className="bg-primary flex flex-col xl:flex-row gap-8 xl:gap-5 px-8 md:px-14 lg:px-20 2xl:px-26 py-14">
         <div className="flex-1 flex flex-col gap-6">
           <p className="text-white text-xl 2xl:text-2xl border-b border-b-white">01</p>

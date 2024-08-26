@@ -25,7 +25,7 @@ const SpecialOffersSection: React.FC = () => {
 
   return (
     <section className="px-8 md:px-14 lg:px-20 2xl:px-26">
-      <div className="flex justify-between items-center mb-16 overflow-hidden">
+      <div className="flex justify-between items-center mb-10 2xl:mb-16 overflow-hidden">
         <h2 className="text-3xl md:text-4xl 2xl:text-5xl">Специальные предложения</h2>
         {specialOffers && (
           <Link
@@ -43,7 +43,7 @@ const SpecialOffersSection: React.FC = () => {
         </div>
       ) : isError ? (
         <div className="w-fit mx-auto">
-          <p className="text-error text-2xl">Ошибка загрузки продуктов</p>
+          <p className="text-error text-xl 2xl:text-2xl">Ошибка загрузки продуктов</p>
         </div>
       ) : (
         specialOffers && (
