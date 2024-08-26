@@ -11,10 +11,10 @@ const ShoppingCartPage: React.FC = () => {
   return (
     <React.Fragment>
       <Layout>
-        <main className="px-26">
-          <div className="flex flex-col gap-16">
+        <main className="px-8 md:px-14 lg:px-20 2xl:px-26">
+          <div className="flex flex-col gap-12 3xl:gap-16">
             <div className="flex justify-between">
-              <h1 className="text-5xl">Корзина</h1>
+              <h1 className="text-3xl md:text-4xl 2xl:text-5xl">Корзина</h1>
             </div>
             <div>{cartItems.length ? <CartContents /> : <EmptyCartContents />}</div>
           </div>

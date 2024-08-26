@@ -96,7 +96,7 @@ const FeedbackSection: React.FC = () => {
             type="submit"
             variant="outline"
             borderRadius="lg"
-            className="group flex justify-between items-center w-fit xs:w-1/2 2xl:w-2/5 h-15"
+            className="group flex justify-between items-center w-fit xs:w-1/2 2xl:w-2/5 h-15 px-5 py-8 xl:py-2.5"
           >
             <p className="hidden xs:block">Отправить</p>
             <div className="bg-white border border-black rounded-3xl group-disabled:bg-neutral-300 group-hover:bg-neutral-300 p-2.5">

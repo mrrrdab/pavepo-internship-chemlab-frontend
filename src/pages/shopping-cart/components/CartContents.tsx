@@ -19,10 +19,10 @@ const CartContents: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <Button variant="text" className="underline p-0 mr-auto" onClick={handleSelectAll}>
+      <Button variant="text" className="underline p-0 mr-auto text-xl 2xl:text-2xl" onClick={handleSelectAll}>
         Выбрать все
       </Button>
-      <div className="flex gap-12">
+      <div className="flex flex-col 2xl:flex-row gap-12">
         <div className="grow">
           {cartItems
             .filter(product => product.quantity > 0)
@@ -30,7 +30,7 @@ const CartContents: React.FC = () => {
               <ProductItem key={product.id} {...product} />
             ))}
         </div>
-        <div className="w-1/3">
+        <div className="2xl:w-1/3">
           <CartSummary
             productsCount={selectedProductsQuantity}
             netTotalPrice={netPrice}

@@ -8,7 +8,7 @@ type LanguageSwitchPopupProps = { trigger: JSX.Element };
 const LanguageSwitchPopup: React.FC<LanguageSwitchPopupProps> = ({ trigger }) => {
   return (
     <Popup trigger={trigger} position="bottom left">
-      <div className="bg-white border-[0.5px] rounded-xl flex flex-col gap-7 px-5 py-6 w-80">
+      <div className="bg-white border-[0.5px] border-black rounded-xl flex flex-col gap-7 px-5 py-6 w-80">
         <p className="text-2xl">Выберите язык</p>
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2.5">

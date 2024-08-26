@@ -26,7 +26,7 @@ const SpecialOfferItem: React.FC<ProductBaseRecord> = ({ id, productType, manufa
         </div>
         <Link
           to={`${ROUTES.SPECIAL_OFFERS}/${id}`}
-          className="group text-xl bg-white border border-black rounded-xl flex justify-center 2xl:justify-between items-center hover:bg-neutral-200 w-fit 2xl:w-full 3xl:w-60 h-15 px-5 py-2.5"
+          className="group text-xl bg-white border border-black rounded-xl flex justify-center 2xl:justify-between items-center hover:bg-neutral-200 w-fit 2xl:w-full 3xl:w-60 h-15 p-8 2xl:px-5 2xl:py-2.5"
         >
           <p className="hidden 2xl:block">Подробнее</p>
           <div className="flex-shrink-0 bg-white border border-black text-neutral-900 rounded-3xl group-hover:bg-neutral-300 p-2.5">

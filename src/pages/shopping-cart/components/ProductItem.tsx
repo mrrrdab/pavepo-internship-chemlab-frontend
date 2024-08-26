@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -5,7 +6,7 @@ import deleteDarkIcon from '@/assets/icons/delete-dark.svg';
 import { ROUTES } from '@/constants';
 import { ProductCartRecord } from '@/types';
 import { useCart } from '@/hooks';
-import { Button, Card, CardContent, Checkbox } from '@/components';
+import { Button, Card, CardContent, CardTitle, Checkbox } from '@/components';
 
 const ProductItem: React.FC<ProductCartRecord> = ({
   id,
@@ -55,36 +56,38 @@ const ProductItem: React.FC<ProductCartRecord> = ({
   };
 
   return (
-    <Card className="border-y border-y-neutral-900/25 py-6">
-      <CardContent className="flex justify-between">
-        <div className="flex items-center gap-6">
-          <Checkbox name={id} size="lg" checked={selected} onChange={handleSelect} />
-          <div className="flex gap-10">
+    <React.Fragment>
+      <Card className="2xl:hidden border-y border-neutral-900/25 py-4">
+        <CardTitle className="mb-5">
+          <Link to={`${ROUTES.LAB_EQUIPMENT}/${id}`} className="block">
+            <p className="text-xl hover:text-primary">
+              {productType} {manufacturer} {model}
+            </p>
+          </Link>
+        </CardTitle>
+        <CardContent className="flex justify-between gap-8">
+          <div className="border-[0.5px] border-neutral-900/25 rounded-xl min-w-32 w-32 min-h-32 h-32 p-5">
             <img
               src={images.sort((a, b) => a.priority - b.priority)[0].url}
               alt={`${productType} ${model} ${manufacturer}`}
-              className="w-28 h-28 object-cover"
+              className="w-full h-full object-cover"
             />
-            <div className="w-98">
-              <div className="flex flex-col justify-between h-full">
-                <Link to={`${ROUTES.LAB_EQUIPMENT}/${id}`} className="block">
-                  <p className="text-xl hover:text-primary">
-                    {productType} {manufacturer} {model}
-                  </p>
-                </Link>
-                <Button
-                  variant="text"
-                  borderRadius="none"
-                  className="border-b border-black flex items-center gap-2.5 w-fit p-0 pb-1"
-                  onClick={handleRemoveAll}
-                >
-                  <img src={deleteDarkIcon} alt="Delete" />
-                  <p>Удалить</p>
-                </Button>
-              </div>
+          </div>
+          <div className="grow flex flex-col justify-between">
+            <div className="flex justify-between">
+              <p className="text-2xl">{price} ₽</p>
+              <Button
+                variant="text"
+                borderRadius="none"
+                className="flex lg:border-b border-black items-center gap-2.5 w-fit p-0 pb-1"
+                onClick={handleRemoveAll}
+              >
+                <img src={deleteDarkIcon} alt="Delete" />
+                <p className="hidden lg:block">Удалить</p>
+              </Button>
             </div>
-            <div className="grow">
-              <div className="border border-black rounded-xl flex justify-center items-center gap-4 w-28 h-12 px-2">
+            <div className="flex justify-between items-stretch">
+              <div className="2xl:hidden flex border border-black rounded-xl justify-center items-center gap-4 w-28 px-2">
                 <Button variant="text" className="text-2xl p-0" onClick={handleRemoveProduct}>
                   -
                 </Button>
@@ -93,15 +96,59 @@ const ProductItem: React.FC<ProductCartRecord> = ({
                   +
                 </Button>
               </div>
+              <Checkbox name={id} size="lg" checked={selected} onChange={handleSelect} />
             </div>
           </div>
-        </div>
-        <div className="w-fit flex flex-col gap-1">
-          <p className="text-2xl">{price} ₽</p>
-          {discount !== 0 && <p className="ml-auto opacity-65 text-xl">-{discount} ₽</p>}
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+      <Card className="hidden 2xl:block border-y border-neutral-900/25 py-6">
+        <CardContent className="flex gap-8 justify-between">
+          <div className="flex items-center gap-6">
+            <Checkbox name={id} size="lg" checked={selected} onChange={handleSelect} />
+            <div className="flex gap-6 3xl:gap-10">
+              <img
+                src={images.sort((a, b) => a.priority - b.priority)[0].url}
+                alt={`${productType} ${model} ${manufacturer}`}
+                className="min-w-32 w-32 min-h-32 h-32 object-cover"
+              />
+              <div className="2xl:w-80 3xl:w-98">
+                <div className="flex flex-col gap-5 2xl:justify-between h-full">
+                  <Link to={`${ROUTES.LAB_EQUIPMENT}/${id}`} className="block">
+                    <p className="text-xl hover:text-primary">
+                      {productType} {manufacturer} {model}
+                    </p>
+                  </Link>
+                  <Button
+                    variant="text"
+                    borderRadius="none"
+                    className="hidden 2xl:flex border-b border-black items-center gap-2.5 w-fit p-0 pb-1"
+                    onClick={handleRemoveAll}
+                  >
+                    <img src={deleteDarkIcon} alt="Delete" />
+                    <p>Удалить</p>
+                  </Button>
+                </div>
+              </div>
+              <div className="grow">
+                <div className="hidden 2xl:flex border border-black rounded-xl justify-center items-center gap-4 w-28 h-12 px-2">
+                  <Button variant="text" className="text-2xl p-0" onClick={handleRemoveProduct}>
+                    -
+                  </Button>
+                  <p className="text-xl">{count}</p>
+                  <Button variant="text" className="text-2xl p-0" onClick={handleAddProduct}>
+                    +
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-fit flex flex-col gap-1">
+            <p className="text-2xl">{price} ₽</p>
+            {discount !== 0 && <p className="ml-auto opacity-65 text-xl">-{discount} ₽</p>}
+          </div>
+        </CardContent>
+      </Card>
+    </React.Fragment>
   );
 };
 
