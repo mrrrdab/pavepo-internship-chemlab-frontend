@@ -38,8 +38,8 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedDeliveryMethod }) =
 
   return (
     <Card>
-      <div className="grow bg-primary rounded text-white text-xl flex flex-col gap-5 p-8">
-        <CardHeader className="text-white text-2xl">
+      <div className="grow bg-primary rounded text-white text-base 2xl:text-xl flex flex-col gap-5 p-8">
+        <CardHeader className="text-white text-xl 2xl:text-2xl">
           <CardTitle>Ваш заказ</CardTitle>
         </CardHeader>
         {isLoading ? (
@@ -48,7 +48,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedDeliveryMethod }) =
           </div>
         ) : isError || !deliveryOptions ? (
           <div className="bg-error w-full">
-            <p className="text-white text-2xl text-center px-4 py-2.5">Ошибка сервера. Вернитесь позже</p>
+            <p className="text-white text-xl 2xl:text-2xl text-center px-4 py-2.5">Ошибка сервера. Вернитесь позже</p>
           </div>
         ) : (
           taxes && (
@@ -67,7 +67,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedDeliveryMethod }) =
                   <p>{selectedDeliveryOption!.price} ₽</p>
                 </div>
               </div>
-              <div className="text-2xl flex justify-between items-center">
+              <div className="text-xl 2xl:text-2xl flex justify-between items-center">
                 <p>Итого:</p>
                 <h4>{totalPrice!.toFixed(2)} ₽</h4>
               </div>
