@@ -1,10 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Oval } from 'react-loader-spinner';
 
 import { useCart } from '@/hooks';
 import { getTaxes } from '@/api';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components';
+import { Card, CardHeader, CardTitle, CardContent, Loader } from '@/components';
 
 type OrderSummaryProps = {
   selectedDeliveryMethod: string;
@@ -13,11 +12,7 @@ type OrderSummaryProps = {
 const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedDeliveryMethod }) => {
   const { netPrice, discount, deliveryOptions } = useCart();
 
-  const {
-    isLoading,
-    isError,
-    data: taxes,
-  } = useQuery(['taxes'], () => getTaxes(), {
+  const { isLoading, isError, data } = useQuery(['taxes'], () => getTaxes(), {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
     retry: 2,
@@ -28,10 +23,10 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedDeliveryMethod }) =
   let totalPrice;
   let vat;
 
-  if (deliveryOptions && taxes) {
+  if (deliveryOptions && data) {
     selectedDeliveryOption = deliveryOptions.find(option => option.type === selectedDeliveryMethod);
 
-    vatTax = taxes.find(tax => tax.type === 'vat');
+    vatTax = data.data.find(tax => tax.type === 'vat');
     totalPrice = netPrice - discount + selectedDeliveryOption!.price + vatTax!.value;
     vat = vatTax!.value * totalPrice;
   }
@@ -44,14 +39,14 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedDeliveryMethod }) =
         </CardHeader>
         {isLoading ? (
           <div className="w-fit mx-auto">
-            <Oval height="40" width="40" color="#2196F3" secondaryColor="#F1F1F1" strokeWidth={4} />
+            <Loader />
           </div>
         ) : isError || !deliveryOptions ? (
           <div className="bg-error w-full">
             <p className="text-white text-xl 2xl:text-2xl text-center px-4 py-2.5">Ошибка сервера. Вернитесь позже</p>
           </div>
         ) : (
-          taxes && (
+          data && (
             <CardContent className="flex flex-col gap-6">
               <div className="flex flex-col gap-2.5">
                 <div className="flex justify-between items-center">

@@ -68,7 +68,7 @@ const ProductItem: React.FC<ProductCartRecord> = ({
         <CardContent className="flex justify-between gap-8">
           <div className="border-[0.5px] border-neutral-900/25 rounded-xl min-w-32 w-32 min-h-32 h-32 p-5">
             <img
-              src={images.sort((a, b) => a.priority - b.priority)[0].url}
+              src={images.sort((a, b) => a.priority! - b.priority!)[0].url}
               alt={`${productType} ${model} ${manufacturer}`}
               className="w-full h-full object-cover"
             />
@@ -96,7 +96,7 @@ const ProductItem: React.FC<ProductCartRecord> = ({
                   +
                 </Button>
               </div>
-              <Checkbox name={id} size="lg" checked={selected} onChange={handleSelect} />
+              <Checkbox name={id.toString()} size="lg" checked={selected} onChange={handleSelect} />
             </div>
           </div>
         </CardContent>
@@ -104,10 +104,10 @@ const ProductItem: React.FC<ProductCartRecord> = ({
       <Card className="hidden 2xl:block border-y border-neutral-900/25 py-6">
         <CardContent className="flex gap-8 justify-between">
           <div className="flex items-center gap-6">
-            <Checkbox name={id} size="lg" checked={selected} onChange={handleSelect} />
+            <Checkbox name={id.toString()} size="lg" checked={selected} onChange={handleSelect} />
             <div className="flex gap-6 3xl:gap-10">
               <img
-                src={images.sort((a, b) => a.priority - b.priority)[0].url}
+                src={images.sort((a, b) => a.priority! - b.priority!)[0].url}
                 alt={`${productType} ${model} ${manufacturer}`}
                 className="min-w-32 w-32 min-h-32 h-32 object-cover"
               />

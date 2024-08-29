@@ -24,8 +24,8 @@ const variantClasses: Record<ButtonVariant, string> = {
 const sizeClasses: Record<ButtonSize, string> = {
   default: 'px-5 py-2.5',
   sm: 'p-2.5',
-  lg: 'px-5 py-6',
-  xl: 'px-16 py-6',
+  lg: 'px-5 py-3 2xl:py-6',
+  xl: 'px-16 py-3 2xl:py-6',
 };
 
 const borderRadiusClasses: Record<ButtonBorderRadius, string> = {
@@ -43,10 +43,10 @@ const hoverClasses: Record<ButtonVariant, string> = {
 };
 
 const disabledClasses: Record<ButtonVariant, string> = {
-  primary: 'disabled:bg-neutral-300 disabled:text-neutral-900/60 disabled:cursor-initial',
-  secondary: 'disabled:bg-neutral-300 disabled:text-neutral-900/60 disabled:cursor-initial',
-  outline: 'disabled:bg-neutral-300 disabled:text-neutral-900/60 disabled:cursor-initial',
-  text: 'disabled:text-neutral-900/60 disabled:cursor-initial',
+  primary: 'disabled:bg-neutral-300 disabled:text-neutral-900/60 disabled:cursor-default',
+  secondary: 'disabled:bg-neutral-300 disabled:text-neutral-900/60 disabled:cursor-default',
+  outline: 'disabled:bg-neutral-300 disabled:text-neutral-900/60 disabled:cursor-default',
+  text: 'disabled:text-neutral-900/60 disabled:cursor-default',
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(

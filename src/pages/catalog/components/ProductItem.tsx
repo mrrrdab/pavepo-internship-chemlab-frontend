@@ -6,9 +6,9 @@ import { CatalogProductRecord, ProductCartRecord } from '@/types';
 import { useCart } from '@/hooks';
 import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components';
 
-// TODO: Count reset on adding another product to cart
 const ProductItem: React.FC<CatalogProductRecord> = ({
   id,
+  category,
   productType,
   model,
   manufacturer,
@@ -52,6 +52,7 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
   const handleAddToCart = () => {
     const product: ProductCartRecord = {
       id,
+      category,
       productType,
       model,
       manufacturer,
@@ -82,13 +83,13 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
   return (
     <div className="bg-secondary border-[0.5px] border-black/20 rounded-xl flex flex-col overflow-hidden">
       <img
-        src={images.sort((a, b) => a.priority - b.priority)[0].url}
+        src={images.sort((a, b) => a.priority! - b.priority!)[0].url}
         alt={`${productType} ${model} ${manufacturer}`}
         className="rounded-xl w-full h-72 object-cover"
       />
-      <Card className="flex flex-col gap-5 px-5 py-6">
+      <Card className="flex flex-col justify-between gap-5 px-5 py-6 h-full">
         <CardHeader className="flex flex-col gap-2.5">
-          <Link to={`${ROUTES.LAB_EQUIPMENT}/${id}`} className="block">
+          <Link to={`${ROUTES[category]}/${id}`} className="block">
             <CardTitle className="text-xl 2xl:text-2xl hover:text-primary">{productType}</CardTitle>
           </Link>
           <p className="opacity-65 text-base">
@@ -113,7 +114,10 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
           </p>
           <div className="flex justify-between items-center">
             <p className="text-base">Цена:</p>
-            <p className="text-xl 2xl:text-2xl font-medium">{price} ₽</p>
+            <div className="flex flex-col gap-1">
+              <p className="text-xl 2xl:text-2xl font-medium">{price} ₽</p>
+              {discount !== 0 && <p className="ml-auto opacity-65 text-xl">-{discount} ₽</p>}
+            </div>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between items-stretch">

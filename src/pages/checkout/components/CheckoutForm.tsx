@@ -30,7 +30,7 @@ const CheckoutForm: React.FC = () => {
   const navigate = useNavigate();
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     control,
     watch,
@@ -141,13 +141,13 @@ const CheckoutForm: React.FC = () => {
                     render={({ field: { onChange, value } }) => (
                       <Radio
                         variant="checkbox"
-                        id={option.id}
+                        id={option.id.toString()}
                         checked={value === option.type}
                         onChange={() => onChange(option.type)}
                       />
                     )}
                   />
-                  <label htmlFor={option.id} className="opacity-65 text-xl 2xl:text-2xl">
+                  <label htmlFor={option.id.toString()} className="opacity-65 text-xl 2xl:text-2xl">
                     {option.label}
                   </label>
                 </div>
@@ -209,7 +209,7 @@ const CheckoutForm: React.FC = () => {
       </div>
       <div className="2xl:hidden mt-12">
         <OrderSummary selectedDeliveryMethod={deliveryMethod} />
-        <Button type="submit" variant="outline" className="font-medium rounded w-full h-12">
+        <Button type="submit" disabled={isSubmitting} variant="outline" className="font-medium rounded w-full h-12">
           Оформить заказ
         </Button>
         <OrderSuccessModal open={showModal} onClose={handleModalClose} />

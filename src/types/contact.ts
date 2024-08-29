@@ -1,19 +1,21 @@
-type Contact = { id: string; label: string; address: string; phoneNumber: string; email: string };
+import { Image } from './image';
 
-type OrderPassPhoneNumbers = { id: string; phone: string };
+type Contact = { id: number; label: string; address: string; phoneNumber: string; email: string };
+
+type OrderPassPhoneNumbers = { id: number; phoneNumber: string };
 type BusinessPremiseContact = {
-  id: string;
+  id: number;
   label: string;
-  image: string;
+  image: Image;
   address: string;
   phoneNumber: string;
   email?: string;
-  orderPassPhoneNumbers?: OrderPassPhoneNumbers[];
+  orderPassPhoneNumbers: OrderPassPhoneNumbers[];
 };
 
-type ExtensionPhoneNumber = { id: string; phone: string };
+type ExtensionPhoneNumber = { id: number; phoneNumber: string };
 type DepartmentsContact = {
-  id: string;
+  id: number;
   label: string;
   phoneNumber: string;
   extensionPhoneNumbers: ExtensionPhoneNumber[];

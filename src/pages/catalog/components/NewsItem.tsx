@@ -4,12 +4,16 @@ import { NewsItem as NewsItemType } from '@/types';
 import { formatDate } from '@/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components';
 
-type NewsItemProps = Pick<NewsItemType, 'title' | 'date' | 'image' | 'content'>;
+type NewsItemProps = Pick<NewsItemType, 'title' | 'date' | 'images' | 'content'>;
 
-const NewsItem: React.FC<NewsItemProps> = ({ title, date, image, content }) => {
+const NewsItem: React.FC<NewsItemProps> = ({ title, date, images, content }) => {
   return (
     <div className="bg-secondary border-[0.5px] border-black/20 rounded-xl flex flex-col p-2">
-      <img src={image} alt={`${title} ${date}`} className="rounded-xl w-full h-72 object-cover mb-5" />
+      <img
+        src={images.sort((a, b) => a.priority! - b.priority!)[0].url}
+        alt={`${title} ${date}`}
+        className="rounded-xl w-full h-72 object-cover mb-5"
+      />
       <Card className="flex flex-col gap-2.5">
         <CardHeader className="flex flex-col gap-2.5">
           <CardTitle className="text-2xl">{title}</CardTitle>

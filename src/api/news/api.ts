@@ -1,8 +1,18 @@
+import { PaginationQueryParams } from '../common';
 import { GetNewsDTO } from './dto';
-import { GetNewsQueryParams } from './types';
 
-const getNews = async (params: GetNewsQueryParams): Promise<GetNewsDTO> => {
-  const response = await fetch(`${import.meta.env.VITE_NEWS_API_URL}?_limit=${params.limit}`);
+const getAllNews = async (params: PaginationQueryParams): Promise<GetNewsDTO> => {
+  const url = new URL(`${import.meta.env.VITE_API_DOMAIN}/api/news`);
+
+  if (params.take !== undefined) {
+    url.searchParams.append('take', params.take.toString());
+  }
+
+  if (params.skip !== undefined) {
+    url.searchParams.append('skip', params.skip.toString());
+  }
+
+  const response = await fetch(url.toString());
 
   if (!response.ok) {
     throw new Error(`Failed to fetch news. Status: ${response.status}`);
@@ -11,4 +21,4 @@ const getNews = async (params: GetNewsQueryParams): Promise<GetNewsDTO> => {
   return response.json();
 };
 
-export { getNews };
+export { getAllNews };

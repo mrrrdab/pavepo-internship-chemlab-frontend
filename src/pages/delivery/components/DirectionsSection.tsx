@@ -11,7 +11,7 @@ const DirectionsSection: React.FC = () => {
         <img src={directionsImage} alt="Map" className="hidden xs:block" />
         <div className="flex flex-col gap-5 xs:justify-between">
           <p className="opacity-90 text-base 2xl:text-xl">Файл pdf</p>
-          <a href="" className="border-b border-b-black flex gap-2">
+          <a href="" className="border-b border-b-black flex items-center gap-2">
             <p className="opacity-90 text-base 2xl:text-xl hover:text-primary">Скачать</p>
             <img src={arrowDownDarkSmallIcon} alt="Arrow Down" className="hidden 2xl:block" />
           </a>

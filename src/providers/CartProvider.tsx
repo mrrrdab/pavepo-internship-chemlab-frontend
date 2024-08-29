@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 
 import { DeleteProductCartRecord, DeliveryOption, ProductCartRecord, UpdateProductCartRecord } from '@/types';
 import { getProductsFromStorage, putProductsToStorage } from '@/utils';
-import { GetDelivereyOptionsDTO, getDeliveryOptions } from '@/api';
+import { GetDelivereyOptionsDTO, getAllDeliveryOptions } from '@/api';
 
 type CartProviderProps = {
   children: React.ReactNode;
@@ -31,7 +31,7 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   useEffect(() => {
     const fetchDeliveryOptions = async () => {
       try {
-        const options = await getDeliveryOptions();
+        const options = await getAllDeliveryOptions();
         setDeliveryOptions(options);
       } catch (error) {
         console.error('Failed to fetch delivery options:', error);
@@ -106,7 +106,7 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   if (deliveryOptions) {
-    value.deliveryOptions = deliveryOptions;
+    value.deliveryOptions = deliveryOptions.data;
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

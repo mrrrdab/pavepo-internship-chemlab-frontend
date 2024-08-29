@@ -1,7 +1,7 @@
 import { License } from '@/types';
 
-type GetLicenseDTO = License;
+type GetLicenseDTO = { data: License };
 
-type GetLicensesDTO = License[];
+type GetLicensesDTO = { data: License[]; metadata: { totalCount: number } };
 
 export type { GetLicenseDTO, GetLicensesDTO };

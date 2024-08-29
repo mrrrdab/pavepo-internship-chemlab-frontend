@@ -1,31 +1,51 @@
+import { Category } from './category';
+import { Image } from './image';
+
+type Advantage = { id: number; title: string; content: string };
+type Spec = { id: number; spec: string; value: string; measurementUnit?: string };
+type File = { id: number; label: string; url: string; image: Image };
+type Accessory = { id: number; name: string; quantity?: number };
+type Transportation = { id: number; name: string; value: string; measurementUnit?: string };
+
 type Product = {
-  id: string;
+  id: number;
+  category: Category;
   productType: string;
   model: string;
   manufacturer: string;
   originCountries: string[];
-  weight: { value: number; measurementUnit: string };
-  images: [{ id: string; url: string; priority: number }];
+  description: string;
   price: number;
   discount: number;
-  description: string;
-  advantages: [{ id: string; title: string; content: string }];
-  specs: [{ id: string; spec: string; value: string; measurementUnit?: string }];
-  files: [{ id: string; label: string; url: string; previewUrl: string }];
-  accessories: [{ id: string; name: string; quantity?: number }];
-  transportation: [{ id: string; name: string; value: string; measurementUnit?: string }];
+  weight: { value: number; measurementUnit: string };
+  color: string;
+  images: Image[];
+  advantages: Advantage[];
+  specs: Spec[];
+  files: File[];
+  accessories: Accessory[];
+  transportationData: Transportation[];
 };
 
-type ProductBaseRecord = Pick<Product, 'id' | 'productType' | 'manufacturer' | 'model' | 'images'>;
+type ProductBaseRecord = Pick<Product, 'id' | 'category' | 'productType' | 'manufacturer' | 'model' | 'images'>;
 
 type CatalogProductRecord = Pick<
   Product,
-  'id' | 'productType' | 'model' | 'manufacturer' | 'originCountries' | 'weight' | 'images' | 'price' | 'discount'
+  | 'id'
+  | 'category'
+  | 'productType'
+  | 'model'
+  | 'manufacturer'
+  | 'originCountries'
+  | 'weight'
+  | 'images'
+  | 'price'
+  | 'discount'
 >;
 
 type ProductCartRecord = Pick<
   Product,
-  'id' | 'productType' | 'model' | 'manufacturer' | 'images' | 'price' | 'discount'
+  'id' | 'category' | 'productType' | 'model' | 'manufacturer' | 'images' | 'price' | 'discount'
 > & {
   quantity: number;
   selected: boolean;

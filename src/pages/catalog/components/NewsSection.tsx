@@ -2,22 +2,18 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { Oval } from 'react-loader-spinner';
 
 import arrowRightWhiteIcon from '@/assets/icons/arrow-right-white.svg';
 import { ROUTES } from '@/constants';
-import { getNews } from '@/api';
+import { Loader } from '@/components';
+import { getAllNews } from '@/api';
 
 import { NewsItem } from './NewsItem';
 
 const LIMIT = 4;
 
 const NewsSection: React.FC = () => {
-  const {
-    isLoading,
-    isError,
-    data: news,
-  } = useQuery(['news'], () => getNews({ limit: LIMIT }), {
+  const { isLoading, isError, data } = useQuery(['news'], () => getAllNews({ take: LIMIT }), {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
     retry: 2,
@@ -37,7 +33,7 @@ const NewsSection: React.FC = () => {
       </div>
       {isLoading && (
         <div className="w-fit mx-auto">
-          <Oval height="40" width="40" color="#2196F3" secondaryColor="#F1F1F1" strokeWidth={4} />
+          <Loader />
         </div>
       )}
       {isError && (
@@ -45,16 +41,21 @@ const NewsSection: React.FC = () => {
           <p className="text-error text-xl 2xl:text-2xl">Ошибка загрузки новостей</p>
         </div>
       )}
-      {news && (
+      {data && (
         <div className="flex flex-nowrap gap-5 overflow-x-auto">
-          {news.map(newsItem => (
+          {data.data.map(newsItem => (
             <div key={newsItem.id} className="flex-1 min-w-96">
-              <NewsItem title={newsItem.title} date={newsItem.date} image={newsItem.image} content={newsItem.content} />
+              <NewsItem
+                title={newsItem.title}
+                date={newsItem.date}
+                images={newsItem.images}
+                content={newsItem.content}
+              />
             </div>
           ))}
         </div>
       )}
-      {news && (
+      {data && (
         <Link
           to={ROUTES.HOME}
           className="flex 2xl:hidden bg-primary text-white text-xl rounded-lg justify-center items-center gap-4 hover:bg-primary-dark w-1/2 md:w-1/3 2xl:w-1/6 h-15 mx-auto mt-8"

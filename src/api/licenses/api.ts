@@ -1,8 +1,18 @@
 import { GetLicensesDTO } from './dto';
-import { GetLicensesQueryParams } from './types';
+import { PaginationQueryParams } from '../common';
 
-const getLicenses = async (params: GetLicensesQueryParams): Promise<GetLicensesDTO> => {
-  const response = await fetch(`${import.meta.env.VITE_LICENSES_API_URL}?_limit=${params.limit}`);
+const getAllLicenses = async (params: PaginationQueryParams): Promise<GetLicensesDTO> => {
+  const url = new URL(`${import.meta.env.VITE_API_DOMAIN}/api/licenses`);
+
+  if (params.take !== undefined) {
+    url.searchParams.append('take', params.take.toString());
+  }
+
+  if (params.skip !== undefined) {
+    url.searchParams.append('skip', params.skip.toString());
+  }
+
+  const response = await fetch(url.toString());
 
   if (!response.ok) {
     throw new Error(`Failed to fetch licenses. Status: ${response.status}`);
@@ -11,4 +21,4 @@ const getLicenses = async (params: GetLicensesQueryParams): Promise<GetLicensesD
   return await response.json();
 };
 
-export { getLicenses };
+export { getAllLicenses };

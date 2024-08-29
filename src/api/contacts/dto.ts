@@ -1,14 +1,13 @@
 import { BusinessPremiseContact, Contact, DepartmentsContact } from '@/types';
 
-type ContactDTO = Contact;
+type ContactDTO = { data: Contact };
+type GetContactsDTO = { data: Contact[]; metadata: { totalCount: number } };
 
-type GetContactsDTO = Contact[];
+type GetBusinessPremiseContactDTO = { data: BusinessPremiseContact };
+type GetBusinessPremisesContactsDTO = { data: BusinessPremiseContact[]; metadata: { totalCount: number } };
 
-type GetBusinessPremiseContactDTO = BusinessPremiseContact;
-type GetBusinessPremisesContactsDTO = BusinessPremiseContact[];
-
-type DepartmentsContactDTO = DepartmentsContact;
-type GetDepartmentsContactsDTO = DepartmentsContact[];
+type DepartmentsContactDTO = { data: DepartmentsContact };
+type GetDepartmentsContactsDTO = { data: DepartmentsContact[]; metadata: { totalCount: number } };
 
 export type {
   ContactDTO,

@@ -22,7 +22,7 @@ type FormDataType = z.infer<typeof validationSchema>;
 const FeedbackSection: React.FC = () => {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     reset,
   } = useForm({
@@ -35,9 +35,8 @@ const FeedbackSection: React.FC = () => {
     mode: 'all',
   });
 
-  const onSubmit = (data: FormDataType) => {
+  const onSubmit = async (data: FormDataType) => {
     console.log(data);
-
     reset();
   };
 
@@ -94,6 +93,7 @@ const FeedbackSection: React.FC = () => {
           </p>
           <Button
             type="submit"
+            disabled={isSubmitting}
             variant="outline"
             borderRadius="lg"
             className="group flex justify-between items-center w-fit xs:w-1/2 2xl:w-2/5 h-15 px-5 py-8 xl:py-2.5"

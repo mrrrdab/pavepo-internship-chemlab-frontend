@@ -1,5 +1,5 @@
 type DeliveryOption = {
-  id: string;
+  id: number;
   type: string;
   label: string;
   price: number;

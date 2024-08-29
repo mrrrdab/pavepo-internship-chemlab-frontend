@@ -1,22 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
-import { Oval } from 'react-loader-spinner';
 
 import arrowLeftDarkIcon from '@/assets/icons/arrow-left-dark.svg';
 import arrowRightDarkMediumIcon from '@/assets/icons/arrow-right-dark-md.svg';
-import { getLicenses } from '@/api';
-import { Button } from '@/components';
+import { getAllLicenses } from '@/api';
+import { Button, Loader } from '@/components';
 
 import { LicenseItem } from './LicenseItem';
 
 const LIMIT = 10;
 
 const LicensesSection: React.FC = () => {
-  const {
-    isLoading,
-    isError,
-    data: licenses,
-  } = useQuery(['licenses'], () => getLicenses({ limit: LIMIT }), {
+  const { isLoading, isError, data } = useQuery(['licenses'], () => getAllLicenses({ take: LIMIT }), {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
     retry: 2,
@@ -39,7 +34,7 @@ const LicensesSection: React.FC = () => {
     return () => {
       window.removeEventListener('resize', updateItemWidth);
     };
-  }, [licenses]);
+  }, [data]);
 
   const handleScroll = (offset: number) => {
     if (scrollContainerRef.current) {
@@ -64,20 +59,20 @@ const LicensesSection: React.FC = () => {
       <h1 className="text-3xl md:text-4xl 2xl:text-5xl px-8 md:px-14 lg:px-20 2xl:px-26 mb-10 2xl:mb-16">Лицензии</h1>
       {isLoading ? (
         <div className="w-fit mx-auto">
-          <Oval height="40" width="40" color="#2196F3" secondaryColor="#F1F1F1" strokeWidth={4} />
+          <Loader />
         </div>
       ) : isError ? (
         <div className="w-fit mx-auto">
           <p className="text-error text-xl 2xl:text-2xl">Ошибка загрузки лицензий</p>
         </div>
       ) : (
-        licenses && (
-          <div className="flex sm:mx-4 lg:mx-8 2xl:mx-12">
-            <Button variant="text" onClick={() => handleScroll(-1)} className="flex-shrink-0 p-0">
+        data && (
+          <div className="flex mx-8 2xl:mx-12">
+            <Button variant="text" onClick={() => handleScroll(-1)} className="hidden md:block flex-shrink-0 p-0">
               <img src={arrowLeftDarkIcon} alt="Arrow Left" />
             </Button>
             <div ref={scrollContainerRef} className="whitespace-nowrap overflow-x-auto scroll-smooth">
-              {licenses.map((license, index) => (
+              {data.data.map((license, index) => (
                 <div
                   key={license.id}
                   className="inline-block whitespace-normal xs:w-1/2 sm:w-1/3 lg:w-1/4 2xl:w-1/6 min-h-96 pl-5"
@@ -87,7 +82,7 @@ const LicensesSection: React.FC = () => {
                 </div>
               ))}
             </div>
-            <Button variant="text" onClick={() => handleScroll(1)} className="flex-shrink-0 p-0 ml-5">
+            <Button variant="text" onClick={() => handleScroll(1)} className="hidden md:block flex-shrink-0 p-0 ml-5">
               <img src={arrowRightDarkMediumIcon} alt="Arrow Right" />
             </Button>
           </div>

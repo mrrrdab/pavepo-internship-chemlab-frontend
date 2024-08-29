@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import './index.css';
@@ -21,12 +21,14 @@ import {
   MicroelectronicsPage,
   PharmaceuticalsPage,
   ReagentsStandartsPage,
-  SpecialOffersPage,
   SuppliersPage,
   VeterinaryPage,
   WarehousePage,
   LabEquipmentProductPage,
+  SpecialOffersPage,
 } from '@/pages';
+
+import { ScrollToTop } from './components';
 
 const queryClient = new QueryClient();
 
@@ -34,7 +36,8 @@ const App: React.FC = () => {
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <Router basename="/chemlab-test-project">
+        <BrowserRouter basename="/chemlab-test-project">
+          <ScrollToTop />
           <CartProvider>
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -60,7 +63,7 @@ const App: React.FC = () => {
               <Route path="/checkout" element={<CheckoutPage />} />
             </Routes>
           </CartProvider>
-        </Router>
+        </BrowserRouter>
       </QueryClientProvider>
     </React.StrictMode>
   );

@@ -35,31 +35,33 @@ const BusinessPremiseContactItem: React.FC<BusinessPremiseContactItemProps> = ({
           </div>
           {email && (
             <div className="flex flex-col gap-2.5">
-              <h4 className="text-base 2xl:text-xl">Email:</h4>
+              <h4 className="text-xl 2xl:text-2xl">Email:</h4>
               <a href={`mailto: ${email}`} className="text-base 2xl:text-xl hover:text-neutral-600">
                 {email}
               </a>
             </div>
           )}
-          {orderPassPhoneNumbers && (
+          {orderPassPhoneNumbers.length !== 0 && (
             <div className="flex flex-col gap-2.5">
-              <h4 className="text-xl 2xl:text-2xl">Телефон для заказа пропуска:</h4>
-              <div className="flex flex-col gap-2">
-                {orderPassPhoneNumbers.map((phone, index, orderPassPhoneNumbers) => (
-                  <div key={phone.id} className="text-base 2xl:text-xl">
-                    <a href={`tel:${phone.phone}`} className="hover:text-neutral-600 underline">
-                      {phone.phone}
-                    </a>
-                    {index < orderPassPhoneNumbers.length - 1 && <span>,</span>}
-                  </div>
-                ))}
-              </div>
+              <h4 className="text-xl 2xl:text-2xl">Телефоны для заказа пропуска:</h4>
+              {orderPassPhoneNumbers && (
+                <div className="flex flex-col gap-2">
+                  {orderPassPhoneNumbers.map((phone, index, orderPassPhoneNumbers) => (
+                    <div key={phone.id} className="text-base 2xl:text-xl">
+                      <a href={`tel:${phone.phoneNumber}`} className="hover:text-neutral-600 underline">
+                        {phone.phoneNumber}
+                      </a>
+                      {index < orderPassPhoneNumbers.length - 1 && <span>,</span>}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </CardContent>
       </div>
       <div className="h-56 xl:h-auto xl:w-1/3">
-        <img src={image} alt={label} className="rounded-xl h-full w-full object-cover" />
+        <img src={image.url} alt={label} className="rounded-xl h-full w-full object-cover" />
       </div>
     </Card>
   );

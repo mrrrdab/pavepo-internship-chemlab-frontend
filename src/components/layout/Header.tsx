@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import menuDarkIcon from '@/assets/icons/menu-dark.svg';
+import menuWhiteIcon from '@/assets/icons/menu-white.svg';
 import chevronUpDarkIcon from '@/assets/icons/chevron-up-dark.svg';
 import chevronDownDarkIcon from '@/assets/icons/chevron-down-dark.svg';
-import searchDarkMediumIcon from '@/assets/icons/search-dark-md.svg';
+import searchWhiteSmallIcon from '@/assets/icons/search-white-sm.svg';
+import searchWhiteMediumIcon from '@/assets/icons/search-white-md.svg';
 import searchDarkSmallIcon from '@/assets/icons/search-dark-sm.svg';
+import searchDarkMediumIcon from '@/assets/icons/search-dark-md.svg';
 import shoppingBagDarkIcon from '@/assets/icons/shopping-bag-dark.svg';
 import { ROUTES } from '@/constants';
 import { cn } from '@/utils';
@@ -21,11 +24,20 @@ type HeaderProps = { isHomePage?: boolean };
 const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
   const [showCatalogPopup, setShowCatalogPopup] = useState(false);
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { isSubmitting },
+    handleSubmit,
+  } = useForm();
 
   const textColor = isHomePage ? 'text-white' : '';
   const placeholderColor = isHomePage ? 'placeholder:text-white' : '';
   const borderColor = isHomePage ? 'border-white' : 'border-black';
+
+  const menuIcon = isHomePage ? menuWhiteIcon : menuDarkIcon;
+
+  const searchSmallIcon = isHomePage ? searchWhiteSmallIcon : searchDarkSmallIcon;
+  const searchMeduimIcon = isHomePage ? searchWhiteMediumIcon : searchDarkMediumIcon;
 
   return (
     <header className="px-8 md:px-14 lg:px-20 2xl:px-26 py-6 mt-6 lg:mt-0">
@@ -82,7 +94,7 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
             <NavPopup
               trigger={
                 <Button variant="text" className="p-0">
-                  <img src={menuDarkIcon} alt="Menu" />
+                  <img src={menuIcon} alt="Menu" />
                 </Button>
               }
             />
@@ -93,8 +105,8 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
             <div className="w-full lg:flex lg:gap-2">
               <div className="relative">
                 <div className={cn('absolute inset-y-0 flex items-center pl-5 pointer-events-none', textColor)}>
-                  <img src={searchDarkMediumIcon} alt="Search Icon" className="hidden md:block" />
-                  <img src={searchDarkSmallIcon} alt="Search Icon" className="md:hidden" />
+                  <img src={searchMeduimIcon} alt="Search Icon" className="hidden md:block" />
+                  <img src={searchSmallIcon} alt="Search Icon" className="md:hidden" />
                 </div>
                 <input
                   type="text"
@@ -108,7 +120,7 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
                   )}
                 />
               </div>
-              <Button type="submit" className="hidden lg:block font-medium">
+              <Button type="submit" disabled={isSubmitting} className="hidden lg:block font-medium">
                 Найти
               </Button>
             </div>

@@ -9,7 +9,6 @@ import { ROUTES } from '@/constants';
 
 import { CatalogItem } from './CatalogItem';
 
-// TODO: Scroll to top on page change
 const CatalogSection: React.FC = () => {
   return (
     <section className="px-8 md:px-14 lg:px-20 2xl:px-26">

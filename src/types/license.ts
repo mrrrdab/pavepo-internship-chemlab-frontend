@@ -1,3 +1,5 @@
-type License = { id: string; title: string; image: string };
+import { Image } from './image';
+
+type License = { id: number; title: string; image: Image };
 
 export type { License };

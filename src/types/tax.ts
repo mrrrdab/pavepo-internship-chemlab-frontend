@@ -1,5 +1,5 @@
 type Tax = {
-  id: string;
+  id: number;
   type: string;
   value: number;
 };

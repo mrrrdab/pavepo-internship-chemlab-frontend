@@ -71,7 +71,7 @@ const CatalogPopup: React.FC<CatalogPopupProps> = ({ isHomePage = false, trigger
     <Popup trigger={trigger} arrow={false} position="bottom left">
       <div
         className={cn(
-          'bg-white border rounded-xl grid grid-flow-col grid-rows-7 grid-cols-2 gap-4 px-5 py-6',
+          'bg-white border rounded-xl grid grid-flow-col grid-rows-7 gap-4 px-5 py-6',
           isHomePage ? 'border-white' : 'border-black',
         )}
       >

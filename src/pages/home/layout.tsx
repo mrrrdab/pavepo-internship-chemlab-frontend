@@ -44,7 +44,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div className="hidden md:block w-full lg:w-3/5">
                 <Button
                   borderRadius="lg"
-                  className="group bg-white text-neutral-900 flex justify-between items-center hover:bg-neutral-200 w-full h-16"
+                  className="group text-xl bg-white text-neutral-900 flex justify-between items-center hover:bg-neutral-200 w-full h-16"
                 >
                   <p>Получить консультацию онлайн</p>
                   <div className="border border-black rounded-3xl group-hover:bg-neutral-300 p-2.5 lg:ml-5">

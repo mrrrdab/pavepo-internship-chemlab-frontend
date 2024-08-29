@@ -1,25 +1,18 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
-import { Oval } from 'react-loader-spinner';
 
 import arrowRightDarkMediumIcon from '@/assets/icons/arrow-right-dark-md.svg';
 import { ROUTES } from '@/constants';
-import { getLabEquipmentProduct } from '@/api';
-import { Button } from '@/components';
+import { getProduct } from '@/api';
+import { Button, Loader } from '@/components';
 import Layout from '@/pages/layout';
 
-import { ProductDetailsTabs, ProductInfo } from './components';
-import { NewsSection } from './components/NewsSection';
-import { SimilarProductsSection } from './components/SimilarProductsSection';
+import { NewsSection, ProductDetailsTabs, ProductInfo, SimilarProductsSection } from '../../components';
 
 const LabEquipmentProductPage: React.FC = () => {
   const { id } = useParams();
-  const {
-    isLoading,
-    isError,
-    data: product,
-  } = useQuery(['product', id], () => getLabEquipmentProduct(id!), {
+  const { isLoading, isError, data } = useQuery(['product', id], () => getProduct(id!), {
     refetchOnWindowFocus: false,
     retry: 2,
   });
@@ -29,7 +22,7 @@ const LabEquipmentProductPage: React.FC = () => {
       <div className="px-8 md:px-14 lg:px-20 2xl:px-26">
         {isLoading ? (
           <div className="w-fit mx-auto">
-            <Oval height="40" width="40" color="#2196F3" secondaryColor="#F1F1F1" strokeWidth={4} />
+            <Loader />
           </div>
         ) : isError ? (
           <div className="flex flex-col gap-8 w-1/3 mx-auto">
@@ -50,11 +43,30 @@ const LabEquipmentProductPage: React.FC = () => {
             </Link>
           </div>
         ) : (
-          product && (
+          data && (
             <div className="flex flex-col gap-20 md:gap-32 xl:gap-42 2xl:gap-50">
               <div className="flex flex-col gap-12 3xl:gap-16">
-                <ProductInfo {...product} />
-                <ProductDetailsTabs {...product} />
+                <ProductInfo
+                  id={data.data.id}
+                  category={data.data.category}
+                  productType={data.data.productType}
+                  model={data.data.model}
+                  manufacturer={data.data.manufacturer}
+                  originCountries={data.data.originCountries}
+                  weight={data.data.weight}
+                  images={data.data.images}
+                  price={data.data.price}
+                  discount={data.data.discount}
+                  description={data.data.description}
+                />
+                <ProductDetailsTabs
+                  description={data.data.description}
+                  advantages={data.data.advantages}
+                  specs={data.data.specs}
+                  files={data.data.files}
+                  accessories={data.data.accessories}
+                  transportationData={data.data.transportationData}
+                />
               </div>
               <SimilarProductsSection />
               <NewsSection />

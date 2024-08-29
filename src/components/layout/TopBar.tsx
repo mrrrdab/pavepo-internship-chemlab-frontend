@@ -24,7 +24,7 @@ const TopBar: React.FC<TopBarProps> = ({ isHomePage = false }) => {
           trigger={
             <Button
               variant="text"
-              className="flex gap-2 p-0"
+              className="flex items-center gap-2 p-0"
               onClick={() => setShowLanguageSwitchPopup(!showLanguageSwitchPopup)}
             >
               <img src={languageDarkIcon} alt="Language" />

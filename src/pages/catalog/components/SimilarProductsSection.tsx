@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 
 import arrowRightWhiteIcon from '@/assets/icons/arrow-right-white.svg';
 import { ROUTES } from '@/constants';
-import { CatalogProductRecord } from '@/types';
-import { ProductItem } from '@/pages/catalog/components';
+import { CatalogProductRecord, Category } from '@/types';
+
+import { ProductItem } from './ProductItem';
 
 // === DATA EXAMPLE ===
 const baseProduct: CatalogProductRecord = {
-  id: '100',
+  id: 100,
+  category: Category.LAB_EQUIPMENT,
   productType: 'Центрифуга лабораторная',
   model: 'LC-04A',
   manufacturer: 'Армед',
@@ -17,7 +19,7 @@ const baseProduct: CatalogProductRecord = {
   weight: { value: 9.1, measurementUnit: 'кг' },
   images: [
     {
-      id: '0',
+      id: 0,
       url: 'https://s3-alpha-sig.figma.com/img/b407/6fd5/00b6f5252ca11a053f237bacd901e911?Expires=1725235200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CsiQnup8m-5qZGW1eN1-Cc04P-VHlsERv5hL-GRNR4hLyy7y~wcIkGgz3odNUvugrbbsPLr3Cmq3esojSi4m7hdQULKSWQzgzoWItgO28SF7gyCm8iY7IV~xvI27FuYQhSk~qM4TK7JVq0GqzgXgcPH04nM-cBpzWf4gT9ilNe3IBgROao545QB~NVVDdHUNNr72y4ZEuEpr52OItpPDKYYHr72A-5yckEE6T6NTwEaOaxRg30Chsa0Le78NFTyspCzsjTAt8mcVAnZ-Fl46qsW5uHbq0Xsn0Tfv3utINdN7nvE07u1I5nP5xgsCFYB124hu3XUBBR-D6LJV0za6NA__',
       priority: 0,
     },
@@ -28,7 +30,7 @@ const baseProduct: CatalogProductRecord = {
 
 const SIMILAR_PRODUCTS = Array.from({ length: 4 }, (_, index) => ({
   ...baseProduct,
-  id: (parseInt(baseProduct.id) + index).toString(),
+  id: baseProduct.id + index,
 }));
 
 const SimilarProductsSection: React.FC = () => {
@@ -49,6 +51,7 @@ const SimilarProductsSection: React.FC = () => {
           <div key={product.id} className="flex-1 min-w-96">
             <ProductItem
               id={product.id}
+              category={product.category}
               productType={product.productType}
               model={product.model}
               manufacturer={product.manufacturer}

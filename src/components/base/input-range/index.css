@@ -1,0 +1,19 @@
+.range-slider {
+  @apply w-full;
+  @apply h-2;
+  @apply bg-secondary;
+  @apply rounded-none;
+}
+
+.range-slider .range-slider__range {
+  @apply bg-neutral-900;
+}
+
+.range-slider .range-slider__thumb {
+  @apply w-4;
+  @apply h-4;
+  @apply bg-secondary;
+  @apply border;
+  @apply border-black;
+  @apply rounded-none;
+}

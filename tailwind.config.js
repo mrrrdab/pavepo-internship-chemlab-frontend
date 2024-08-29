@@ -42,6 +42,9 @@ const config = {
         100: '30rem',
         104: '32.5rem',
       },
+      minWidth: {
+        104: '32.5rem',
+      },
       height: {
         15: '3.625rem',
         18: '4.5rem',

@@ -1,6 +1,6 @@
 import { Tax } from '@/types';
 
-type GetTaxDTO = Tax;
-type GetTaxesDTO = Tax[];
+type GetTaxDTO = { data: Tax };
+type GetTaxesDTO = { data: Tax[]; metadata: { totalCount: number } };
 
 export type { GetTaxDTO, GetTaxesDTO };

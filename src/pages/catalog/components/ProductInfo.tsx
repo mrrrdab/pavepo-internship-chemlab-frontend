@@ -12,6 +12,7 @@ import { Button } from '@/components';
 type ProductInfoProps = Pick<
   Product,
   | 'id'
+  | 'category'
   | 'productType'
   | 'model'
   | 'manufacturer'
@@ -27,6 +28,7 @@ type Image = Product['images'][0];
 
 const ProductInfo: React.FC<ProductInfoProps> = ({
   id,
+  category,
   productType,
   model,
   manufacturer,
@@ -41,7 +43,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   const [isInCart, setIsInCart] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [mainImage, setMainImage] = useState(() => {
-    return images.sort((a, b) => a.priority - b.priority)[0];
+    return images.sort((a, b) => a.priority! - b.priority!)[0];
   });
 
   const { cartItems, putProduct, updateProduct, deleteProduct } = useCart();
@@ -76,6 +78,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   const handleAddToCart = () => {
     const product: ProductCartRecord = {
       id,
+      category,
       productType,
       model,
       manufacturer,
@@ -135,38 +138,40 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   return (
     <div className="flex flex-col xl:flex-row gap-10 xl:gap-20 3xl:gap-36 xl:h-104">
       <div className="grow flex gap-5">
-        <div className="hidden w-20 min-w-20 3xl:min-w-28 3xl:w-28 xl:flex flex-col">
-          <Button
-            variant="text"
-            className="flex justify-center items-center h-[calc((100%-3*1.25rem)/4)] p-0"
-            onClick={() => handleScroll(-1)}
-          >
-            <img src={arrowUpDarkMediumIcon} alt="Arrow Up" />
-          </Button>
-          <div ref={imageContainerRef} className="flex-1 flex flex-col gap-5 overflow-y-auto">
-            {images
-              .filter(image => image !== mainImage)
-              .sort((a, b) => a.priority - b.priority)
-              .map((image, index) => (
-                <div key={image.id} className="border-[0.5px] border-neutral-900/25 h-[calc((100%-3*1.25rem)/3)]">
-                  <img
-                    src={image.url}
-                    alt={`${productType} ${model} ${manufacturer} ${index}`}
-                    className="w-full h-full object-cover cursor-pointer"
-                    onClick={() => handleImageClick(image)}
-                  />
-                </div>
-              ))}
+        {images.length > 1 && (
+          <div className="hidden w-20 min-w-20 3xl:min-w-28 3xl:w-28 xl:flex flex-col">
+            <Button
+              variant="text"
+              className="flex justify-center items-center h-[calc((100%-3*1.25rem)/4)] p-0"
+              onClick={() => handleScroll(-1)}
+            >
+              <img src={arrowUpDarkMediumIcon} alt="Arrow Up" />
+            </Button>
+            <div ref={imageContainerRef} className="flex-1 flex flex-col gap-5 overflow-y-auto">
+              {images
+                .filter(image => image !== mainImage)
+                .sort((a, b) => a.priority! - b.priority!)
+                .map((image, index) => (
+                  <div key={image.id} className="border-[0.5px] border-neutral-900/25 h-[calc((100%-3*1.25rem)/3)]">
+                    <img
+                      src={image.url}
+                      alt={`${productType} ${model} ${manufacturer} ${index}`}
+                      className="w-full h-full object-cover cursor-pointer"
+                      onClick={() => handleImageClick(image)}
+                    />
+                  </div>
+                ))}
+            </div>
+            <Button
+              variant="text"
+              className="flex justify-center items-center h-[calc((100%-3*1.25rem)/5)] p-0"
+              onClick={() => handleScroll(1)}
+            >
+              <img src={arrowDownDarkMediumIcon} alt="Arrow Down" />
+            </Button>
           </div>
-          <Button
-            variant="text"
-            className="flex justify-center items-center h-[calc((100%-3*1.25rem)/5)] p-0"
-            onClick={() => handleScroll(1)}
-          >
-            <img src={arrowDownDarkMediumIcon} alt="Arrow Down" />
-          </Button>
-        </div>
-        <div className="hidden border-[0.5px] border-neutral-900/25 rounded-xl w-96 2xl:w-100 xl:block 3xl:w-104">
+        )}
+        <div className="grow hidden border-[0.5px] border-neutral-900/25 rounded-xl w-96 2xl:w-100 xl:block 3xl:w-104">
           <img
             src={mainImage.url}
             alt={`${productType} ${model} ${manufacturer}`}

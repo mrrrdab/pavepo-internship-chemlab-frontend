@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 
 import addDarkIcon from '@/assets/icons/add-dark.svg';
@@ -30,29 +31,29 @@ const DepartmentCollapse: React.FC<DepartmentCollapseProps> = ({
         </div>
       </Button>
       {visible && (
-        <div className="text-white bg-primary flex justify-between items-center px-5 py-6">
-          <div className="flex flex-col gap-2.5">
+        <div className="bg-white border border-neutral-900 flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center px-5 py-6">
+          <div className="flex flex-col gap-1 sm:gap-2.5">
             <h4 className="text-xl 2xl:text-2xl">Телефон/факс:</h4>
-            <a href={`tel: ${phoneNumber}`} className="text-base 2xl:text-xl hover:text-neutral-200 underline">
+            <a href={`tel: ${phoneNumber}`} className="text-base 2xl:text-xl hover:text-neutral-600 underline">
               {phoneNumber}
             </a>
           </div>
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-1 sm:gap-2.5">
             <h4 className="text-xl 2xl:text-2xl">Добавочный:</h4>
             <div className="flex gap-2">
               {extensionPhoneNumbers.map((phone, index) => (
                 <div key={phone.id} className="text-base 2xl:text-xl">
-                  <a href={`tel:${phone.phone}`} className="hover:text-neutral-200">
-                    {phone.phone}
+                  <a href={`tel:${phone.phoneNumber}`} className="hover:text-neutral-600">
+                    {phone.phoneNumber}
                   </a>
                   {index < extensionPhoneNumbers.length - 1 && <span>, </span>}
                 </div>
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-1 sm:gap-2.5">
             <h4 className="text-xl 2xl:text-2xl">Email:</h4>
-            <a href={`mailto: ${email}`} className="text-base 2xl:text-xl hover:text-neutral-200">
+            <a href={`mailto: ${email}`} className="text-base 2xl:text-xl hover:text-neutral-600">
               {email}
             </a>
           </div>
