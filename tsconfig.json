@@ -33,6 +33,6 @@
     "esModuleInterop": true
   },
 
-  "include": ["src", "postcss.config.js", "tailwind.config.js", "vite.config.js", "ProductItem.tsx"],
+  "include": ["src", "postcss.config.js", "tailwind.config.js", "vite.config.js"],
   "exclude": ["node_modules", "dist"]
 }

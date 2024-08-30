@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import menuDarkIcon from '@/assets/icons/menu-dark.svg';
@@ -13,22 +13,51 @@ import searchDarkSmallIcon from '@/assets/icons/search-dark-sm.svg';
 import searchDarkMediumIcon from '@/assets/icons/search-dark-md.svg';
 import shoppingBagDarkIcon from '@/assets/icons/shopping-bag-dark.svg';
 import { ROUTES } from '@/constants';
+import { useDebounce, useSearch } from '@/hooks';
 import { cn } from '@/utils';
 
 import { Button } from '../base';
-import { CatalogPopup, NavPopup } from '../popups';
+import { CatalogPopup, NavPopup, ProductsSearchPopup } from '../popups';
+
+type SearchFormData = { search: string };
 
 type HeaderProps = { isHomePage?: boolean };
 
 // TODO: Button Icon
 const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
   const [showCatalogPopup, setShowCatalogPopup] = useState(false);
+  const [showSearchPopup, setShowSearchPopup] = useState(false);
+  const navigate = useNavigate();
+  const { searchQuery, setSearchQuery } = useSearch();
 
   const {
     register,
+    watch,
     formState: { isSubmitting },
     handleSubmit,
-  } = useForm();
+    reset,
+  } = useForm<SearchFormData>({
+    defaultValues: { search: searchQuery },
+  });
+
+  const searchQueryForm = watch('search');
+  const debouncedSearchQuery = useDebounce(searchQueryForm, 500);
+
+  useEffect(() => {
+    if (debouncedSearchQuery.trim()) {
+      setShowSearchPopup(true);
+    } else {
+      setShowSearchPopup(false);
+    }
+  }, [debouncedSearchQuery]);
+
+  const onSubmit = (data: SearchFormData) => {
+    setSearchQuery(data.search);
+    const queryParams = new URLSearchParams({ searchParams: data.search }).toString();
+    navigate(`${ROUTES.PRODUCTS_SEARCH}?${queryParams}`);
+    reset({ search: data.search });
+    setShowSearchPopup(false);
+  };
 
   const textColor = isHomePage ? 'text-white' : '';
   const placeholderColor = isHomePage ? 'placeholder:text-white' : '';
@@ -101,7 +130,7 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
           </div>
         </div>
         <div className="lg:flex lg:items-center 2xl:gap-12 lg:ml-auto 3xl:gap-16">
-          <form autoComplete="off" onSubmit={handleSubmit(data => console.log(data))} className="w-full">
+          <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className="relative w-full">
             <div className="w-full lg:flex lg:gap-2">
               <div className="relative">
                 <div className={cn('absolute inset-y-0 flex items-center pl-5 pointer-events-none', textColor)}>
@@ -110,7 +139,7 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
                 </div>
                 <input
                   type="text"
-                  placeholder="Поиск"
+                  placeholder="Флокулятор, JT-M6C"
                   {...register('search')}
                   className={cn(
                     'bg-transparent text-base 2xl:text-xl border rounded-lg w-full 2xl:w-96 3xl:w-100 px-13 md:px-16 py-2.5',
@@ -124,6 +153,12 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
                 Найти
               </Button>
             </div>
+            <ProductsSearchPopup
+              open={showSearchPopup}
+              isHomePage={isHomePage}
+              searchQuery={debouncedSearchQuery}
+              onClose={() => setShowSearchPopup(false)}
+            />
           </form>
           <Link to={ROUTES.SHOPPING_CART} className="hidden 2xl:block 2xl:flex-shrink-0">
             <img src={shoppingBagDarkIcon} alt="Shopping Bag" />

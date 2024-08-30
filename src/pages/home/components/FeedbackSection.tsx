@@ -3,6 +3,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { send } from '@emailjs/browser';
 
 import arrowRightDarkSmallIcon from '@/assets/icons/arrow-right-dark-sm.svg';
 import { Button } from '@/components';
@@ -36,7 +37,15 @@ const FeedbackSection: React.FC = () => {
   });
 
   const onSubmit = async (data: FormDataType) => {
-    console.log(data);
+    const responseStatus = await send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_FEEDBACK_TEMPLATE,
+      data,
+      {
+        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      },
+    );
+
     reset();
   };
 

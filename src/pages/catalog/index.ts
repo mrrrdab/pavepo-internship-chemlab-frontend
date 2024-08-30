@@ -13,3 +13,4 @@ export * from './special-offers';
 export * from './suppliers';
 export * from './veterinary';
 export * from './warehouse';
+export * from './products-search';

@@ -24,13 +24,21 @@ const getProducts = async (params: ProductFiltersQueryParams & PaginationQueryPa
     url.searchParams.append('category', params.category.toString());
   }
 
-  if (params.priceRange) {
-    url.searchParams.append('priceMin', params.priceRange.min.toString());
-    url.searchParams.append('priceMax', params.priceRange.max.toString());
+  if (params.productType) {
+    url.searchParams.append('productType', params.productType.toString());
+  }
+
+  if (params.model) {
+    url.searchParams.append('model', params.model);
   }
 
   if (params.manufacturer) {
     url.searchParams.append('manufacturer', params.manufacturer);
+  }
+
+  if (params.priceRange) {
+    url.searchParams.append('priceMin', params.priceRange.min.toString());
+    url.searchParams.append('priceMax', params.priceRange.max.toString());
   }
 
   if (params.weightRange) {
@@ -51,6 +59,7 @@ const getProducts = async (params: ProductFiltersQueryParams & PaginationQueryPa
   if (params.skip !== undefined) {
     url.searchParams.append('skip', params.skip.toString());
   }
+
   const response = await fetch(url.toString());
 
   if (!response.ok) {

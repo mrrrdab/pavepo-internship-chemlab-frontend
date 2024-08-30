@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { useCart } from '@/hooks';
 import { getTaxes } from '@/api';
 import { Card, CardHeader, CardTitle, CardContent, Loader } from '@/components';
+import { DeliveryOption, Tax } from '@/types';
 
 type OrderSummaryProps = {
   selectedDeliveryMethod: string;
@@ -18,17 +19,17 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedDeliveryMethod }) =
     retry: 2,
   });
 
-  let selectedDeliveryOption;
-  let vatTax;
-  let totalPrice;
-  let vat;
+  let selectedDeliveryOption: DeliveryOption | undefined;
+  let vatTax: Tax | undefined;
+  let totalPrice: number | undefined;
+  let vat: number | undefined;
 
   if (deliveryOptions && data) {
     selectedDeliveryOption = deliveryOptions.find(option => option.type === selectedDeliveryMethod);
 
     vatTax = data.data.find(tax => tax.type === 'vat');
-    totalPrice = netPrice - discount + selectedDeliveryOption!.price + vatTax!.value;
-    vat = vatTax!.value * totalPrice;
+    vat = vatTax!.value * netPrice;
+    totalPrice = netPrice - discount + selectedDeliveryOption!.price + vat;
   }
 
   return (
@@ -52,6 +53,10 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedDeliveryMethod }) =
                 <div className="flex justify-between items-center">
                   <p>Товаров на:</p>
                   <p>{netPrice} ₽</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p>Скидка:</p>
+                  <p>{discount} ₽</p>
                 </div>
                 <div className="flex justify-between items-center">
                   <p>НДС:</p>

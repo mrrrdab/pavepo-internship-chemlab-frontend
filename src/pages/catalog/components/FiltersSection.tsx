@@ -44,13 +44,7 @@ const formatWeightRanges = (weights: number[]): string[] => {
   return ranges;
 };
 
-type FiltersFormData = {
-  category: string;
-  priceRange: { min: number; max: number };
-  manufacturer: string;
-  weightRange: { min: number; max: number };
-  colors: string[];
-};
+type FiltersFormData = ProductFiltersQueryParams;
 
 type FiltersSectionProps = {
   onApplyFilters: (filters: ProductFiltersQueryParams & PaginationQueryParams) => void;
@@ -80,13 +74,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
   const priceRange = data?.data.priceRange || { min: 0, max: 0 };
 
   const { control, setValue, handleSubmit, reset } = useForm<FiltersFormData>({
-    defaultValues: {
-      category,
-      priceRange: { min: undefined, max: undefined },
-      manufacturer: '',
-      weightRange: { min: undefined, max: undefined },
-      colors: [] as string[],
-    },
+    defaultValues: { category },
   });
 
   useEffect(() => {
@@ -154,14 +142,14 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
                           <InputRange
                             min={Math.round(priceRange.min)}
                             max={Math.round(priceRange.max)}
-                            value={[field.value.min || 0, field.value.max || 0]}
+                            value={[field.value?.min || 0, field.value?.max || 0]}
                             step={1}
                             onChange={value => field.onChange({ min: value[0], max: value[1] })}
                             className="w-full"
                           />
                           <div className="flex items-center justify-between mt-2">
-                            <span className="text-base 2xl:text-xl">{field.value.min || 0} ₽</span>
-                            <span className="text-base 2xl:text-xl">{field.value.max || 0} ₽</span>
+                            <span className="text-base 2xl:text-xl">{field.value?.min || 0} ₽</span>
+                            <span className="text-base 2xl:text-xl">{field.value?.max || 0} ₽</span>
                           </div>
                         </div>
                       )}
@@ -240,7 +228,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
                               <Radio
                                 id={weightRange}
                                 name="weight"
-                                checked={field.value.min === rangeStart && field.value.max === rangeEnd}
+                                checked={field.value?.min === rangeStart && field.value?.max === rangeEnd}
                                 onChange={() => field.onChange({ min: rangeStart, max: rangeEnd })}
                               />
                             )}
@@ -277,11 +265,11 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
                             name={color}
                             color={color}
                             size="lg"
-                            checked={field.value.includes(color)}
+                            checked={field.value?.includes(color)}
                             onChange={() => {
-                              const newValue = field.value.includes(color)
+                              const newValue = field.value?.includes(color)
                                 ? field.value.filter((c: string) => c !== color)
-                                : [...field.value, color];
+                                : [...(field.value || []), color];
                               field.onChange(newValue);
                             }}
                           />

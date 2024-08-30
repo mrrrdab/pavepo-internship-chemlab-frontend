@@ -55,7 +55,7 @@ const CatalogSection: React.FC = () => {
         </Link>
       </div>
       <Link
-        to={ROUTES.LAB_EQUIPMENT}
+        to={ROUTES.SPECIAL_OFFERS}
         className="flex 2xl:hidden bg-primary text-white text-xl rounded-lg justify-center items-center gap-4 hover:bg-primary-dark w-1/2 md:w-1/3 2xl:w-1/6 h-15 mx-auto mt-8"
       >
         <p className="hidden xs:block font-medium">Смотреть еще</p>

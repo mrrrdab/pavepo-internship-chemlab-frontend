@@ -21,10 +21,12 @@ type AggregatedInfoQueryParams = {
 
 type ProductFiltersQueryParams = {
   category?: string;
-  priceRange: { min: number; max: number };
+  productType?: string;
+  model?: string;
   manufacturer?: string;
-  weightRange: { min: number; max: number };
-  colors: string[];
+  priceRange?: { min: number; max: number };
+  weightRange?: { min: number; max: number };
+  colors?: string[];
 };
 
 export type {

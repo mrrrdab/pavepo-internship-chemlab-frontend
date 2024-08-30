@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { send } from '@emailjs/browser';
 
 import { ROUTES } from '@/constants';
 import { cn } from '@/utils';
+import { DeliveryOption, Tax } from '@/types';
 import { useCart } from '@/hooks';
+import { getTaxes } from '@/api';
 import { Button, Checkbox, Radio } from '@/components';
 
 import { OrderSummary } from './OrderSummary';
@@ -48,12 +52,61 @@ const CheckoutForm: React.FC = () => {
     mode: 'all',
   });
 
-  const [showModal, setShowModal] = useState(false);
-  const { deliveryOptions, deleteProducts } = useCart();
   const deliveryMethod = watch('deliveryMethod');
 
-  const onSubmit = (data: FormDataType) => {
-    console.log(data);
+  const { data: taxes } = useQuery(['taxes'], () => getTaxes(), {
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+    retry: 2,
+  });
+
+  const { cartItems, netPrice, discount, deliveryOptions, deleteProducts } = useCart();
+
+  let selectedDeliveryOption: DeliveryOption | undefined;
+  let vatTax: Tax | undefined;
+  let totalPrice: number | undefined;
+  let vat: number | undefined;
+
+  if (deliveryOptions && taxes) {
+    vatTax = taxes.data.find(tax => tax.type === 'vat');
+    selectedDeliveryOption = deliveryOptions.find(option => option.type === deliveryMethod);
+    vat = vatTax!.value * netPrice;
+    totalPrice = netPrice - discount + selectedDeliveryOption!.price + vat;
+  }
+
+  const [showModal, setShowModal] = useState(false);
+
+  const onSubmit = async (data: FormDataType) => {
+    const products = cartItems.map(product => ({
+      id: product.id,
+      product: `${product.productType} ${product.manufacturer} ${product.model}`,
+      price: product.price,
+      quantity: product.quantity,
+      totalProductPrice: product.price * product.quantity,
+    }));
+
+    const options = {
+      productsCount: cartItems.reduce((total, product) => total + product.quantity, 0),
+      deliveryType: selectedDeliveryOption!.label,
+      deliveryPrice: selectedDeliveryOption!.price,
+      products,
+      vat: vat,
+      totalPrice,
+      customerFullName: data.fullName,
+      customerEmail: data.email,
+      customerPhoneNumber: data.phoneNumber,
+      customerComment: data.comment,
+    };
+
+    const responseStatus = await send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_ORDER_TEMPLATE,
+      options,
+      {
+        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      },
+    );
+
     setShowModal(true);
     reset();
   };

@@ -53,7 +53,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </Button>
               </div>
               <Link
-                to={ROUTES.LAB_EQUIPMENT}
+                to={ROUTES.SPECIAL_OFFERS}
                 className="px-5 py-2.5 text-xl bg-white rounded-xl hidden xs:flex group text-neutral-900 justify-between items-center hover:bg-neutral-200 w-full lg:w-2/5 h-16"
               >
                 <p>Перейти в каталог</p>

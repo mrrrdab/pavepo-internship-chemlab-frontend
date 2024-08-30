@@ -20,6 +20,7 @@ const ROUTES: Record<string, string> = {
   CONTACTS: '/contacts',
   SHOPPING_CART: '/shopping-cart',
   CHECKOUT: '/checkout',
+  PRODUCTS_SEARCH: '/catalog/products-search',
 } as const;
 
 const ROUTE_SEGMENTS_LABELS: Record<string, string> = {
@@ -44,6 +45,7 @@ const ROUTE_SEGMENTS_LABELS: Record<string, string> = {
   contacts: 'Контакты',
   'shopping-cart': 'Корзина',
   checkout: 'Оформление заказа',
+  'products-search': 'Поиск товаров',
 };
 
 export { ROUTES, ROUTE_SEGMENTS_LABELS };
