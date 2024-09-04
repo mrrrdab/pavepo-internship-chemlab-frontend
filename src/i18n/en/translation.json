@@ -1,0 +1,189 @@
+{
+  "routes": {
+    "": "Home",
+    "catalog": "Catalog",
+    "special-offers": "Special Offers",
+    "suppliers": "Suppliers",
+    "warehouse": "Warehouse",
+    "reagents-standarts": "Reagents and Standarts",
+    "clinic-diagnostics": "Clinic and Diagnostics",
+    "biochemistry-biotechnology": "Biochemistry and Biotechnology",
+    "cosmeceuticals": "Cosmeceuticals",
+    "analytical-equipment": "Analytical Equipment",
+    "lab-equipment": "Laboratory Equipment",
+    "life-science-equipment": "Life Sciences Equipment",
+    "consumables": "Consumables",
+    "pharmaceuticals": "Pharmaceuticals",
+    "veterinary": "Veterinary",
+    "microelectronics": "Microelectronics",
+    "delivery": "Delivery",
+    "about": "About",
+    "contacts": "Contacts",
+    "shopping-cart": "Shopping Cart",
+    "checkout": "Checkout",
+    "products-search": "Products Search"
+  },
+
+  "common_messages": {
+    "server_error": "Server error"
+  },
+
+  "products_messages": {
+    "no_products_found": "No products found"
+  },
+
+  "common_measurement_units": {
+    "kg": "kg"
+  },
+
+  "contacts": {
+    "address": "Address",
+    "contacts": "Contacts",
+    "phone_number": "Phone Number",
+    "order_pass_phone_numbers": "Order pass phone numbers",
+    "extension_phone_numbers": "Phone extensions"
+  },
+
+  "contacts_page": {
+    "contacts_title": "Contacts",
+    "departments_title": "Departments"
+  },
+
+  "catalog_page": {
+    "go_to_catalog_button": "Go to catalog"
+  },
+
+  "about_page": {
+    "hide_button": "Hide",
+    "read_more_button": "Read more"
+  },
+
+  "shopping_cart_page": {
+    "title": "Shopping Cart",
+    "select_all_button": "Select all",
+    "delete_button": "Delete",
+
+    "order_summary": {
+      "products_count": "Number of products",
+      "net_price": "Net price",
+      "discount": "Discount",
+      "delivery": "Delivery",
+      "total": "Total"
+    },
+
+    "checkout_button": "Proceed to checkout",
+
+    "empty_cart_message": "Your cart is empty!",
+    "empty_cart_instructions": "But it's easy to fix! Go shopping!",
+    "go_to_catalog_button": "Go to catalog"
+  },
+
+  "checkout_page": {
+    "title": "Checkout",
+
+    "order_summary": {
+      "title": "Your order",
+      "net_price": "Net price",
+      "discount": "Discount",
+      "vat": "VAT",
+      "delivery": "Delivery",
+      "total": "Total"
+    }
+  },
+
+  "products_search_page": {
+    "products_on_request_message": "Products on request"
+  },
+
+  "cart_actions": {
+    "add_to_cart": "Add to cart",
+    "remove_from_cart": "Delete",
+    "save": "Save",
+    "buy_now": "Buy now"
+  },
+
+  "product_info": {
+    "manufacturer": "Manufacturer",
+    "weight": "Weight",
+    "price": "Price"
+  },
+
+  "product_details_tabs": {
+    "description": "Description",
+    "specs": "Specs",
+    "files": "Files",
+    "accessories": "Accessories",
+    "transportation": "Transportation"
+  },
+
+  "language_switch_popup": {
+    "choose_language": "Choose language"
+  },
+
+  "chat": {
+    "title": "Send us a message",
+    "manager": "Manager",
+
+    "manager_message": "Good day. Do you have any questions? We will be happy to answer them!",
+
+    "name_field": "Name",
+    "message_field": "Enter your message",
+
+    "reply_message": "Thank you for your question! Please expect a response by email."
+  },
+
+  "form_common": {
+    "required_field_error": "Required field",
+    "invalid_field_error": "Invalid field"
+  },
+
+  "global_search_form": {
+    "submit_button": "Search",
+    "see_more_button": "See more"
+  },
+
+  "feedback_form": {
+    "title": "Leave a request for a call back",
+    "name_field": "Name",
+    "phone_number_field": "Phone number",
+    "personal_data_processing_warning": "By submitting your data, you agree to the terms of personal data",
+    "submit_button": "Submit",
+
+    "name_field_error": "Name can only contain letters and hyphens",
+    "phone_number_field_error": "Phone number can only contain numbers"
+  },
+
+  "filters_form": {
+    "filter_label": "Filter",
+    "price_label": "Price",
+    "manufacturer_label": "Manufacturer",
+    "select_manufacturer_label": "Select manufacturer",
+    "weight_label": "Weight",
+    "color_label": "Color",
+
+    "submit_button": "Apply",
+    "reset_button": "Reset all"
+  },
+
+  "checkout_form": {
+    "personal_data_label": "Personal data",
+    "delivery_method_label": "Delivery method",
+
+    "full_name_field": "Full name",
+    "phone_number_field": "Phone number",
+    "comment_field": "Comment",
+    "personal_data_processing_agreement": "I agree to the processing of personal data",
+
+    "pickup_delivery_method_message": "Moscow and Moscow region",
+
+    "submit_button": "Place an order",
+
+    "full_name_field_error": "Full name can only contain letters, spaces and hyphens",
+    "phone_number_field_error": "Phone number can only contain numbers"
+  },
+
+  "order_success_modal": {
+    "success_message": "Your order has been successfully placed!",
+    "return_to_home_button": "Return to the home page"
+  }
+}

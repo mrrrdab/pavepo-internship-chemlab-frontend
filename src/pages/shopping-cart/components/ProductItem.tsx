@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import deleteDarkIcon from '@/assets/icons/delete-dark.svg';
 import { ROUTES } from '@/constants';
@@ -21,6 +22,7 @@ const ProductItem: React.FC<ProductCartRecord> = ({
 }) => {
   const [count, setCount] = useState(quantity);
   const { updateProduct, deleteProduct } = useCart();
+  const { t } = useTranslation();
 
   const handleAddProduct = () => {
     const newCount = count + 1;
@@ -83,7 +85,7 @@ const ProductItem: React.FC<ProductCartRecord> = ({
                 onClick={handleRemoveAll}
               >
                 <img src={deleteDarkIcon} alt="Delete" />
-                <p className="hidden lg:block">Удалить</p>
+                <p className="hidden lg:block">{t('shopping_cart_page.delete_button')}</p>
               </Button>
             </div>
             <div className="flex justify-between items-stretch">
@@ -125,7 +127,7 @@ const ProductItem: React.FC<ProductCartRecord> = ({
                     onClick={handleRemoveAll}
                   >
                     <img src={deleteDarkIcon} alt="Delete" />
-                    <p>Удалить</p>
+                    <p>{t('shopping_cart_page.delete_button')}</p>
                   </Button>
                 </div>
               </div>

@@ -1,0 +1,189 @@
+{
+  "routes": {
+    "": "Главная",
+    "catalog": "Каталог",
+    "special-offers": "Акции",
+    "suppliers": "Поставщики",
+    "warehouse": "Склад",
+    "reagents-standarts": "Реактивы и Стандарты",
+    "clinic-diagnostics": "Клиника и Диагностика",
+    "biochemistry-biotechnology": "Биохимия и Биотехнологии",
+    "cosmeceuticals": "Космецевтика",
+    "analytical-equipment": "Аналитическое оборудование",
+    "lab-equipment": "Лабораторное оборудование",
+    "life-science-equipment": "Оборудование Life Sciences",
+    "consumables": "Расходные материалы",
+    "pharmaceuticals": "Фармацевтика",
+    "veterinary": "Ветеринария",
+    "microelectronics": "Микроэлектроника",
+    "delivery": "Доставка",
+    "about": "О Нас",
+    "contacts": "Контакты",
+    "shopping-cart": "Корзина",
+    "checkout": "Оформление заказа",
+    "products-search": "Поиск товаров"
+  },
+
+  "common_messages": {
+    "server_error": "Ошибка сервера"
+  },
+
+  "products_messages": {
+    "no_products_found": "Товаров не найдено"
+  },
+
+  "common_measurement_units": {
+    "kg": "кг"
+  },
+
+  "contacts": {
+    "address": "Адрес",
+    "contacts": "Контакты",
+    "phone_number": "Телефон",
+    "order_pass_phone_numbers": "Телефоны для заказа пропуска",
+    "extension_phone_numbers": "Добавочный"
+  },
+
+  "contacts_page": {
+    "contacts_title": "Контакты",
+    "departments_title": "Департаменты"
+  },
+
+  "catalog_page": {
+    "go_to_catalog_button": "В каталог"
+  },
+
+  "about_page": {
+    "hide_button": "Скрыть",
+    "read_more_button": "Читать еще"
+  },
+
+  "shopping_cart_page": {
+    "title": "Корзина",
+    "select_all_button": "Выбрать все",
+    "delete_button": "Удалить",
+
+    "order_summary": {
+      "products_count": "Количество товаров",
+      "net_price": "Цена",
+      "discount": "Скидка",
+      "delivery": "Доставка",
+      "total": "Итого"
+    },
+
+    "checkout_button": "Перейти к оформлению",
+
+    "empty_cart_message": "Ваша корзина пуста!",
+    "empty_cart_instructions": "Но это легко исправить! Отправляйтесь за покупками!",
+    "go_to_catalog_button": "В каталог"
+  },
+
+  "checkout_page": {
+    "title": "Оформление заказа",
+
+    "order_summary": {
+      "title": "Ваш заказ",
+      "net_price": "Цена",
+      "discount": "Скидка",
+      "vat": "НДС",
+      "delivery": "Доставка",
+      "total": "Итого"
+    }
+  },
+
+  "products_search_page": {
+    "products_on_request_message": "Товары по запросу"
+  },
+
+  "cart_actions": {
+    "add_to_cart": "Добавить в корзину",
+    "remove_from_cart": "Удалить",
+    "save": "Сохранить",
+    "buy_now": "Купить в 1 клик"
+  },
+
+  "product_info": {
+    "manufacturer": "Производитель",
+    "weight": "Вес",
+    "price": "Цена"
+  },
+
+  "product_details_tabs": {
+    "description": "Описание",
+    "specs": "Характеристики",
+    "files": "Документы",
+    "accessories": "Комплект",
+    "transportation": "Данные о транспортировке"
+  },
+
+  "language_switch_popup": {
+    "choose_language": "Выберите язык"
+  },
+
+  "chat": {
+    "title": "Отправьте нам сообщение",
+    "manager": "Менеджер",
+
+    "manager_message": "Здравствуйте. У вас возникли вопросы? Мы с удовольствием ответим!",
+
+    "name_field": "Имя",
+    "message_field": "Введите сообщение",
+
+    "reply_message": "Благодарим за обращение! Ожидайте ответ по почте."
+  },
+
+  "form_common": {
+    "required_field_error": "Обязательное поле",
+    "invalid_field_error": "Невалидное поле"
+  },
+
+  "global_search_form": {
+    "submit_button": "Найти",
+    "see_more_button": "Смотреть еще"
+  },
+
+  "feedback_form": {
+    "title": "Оставьте заявку на обратный звонок",
+    "name_field": "Имя",
+    "phone_number_field": "Телефон",
+    "personal_data_processing_warning": "Отправляя свои данные, вы соглашаетесь с условиями персональных данных",
+    "submit_button": "Отправить",
+
+    "name_field_error": "Имя может содержать только буквы и дефисы",
+    "phone_number_field_error": "Телефон может содержать только цифры"
+  },
+
+  "filters_form": {
+    "filter_label": "Фильтр",
+    "price_label": "Цена",
+    "manufacturer_label": "Производитель",
+    "select_manufacturer_label": "Выберите производителя",
+    "weight_label": "Вес",
+    "color_label": "Цвет",
+
+    "submit_button": "Применить",
+    "reset_button": "Сбросить все"
+  },
+
+  "checkout_form": {
+    "personal_data_label": "Личные данные",
+    "delivery_method_label": "Способ доставки",
+
+    "full_name_field": "ФИО",
+    "phone_number_field": "Телефон",
+    "comment_field": "Комментарий",
+    "personal_data_processing_agreement": "Я согласен(на) на обработку персональных данных",
+
+    "pickup_delivery_method_message": "Москва и Московская область",
+
+    "submit_button": "Оформить заказ",
+
+    "full_name_field_error": "ФИО может содержать только буквы, пробелы и дефисы",
+    "phone_number_field_error": "Телефон может содержать только цифры"
+  },
+
+  "order_success_modal": {
+    "success_message": "Ваш заказ успешно оформлен!",
+    "return_to_home_button": "Вернуться на главную страницу"
+  }
+}

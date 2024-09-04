@@ -1,37 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 import { send } from '@emailjs/browser';
 
 import { ROUTES } from '@/constants';
 import { cn } from '@/utils';
-import { DeliveryOption, Tax } from '@/types';
 import { useCart } from '@/hooks';
-import { getTaxes } from '@/api';
+import { GetDeliveryOptionDTO, GetTaxDTO, getTaxes } from '@/api';
 import { Button, Checkbox, Radio } from '@/components';
 
 import { OrderSummary } from './OrderSummary';
 import { OrderSuccessModal } from './OrderSuccessModal';
 
-const validationSchema = z.object({
-  fullName: z
-    .string()
-    .min(1, 'ФИО обязательно')
-    .regex(/^[А-Яа-яA-Za-z\s-]+$/, 'ФИО может содержать только буквы, пробелы и дефисы'),
-  phoneNumber: z.string().min(1, 'Телефон обязателен').regex(/^\d+$/, 'Телефон может содержать только цифры'),
-  email: z.string().email('Некорректный email'),
-  deliveryMethod: z.string(),
-  comment: z.string().optional(),
-  personalData: z.boolean().refine(value => value === true, 'Согласие на обработку данных обязательно'),
-});
-
-type FormDataType = z.infer<typeof validationSchema>;
-
 const CheckoutForm: React.FC = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
+  const validationSchema = useMemo(
+    () =>
+      z.object({
+        fullName: z
+          .string()
+          .min(1, t('form_common.required_field_error'))
+          .regex(/^[А-Яа-яA-Za-z\s-]+$/, t('checkout_form.full_name_field_error')),
+        phoneNumber: z
+          .string()
+          .min(1, t('form_common.required_field_error'))
+          .regex(/^\d+$/, t('checkout_form.phone_number_field_error')),
+        email: z.string().min(1, t('form_common.required_field_error')).email(t('form_common.invalid_field_error')),
+        deliveryMethod: z.string(),
+        comment: z.string().optional(),
+        personalData: z.boolean().refine(value => value === true, t('form_common.required_field_error')),
+      }),
+    [i18n.language],
+  );
+
+  type FormDataType = z.infer<typeof validationSchema>;
+
   const {
     register,
     formState: { errors, isSubmitting },
@@ -52,6 +61,10 @@ const CheckoutForm: React.FC = () => {
     mode: 'all',
   });
 
+  useEffect(() => {
+    reset();
+  }, [i18n.language]);
+
   const deliveryMethod = watch('deliveryMethod');
 
   const { data: taxes } = useQuery(['taxes'], () => getTaxes(), {
@@ -62,8 +75,8 @@ const CheckoutForm: React.FC = () => {
 
   const { cartItems, netPrice, discount, deliveryOptions, deleteProducts } = useCart();
 
-  let selectedDeliveryOption: DeliveryOption | undefined;
-  let vatTax: Tax | undefined;
+  let selectedDeliveryOption: GetDeliveryOptionDTO | undefined;
+  let vatTax: GetTaxDTO['data'] | undefined;
   let totalPrice: number | undefined;
   let vat: number | undefined;
 
@@ -99,11 +112,11 @@ const CheckoutForm: React.FC = () => {
     };
 
     const responseStatus = await send(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_SERVICE_1_ID,
       import.meta.env.VITE_EMAILJS_ORDER_TEMPLATE,
       options,
       {
-        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY_1,
       },
     );
 
@@ -120,7 +133,7 @@ const CheckoutForm: React.FC = () => {
   if (!deliveryOptions) {
     return (
       <div className="w-full">
-        <p className="text-error text-xl 2xl:text-2xl text-center px-4 py-2.5">Ошибка сервера. Вернитесь позже</p>
+        <p className="text-error text-xl 2xl:text-2xl text-center px-4 py-2.5">{t('common_messages.server_error')}</p>
       </div>
     );
   }
@@ -129,14 +142,14 @@ const CheckoutForm: React.FC = () => {
     <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className="relative">
       <div className="grid 2xl:grid-cols-[1fr_1fr_33%] 2xl:gap-x-5 gap-y-12 3xl:gap-y-16">
         <div className="2xl:col-span-2 flex flex-col gap-8">
-          <h2 className="text-xl 2xl:text-2xl">Личные данные</h2>
+          <h2 className="text-xl 2xl:text-2xl">{t('checkout_form.personal_data_label')}</h2>
           <div className="grid 2xl:grid-rows-2 2xl:grid-cols-2 gap-5">
             <div className="relative flex flex-col gap-1">
               <label
                 htmlFor="fullName"
                 className={cn('text-xl 2xl:text-2xl', errors.fullName ? 'text-error' : 'text-neutral-900/65')}
               >
-                ФИО
+                {t('checkout_form.full_name_field')}
               </label>
               <input
                 id="fullName"
@@ -153,7 +166,7 @@ const CheckoutForm: React.FC = () => {
                 htmlFor="phoneNumber"
                 className={cn('text-xl 2xl:text-2xl', errors.phoneNumber ? 'text-error' : 'text-neutral-900/65')}
               >
-                Телефон
+                {t('checkout_form.phone_number_field')}
               </label>
               <input
                 id="phoneNumber"
@@ -184,7 +197,7 @@ const CheckoutForm: React.FC = () => {
         </div>
         <div className="2xl:row-start-2 flex flex-col gap-5">
           <div className="flex flex-col gap-8">
-            <h2 className="text-xl 2xl:text-2xl">Способ доставки</h2>
+            <h2 className="text-xl 2xl:text-2xl">{t('checkout_form.delivery_method_label')}</h2>
             <div className="flex flex-col gap-2.5">
               {deliveryOptions.map(option => (
                 <div key={option.id} className="flex items-center gap-5">
@@ -206,11 +219,13 @@ const CheckoutForm: React.FC = () => {
                 </div>
               ))}
             </div>
-            {deliveryMethod === 'pickup' && <p className="text-xl 2xl:text-2xl">Москва и Московская область</p>}
+            {deliveryMethod === 'pickup' && (
+              <p className="text-xl 2xl:text-2xl">{t('checkout_form.pickup_delivery_method_message')}</p>
+            )}
           </div>
           <div className="relative flex flex-col gap-1">
             <label htmlFor="comment" className="opacity-65 text-xl 2xl:text-2xl">
-              Комментарий
+              {t('checkout_form.comment_field')}
             </label>
             <input
               id="comment"
@@ -224,7 +239,7 @@ const CheckoutForm: React.FC = () => {
           <div>
             <OrderSummary selectedDeliveryMethod={deliveryMethod} />
             <Button type="submit" variant="outline" className="font-medium rounded w-full h-12">
-              Оформить заказ
+              {t('checkout_form.submit_button')}
             </Button>
             <OrderSuccessModal open={showModal} onClose={handleModalClose} />
           </div>
@@ -238,7 +253,7 @@ const CheckoutForm: React.FC = () => {
             />
             <div>
               <label htmlFor="personalData" className="text-xl 2xl:text-2xl opacity-65 underline">
-                Я согласен(на) на обработку персональных данных
+                {t('checkout_form.personal_data_processing_agreement')}
               </label>
               {errors.personalData && <p className="text-error text-base">{errors.personalData?.message}</p>}
             </div>
@@ -255,7 +270,7 @@ const CheckoutForm: React.FC = () => {
         />
         <div>
           <label htmlFor="personalData" className="text-xl 2xl:text-2xl opacity-65 underline">
-            Я согласен(на) на обработку персональных данных
+            {t('checkout_form.personal_data_processing_agreement')}
           </label>
           {errors.personalData && <p className="text-error text-base">{errors.personalData?.message}</p>}
         </div>
@@ -263,7 +278,7 @@ const CheckoutForm: React.FC = () => {
       <div className="2xl:hidden mt-12">
         <OrderSummary selectedDeliveryMethod={deliveryMethod} />
         <Button type="submit" disabled={isSubmitting} variant="outline" className="font-medium rounded w-full h-12">
-          Оформить заказ
+          {t('checkout_form.submit_button')}
         </Button>
         <OrderSuccessModal open={showModal} onClose={handleModalClose} />
       </div>

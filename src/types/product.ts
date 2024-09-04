@@ -1,36 +1,27 @@
-import { Category } from './category';
-import { Image } from './image';
+import { GetProductDTO } from '@/api';
 
-type Advantage = { id: number; title: string; content: string };
-type Spec = { id: number; spec: string; value: string; measurementUnit?: string };
-type File = { id: number; label: string; url: string; image: Image };
-type Accessory = { id: number; name: string; quantity?: number };
-type Transportation = { id: number; name: string; value: string; measurementUnit?: string };
+type ProductBaseRecord = Pick<
+  GetProductDTO['data'],
+  'id' | 'category' | 'productType' | 'manufacturer' | 'model' | 'images'
+>;
 
-type Product = {
-  id: number;
-  category: Category;
-  productType: string;
-  model: string;
-  manufacturer: string;
-  originCountries: string[];
-  description: string;
-  price: number;
-  discount: number;
-  weight: { value: number; measurementUnit: string };
-  color: string;
-  images: Image[];
-  advantages: Advantage[];
-  specs: Spec[];
-  files: File[];
-  accessories: Accessory[];
-  transportationData: Transportation[];
-};
-
-type ProductBaseRecord = Pick<Product, 'id' | 'category' | 'productType' | 'manufacturer' | 'model' | 'images'>;
+type ProductDetailedRecord = Pick<
+  GetProductDTO['data'],
+  | 'id'
+  | 'category'
+  | 'productType'
+  | 'model'
+  | 'manufacturer'
+  | 'originCountries'
+  | 'weight'
+  | 'images'
+  | 'price'
+  | 'discount'
+  | 'description'
+>;
 
 type CatalogProductRecord = Pick<
-  Product,
+  GetProductDTO['data'],
   | 'id'
   | 'category'
   | 'productType'
@@ -44,7 +35,7 @@ type CatalogProductRecord = Pick<
 >;
 
 type ProductCartRecord = Pick<
-  Product,
+  GetProductDTO['data'],
   'id' | 'category' | 'productType' | 'model' | 'manufacturer' | 'images' | 'price' | 'discount'
 > & {
   quantity: number;
@@ -57,8 +48,8 @@ type UpdateProductCartRecord = Pick<ProductCartRecord, 'id'> &
 type DeleteProductCartRecord = Pick<ProductCartRecord, 'id'>;
 
 export type {
-  Product,
   ProductBaseRecord,
+  ProductDetailedRecord,
   CatalogProductRecord,
   ProductCartRecord,
   UpdateProductCartRecord,

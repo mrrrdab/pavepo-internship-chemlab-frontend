@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useForm, Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import chevronDownDarkIcon from '@/assets/icons/chevron-down-dark.svg';
 import chevronUpDarkIcon from '@/assets/icons/chevron-up-dark.svg';
@@ -25,7 +26,7 @@ const formatWeightRanges = (weights: number[]): string[] => {
   }
 
   if (weights.length === 1) {
-    return [`${Math.round(weights[0])} кг`];
+    return [Math.round(weights[0]).toString()];
   }
 
   const [minWeight, maxWeight] = [Math.min(...weights), Math.max(...weights)];
@@ -36,10 +37,10 @@ const formatWeightRanges = (weights: number[]): string[] => {
   for (let i = 0; i < 6; i++) {
     const rangeStart = minWeight + i * step;
     const rangeEnd = minWeight + (i + 1) * step;
-    ranges.push(`${Math.round(rangeStart)}-${Math.round(rangeEnd)} кг`);
+    ranges.push(`${Math.round(rangeStart)}-${Math.round(rangeEnd)}`);
   }
 
-  ranges[ranges.length - 1] = `${Math.round(minWeight + 5 * step)}-${Math.round(maxWeight)} кг`;
+  ranges[ranges.length - 1] = `${Math.round(minWeight + 5 * step)}-${Math.round(maxWeight)}`;
 
   return ranges;
 };
@@ -52,6 +53,8 @@ type FiltersSectionProps = {
 };
 
 const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoading }) => {
+  const { t, i18n } = useTranslation();
+
   const [showFilters, setShowFilters] = useState(true);
   const [showPriceRange, setShowPriceRange] = React.useState(true);
   const [showManufacturers, setShowManufacturers] = useState(true);
@@ -66,8 +69,13 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
     isLoading: isLoadingData,
     isError,
     data,
-  } = useQuery<GetAggregatedInfoDTO>('aggregated-info', () =>
-    getAggregatedInfo({ category } as AggregatedInfoQueryParams),
+  } = useQuery<GetAggregatedInfoDTO>(
+    ['aggregated-info', i18n.language],
+    () => getAggregatedInfo({ category } as AggregatedInfoQueryParams, i18n.language),
+    {
+      refetchOnWindowFocus: false,
+      retry: 2,
+    },
   );
 
   const weightsRanges = formatWeightRanges(data?.data.weights || []);
@@ -97,7 +105,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
   if (isError) {
     return (
       <div className="w-fit mx-auto">
-        <p className="text-error text-xl 2xl:text-2xl">Ошибка загрузки фильтров</p>
+        <p className="text-error text-xl 2xl:text-2xl">{t('common_messages.server_error')}</p>
       </div>
     );
   }
@@ -114,7 +122,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
         >
           <div className="flex gap-2 items-center">
             <img src={filterDarkIcon} alt="Filter" />
-            <p className="text-base 2xl:text-xl">Фильтр</p>
+            <p className="text-base 2xl:text-xl">{t('filters_form.filter_label')}</p>
           </div>
           <img src={showFilters ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
         </Button>
@@ -129,7 +137,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
                   className="flex justify-between items-center gap-2 h-18"
                   onClick={() => setShowPriceRange(!showPriceRange)}
                 >
-                  <p className="text-base 2xl:text-xl">Цена</p>
+                  <p className="text-base 2xl:text-xl">{t('filters_form.price_label')}</p>
                   <img src={showPriceRange ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                 </Button>
                 {showPriceRange && (
@@ -165,7 +173,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
                   className="flex justify-between items-center gap-2 h-18"
                   onClick={() => setShowManufacturers(!showManufacturers)}
                 >
-                  <p className="text-base 2xl:text-xl">Производители</p>
+                  <p className="text-base 2xl:text-xl">{t('filters_form.manufacturer_label')}</p>
                   <img src={showManufacturers ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                 </Button>
                 {showManufacturers && (
@@ -175,7 +183,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
                       className="flex items-center gap-2 p-0"
                       onClick={() => setShowBrandStartLetters(!showBrandStartLetters)}
                     >
-                      <p className="text-base 2xl:text-xl">Выберите производителя</p>
+                      <p className="text-base 2xl:text-xl">{t('filters_form.select_manufacturer_label')}</p>
                       <img src={showBrandStartLetters ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                     </Button>
                     {showBrandStartLetters && (
@@ -212,7 +220,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
                   className="flex justify-between items-center gap-2 h-18"
                   onClick={() => setShowWeights(!showWeights)}
                 >
-                  <p className="text-base 2xl:text-xl">Вес</p>
+                  <p className="text-base 2xl:text-xl">{t('filters_form.weight_label')}</p>
                   <img src={showWeights ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                 </Button>
                 {showWeights && (
@@ -234,7 +242,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
                             )}
                           />
                           <label htmlFor={weightRange} className="text-base 2xl:text-xl cursor-pointer">
-                            {weightRange}
+                            {weightRange} {t('common_measurement_units.kg')}
                           </label>
                         </div>
                       );
@@ -250,7 +258,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
                   className="flex justify-between items-center gap-2 h-18"
                   onClick={() => setShowColors(!showColors)}
                 >
-                  <p className="text-base 2xl:text-xl">Цвет</p>
+                  <p className="text-base 2xl:text-xl">{t('filters_form.color_label')}</p>
                   <img src={showColors ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                 </Button>
                 {showColors && (
@@ -282,7 +290,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
             </div>
             <div className="flex flex-col gap-2.5">
               <Button type="submit" className="font-semibold flex justify-center items-center gap-4 h-15">
-                <p>Применить</p>
+                <p>{t('filters_form.submit_button')}</p>
                 <img src={tickWhiteIcon} alt="Tick" />
               </Button>
               <Button
@@ -302,7 +310,7 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onApplyFilters, isLoadi
                   handleSubmit(data => onApplyFilters(data))();
                 }}
               >
-                <p>Сбросить все</p>
+                <p>{t('filters_form.reset_button')}</p>
                 <img src={crossDarkSmallIcon} alt="Cross" />
               </Button>
             </div>

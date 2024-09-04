@@ -1,12 +1,13 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import addDarkIcon from '@/assets/icons/add-dark.svg';
-import { DepartmentsContact } from '@/types';
 import { cn } from '@/utils';
 import { Button } from '@/components';
+import { GetDepartmentsContactDTO } from '@/api';
 
-type DepartmentCollapseProps = Pick<DepartmentsContact, 'label' | 'phoneNumber' | 'extensionPhoneNumbers' | 'email'>;
+type DepartmentCollapseProps = Omit<GetDepartmentsContactDTO, 'id'>;
 
 const DepartmentCollapse: React.FC<DepartmentCollapseProps> = ({
   label,
@@ -15,6 +16,7 @@ const DepartmentCollapse: React.FC<DepartmentCollapseProps> = ({
   email,
 }) => {
   const [visible, setVisible] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="overflow-hidden">
@@ -33,13 +35,13 @@ const DepartmentCollapse: React.FC<DepartmentCollapseProps> = ({
       {visible && (
         <div className="bg-white border border-neutral-900 flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center px-5 py-6">
           <div className="flex flex-col gap-1 sm:gap-2.5">
-            <h4 className="text-xl 2xl:text-2xl">Телефон/факс:</h4>
+            <h4 className="text-xl 2xl:text-2xl">{t('contacts.phone_number')}:</h4>
             <a href={`tel: ${phoneNumber}`} className="text-base 2xl:text-xl hover:text-neutral-600 underline">
               {phoneNumber}
             </a>
           </div>
           <div className="flex flex-col gap-1 sm:gap-2.5">
-            <h4 className="text-xl 2xl:text-2xl">Добавочный:</h4>
+            <h4 className="text-xl 2xl:text-2xl">{t('contacts.extension_phone_numbers')}:</h4>
             <div className="flex gap-2">
               {extensionPhoneNumbers.map((phone, index) => (
                 <div key={phone.id} className="text-base 2xl:text-xl">

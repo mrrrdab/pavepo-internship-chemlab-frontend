@@ -2,8 +2,6 @@ export * from './CategorySection';
 export * from './ProductItem';
 export * from './ProductsSection';
 export * from './FiltersSection';
-export * from './NewsItem';
-export * from './NewsSection';
 export * from './ProductDetailsTabs';
 export * from './ProductInfo';
 export * from './SimilarProductsSection';

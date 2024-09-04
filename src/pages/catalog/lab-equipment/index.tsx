@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { getProducts, PaginationQueryParams, ProductFiltersQueryParams } from '@/api';
 
@@ -8,6 +9,8 @@ import { ProductsSection, FiltersSection } from '../components';
 type FilterParams = ProductFiltersQueryParams & PaginationQueryParams;
 
 const LabEquipmentPage: React.FC = () => {
+  const { i18n } = useTranslation();
+
   const [filters, setFilters] = useState({} as FilterParams);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,7 +27,7 @@ const LabEquipmentPage: React.FC = () => {
         <div className="flex-1">
           <ProductsSection
             filters={filters}
-            fetchProducts={params => getProducts({ ...filters, ...params })}
+            fetchProducts={params => getProducts({ ...filters, ...params }, i18n.language)}
             setIsLoading={setIsLoading}
           />
         </div>

@@ -13,6 +13,7 @@ const config = {
         },
       },
       fontSize: {
+        sm: ['0.75rem, 0.85rem'],
         base: ['1rem', '1.2rem'],
         xl: ['1.25rem', '1.5rem'],
         '2xl': ['1.5rem', '1.8rem'],

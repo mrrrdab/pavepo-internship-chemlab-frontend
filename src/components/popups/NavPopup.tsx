@@ -1,16 +1,44 @@
 /* eslint-disable max-len */
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Popup } from 'reactjs-popup';
+import { useQuery } from 'react-query';
+import { useTranslation } from 'react-i18next';
 
+import languageDarkIcon from '@/assets/icons/language-dark.svg';
 import crossDarkSmallIcon from '@/assets/icons/cross-dark-sm.svg';
-import { ROUTES } from '@/constants';
+import { getHeader, getTopBar } from '@/api';
+import { LANGUAGES } from '@/constants';
 
 import { Button } from '../base';
+import { Loader } from '../Loader';
 
 type NavPopupProps = { trigger: JSX.Element };
 
 const NavPopup: React.FC<NavPopupProps> = ({ trigger }) => {
+  const { t, i18n } = useTranslation();
+  const [currentLanguageIndex, setCurrentLanguageIndex] = useState(
+    LANGUAGES.findIndex(lang => lang.code === i18n.language),
+  );
+
+  const {
+    data: navData,
+    isLoading,
+    isError,
+  } = useQuery(['nav-data', i18n.language], () => getHeader(i18n.language), {
+    refetchOnWindowFocus: false,
+    retry: 2,
+  });
+
+  const {
+    data: topBarData,
+    isLoading: isLoadingTopBarData,
+    isError: isErrorTopBarData,
+  } = useQuery(['top-bar'], () => getTopBar(), {
+    refetchOnWindowFocus: false,
+    retry: 2,
+  });
+
   const popupRef = useRef(null);
 
   const handleClose = () => {
@@ -18,6 +46,29 @@ const NavPopup: React.FC<NavPopupProps> = ({ trigger }) => {
       popupRef.current.close();
     }
   };
+
+  const handleChangeLanguage = () => {
+    const nextIndex = (currentLanguageIndex + 1) % LANGUAGES.length;
+    setCurrentLanguageIndex(nextIndex);
+    const nextLanguage = LANGUAGES[nextIndex].code;
+    i18n.changeLanguage(nextLanguage);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="w-fit mx-auto">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (isError || !navData) {
+    return (
+      <div className="w-fit mx-auto">
+        <p className="text-error text-xl 2xl:text-2xl">{t('common_messages.server_error')}</p>
+      </div>
+    );
+  }
 
   return (
     <Popup ref={popupRef} trigger={trigger} arrow={false}>
@@ -28,42 +79,43 @@ const NavPopup: React.FC<NavPopupProps> = ({ trigger }) => {
         <nav>
           <ul className="flex flex-col gap-5 mt-5">
             <li>
-              <Link to={ROUTES.SHOPPING_CART} className="text-xl font-medium hover:text-primary">
-                Корзина
+              <Link to={navData.cartLink.url} className="text-xl font-medium hover:text-primary">
+                {navData.cartLink.label}
               </Link>
             </li>
             <li>
-              <Link to={ROUTES.LAB_EQUIPMENT} className="text-xl hover:text-primary">
-                Каталог
+              <Link to={navData.catalogButton.url} className="text-xl hover:text-primary">
+                {navData.catalogButton.label}
               </Link>
             </li>
-            <li>
-              <Link to={ROUTES.SPECIAL_OFFERS} className="text-xl hover:text-primary">
-                Акции
-              </Link>
-            </li>
-            <li>
-              <Link to={ROUTES.DELIVERY} className="text-xl hover:text-primary">
-                Доставка
-              </Link>
-            </li>
-            <li>
-              <Link to={ROUTES.ABOUT} className="text-xl hover:text-primary">
-                О Нас
-              </Link>
-            </li>
-            <li>
-              <Link to={ROUTES.CONTACTS} className="text-xl hover:text-primary">
-                Контакты
-              </Link>
-            </li>
+            {navData.navLinks.map(link => (
+              <li key={link.id}>
+                <Link to={link.url} className="text-xl hover:text-primary">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
-        <div className="flex flex-col gap-5">
-          <a href={`tel: + 7 (499) 490-51-07`} className="block text-xl hover:text-neutral-600">
-            + 7 (499) 490-51-07
-          </a>
-        </div>
+        {isLoadingTopBarData ? (
+          <div className="w-fit mx-auto">
+            <Loader />
+          </div>
+        ) : isErrorTopBarData || !topBarData ? (
+          <div className="w-fit mx-auto">
+            <p className="text-error text-xl 2xl:text-2xl">{t('common_messages.server_error')}</p>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-5">
+            <Button variant="text" className="flex items-center gap-2 p-0 w-fit" onClick={handleChangeLanguage}>
+              <img src={languageDarkIcon} alt="Language" />
+              <p className="uppercase">{LANGUAGES[currentLanguageIndex].shortCode}</p>
+            </Button>
+            <a href={`tel: ${topBarData.contact.phoneNumber}`} className="block text-xl hover:text-neutral-600">
+              {topBarData.contact.phoneNumber}
+            </a>
+          </div>
+        )}
       </div>
     </Popup>
   );

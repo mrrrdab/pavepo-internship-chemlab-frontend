@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { ROUTES } from '@/constants';
 import { CatalogProductRecord, ProductCartRecord } from '@/types';
@@ -18,6 +19,8 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
   price,
   discount,
 }) => {
+  const { t } = useTranslation();
+
   const [count, setCount] = useState(1);
   const [isInCart, setIsInCart] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -98,7 +101,7 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
         </CardHeader>
         <CardContent className="flex flex-col gap-2.5">
           <p className="text-base">
-            <span className="mr-2">Производитель:</span>
+            <span className="mr-2">{t('product_info.manufacturer')}:</span>
             {originCountries.map((country, index, originCountries) => (
               <span key={country} className="opacity-65">
                 {country}
@@ -107,13 +110,13 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
             ))}
           </p>
           <p className="text-base">
-            Вес:
+            {t('product_info.weight')}:
             <span className="opacity-65 ml-2">
-              {weight.value} {weight.measurementUnit}
+              {weight} {t('common_measurement_units.kg')}
             </span>
           </p>
           <div className="flex justify-between items-center">
-            <p className="text-base">Цена:</p>
+            <p className="text-base">{t('product_info.price')}:</p>
             <div className="flex flex-col gap-1">
               <p className="text-xl 2xl:text-2xl font-medium">{price} ₽</p>
               {discount !== 0 && <p className="ml-auto opacity-65 text-xl">-{discount} ₽</p>}
@@ -134,10 +137,10 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
             {isInCart ? (
               <div className="flex flex-col gap-4">
                 <Button variant="outline" disabled={!isEditing} className="bg-white" onClick={handleSave}>
-                  Сохранить
+                  {t('cart_actions.save')}
                 </Button>
                 <Button variant="text" className="p-0 px-2" onClick={handleRemoveFromCart}>
-                  Удалить
+                  {t('cart_actions.remove_from_cart')}
                 </Button>
               </div>
             ) : (
@@ -148,7 +151,7 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
                 onClick={handleAddToCart}
                 className="bg-transparent font-medium w-full h-12"
               >
-                Добавить в корзину
+                {t('cart_actions.add_to_cart')}
               </Button>
             )}
           </div>

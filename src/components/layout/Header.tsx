@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useQuery } from 'react-query';
 
 import menuDarkIcon from '@/assets/icons/menu-dark.svg';
 import menuWhiteIcon from '@/assets/icons/menu-white.svg';
@@ -15,9 +17,11 @@ import shoppingBagDarkIcon from '@/assets/icons/shopping-bag-dark.svg';
 import { ROUTES } from '@/constants';
 import { useDebounce, useSearch } from '@/hooks';
 import { cn } from '@/utils';
+import { getHeader } from '@/api';
 
 import { Button } from '../base';
 import { CatalogPopup, NavPopup, ProductsSearchPopup } from '../popups';
+import { Loader } from '../Loader';
 
 type SearchFormData = { search: string };
 
@@ -26,38 +30,55 @@ type HeaderProps = { isHomePage?: boolean };
 // TODO: Button Icon
 const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
   const [showCatalogPopup, setShowCatalogPopup] = useState(false);
-  const [showSearchPopup, setShowSearchPopup] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
   const { searchQuery, setSearchQuery } = useSearch();
+
+  const { i18n, t } = useTranslation();
 
   const {
     register,
     watch,
     formState: { isSubmitting },
     handleSubmit,
-    reset,
   } = useForm<SearchFormData>({
     defaultValues: { search: searchQuery },
   });
 
   const searchQueryForm = watch('search');
+  const { ref, ...searchInputProps } = register('search');
   const debouncedSearchQuery = useDebounce(searchQueryForm, 500);
 
-  useEffect(() => {
-    if (debouncedSearchQuery.trim()) {
-      setShowSearchPopup(true);
-    } else {
-      setShowSearchPopup(false);
-    }
-  }, [debouncedSearchQuery]);
+  const {
+    data: headerData,
+    isLoading,
+    isError,
+  } = useQuery(['header-data', i18n.language], () => getHeader(i18n.language), {
+    refetchOnWindowFocus: false,
+    retry: 2,
+  });
 
   const onSubmit = (data: SearchFormData) => {
     setSearchQuery(data.search);
     const queryParams = new URLSearchParams({ searchParams: data.search }).toString();
     navigate(`${ROUTES.PRODUCTS_SEARCH}?${queryParams}`);
-    reset({ search: data.search });
-    setShowSearchPopup(false);
   };
+
+  if (isLoading) {
+    return (
+      <div className="w-fit mx-auto">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (isError || !headerData) {
+    return (
+      <div className="w-fit mx-auto">
+        <p className="text-error text-xl 2xl:text-2xl">{t('common_messages.server_error')}</p>
+      </div>
+    );
+  }
 
   const textColor = isHomePage ? 'text-white' : '';
   const placeholderColor = isHomePage ? 'placeholder:text-white' : '';
@@ -73,7 +94,7 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
       <div className="flex flex-col gap-8 2xl:flex-row 2xl:gap-0">
         <div className="flex flex-col gap-2.5 xs:flex-row xs:justify-between xs:items-center lg:gap-16">
           <h4 className={cn('text-2xl font-medium uppercase hover:text-primary', textColor)}>
-            <Link to={ROUTES.HOME}>Химлаб</Link>
+            <Link to={headerData.url}>{headerData.title}</Link>
           </h4>
           <nav className="hidden lg:block lg:w-max">
             <ul className="flex items-center gap-6">
@@ -86,34 +107,23 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
                       className="flex items-center gap-2.5 hover:bg-transparent p-0"
                       onClick={() => setShowCatalogPopup(!showCatalogPopup)}
                     >
-                      <p className={cn('text-xl font-semibold hover:text-primary', textColor)}>Каталог</p>
+                      <p className={cn('text-xl font-semibold hover:text-primary', textColor)}>
+                        {headerData.catalogButton.label}
+                      </p>
                       <img src={showCatalogPopup ? chevronUpDarkIcon : chevronDownDarkIcon} alt="Chevron" />
                     </Button>
                   }
                 />
               </li>
-              <li>
-                <Link to={ROUTES.SPECIAL_OFFERS} className={cn('block text-xl hover:text-primary', textColor)}>
-                  Акции
-                </Link>
-              </li>
-              <li>
-                <Link to={ROUTES.DELIVERY} className={cn('block text-xl hover:text-primary', textColor)}>
-                  Доставка
-                </Link>
-              </li>
-              <li>
-                <Link to={ROUTES.ABOUT} className={cn('block text-xl hover:text-primary w-fit', textColor)}>
-                  О Нас
-                </Link>
-              </li>
-              <li>
-                <Link to={ROUTES.CONTACTS} className={cn('block text-xl hover:text-primary', textColor)}>
-                  Контакты
-                </Link>
-              </li>
+              {headerData.navLinks.map(link => (
+                <li key={link.id}>
+                  <Link to={link.url} className={cn('block text-xl hover:text-primary', textColor)}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
               <li className="hidden md:block 2xl:hidden">
-                <Link to={ROUTES.SHOPPING_CART}>
+                <Link to={headerData.cartLink.url}>
                   <img src={shoppingBagDarkIcon} alt="Shopping Bag" />
                 </Link>
               </li>
@@ -139,8 +149,12 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
                 </div>
                 <input
                   type="text"
-                  placeholder="Флокулятор, JT-M6C"
-                  {...register('search')}
+                  placeholder="Flocculator, JT-M6C"
+                  {...searchInputProps}
+                  ref={e => {
+                    ref(e);
+                    inputRef.current = e;
+                  }}
                   className={cn(
                     'bg-transparent text-base 2xl:text-xl border rounded-lg w-full 2xl:w-96 3xl:w-100 px-13 md:px-16 py-2.5',
                     textColor,
@@ -150,14 +164,13 @@ const Header: React.FC<HeaderProps> = ({ isHomePage = false }) => {
                 />
               </div>
               <Button type="submit" disabled={isSubmitting} className="hidden lg:block font-medium">
-                Найти
+                {t('global_search_form.submit_button')}
               </Button>
             </div>
             <ProductsSearchPopup
-              open={showSearchPopup}
+              open={Boolean(inputRef.current === document.activeElement && debouncedSearchQuery.trim())}
               isHomePage={isHomePage}
               searchQuery={debouncedSearchQuery}
-              onClose={() => setShowSearchPopup(false)}
             />
           </form>
           <Link to={ROUTES.SHOPPING_CART} className="hidden 2xl:block 2xl:flex-shrink-0">

@@ -1,30 +1,16 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import arrowUpDarkMediumIcon from '@/assets/icons/arrow-up-dark-md.svg';
 import arrowDownDarkMediumIcon from '@/assets/icons/arrow-down-dark-md.svg';
 import { ROUTES } from '@/constants';
-import { Product, ProductCartRecord } from '@/types';
+import { ProductCartRecord, ProductDetailedRecord } from '@/types';
 import { useCart } from '@/hooks';
 import { Button } from '@/components';
 
-type ProductInfoProps = Pick<
-  Product,
-  | 'id'
-  | 'category'
-  | 'productType'
-  | 'model'
-  | 'manufacturer'
-  | 'originCountries'
-  | 'weight'
-  | 'images'
-  | 'price'
-  | 'discount'
-  | 'description'
->;
-
-type Image = Product['images'][0];
+type ProductInfoProps = ProductDetailedRecord;
 
 const ProductInfo: React.FC<ProductInfoProps> = ({
   id,
@@ -39,6 +25,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   discount,
   description,
 }) => {
+  const { t } = useTranslation();
+
   const [count, setCount] = useState(1);
   const [isInCart, setIsInCart] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -111,7 +99,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
     navigate(ROUTES.SHOPPING_CART);
   };
 
-  const handleImageClick = (image: Image) => {
+  const handleImageClick = (image: any) => {
     if (image !== mainImage) {
       setMainImage(image);
     }
@@ -203,12 +191,12 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             <h3 className="text-primary text-xl 2xl:text-2xl">{price} ₽</h3>
             {/* TODO: */}
             <div className="h-30 overflow-auto">
-              <p className="opacity-80 text-xl">{description.split('.')[0]}</p>
+              <p className="opacity-80 text-xl">{description!.split(/[.!?]\s/)[0]}</p>
             </div>
           </div>
           <div className="flex flex-col gap-2.5">
             <p className="opacity-80 text-base 2xl:text-xl">
-              <span className="mr-2">Производитель:</span>
+              <span className="mr-2">{t('product_info.manufacturer')}:</span>
               {originCountries.map((country, index, originCountries) => (
                 <span key={country} className="opacity-65">
                   {country}
@@ -217,9 +205,9 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               ))}
             </p>
             <p className="opacity-80 text-base 2xl:text-xl">
-              Вес:
-              <span className="ml-2">
-                {weight.value} {weight.measurementUnit}
+              {t('product_info.weight')}:
+              <span className="opacity-65 ml-2">
+                {weight} {t('common_measurement_units.kg')}
               </span>
             </p>
           </div>
@@ -240,10 +228,10 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
                 <div className="w-max sm:ml-auto">
                   <div className="flex flex-row sm:flex-col gap-4">
                     <Button variant="outline" disabled={!isEditing} className="bg-white" onClick={handleSave}>
-                      Сохранить
+                      {t('cart_actions.save')}
                     </Button>
                     <Button variant="text" className="p-0 px-2" onClick={handleRemoveFromCart}>
-                      Удалить
+                      {t('cart_actions.remove_from_cart')}
                     </Button>
                   </div>
                 </div>
@@ -255,13 +243,13 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
                   onClick={handleAddToCart}
                   className="bg-transparent font-medium w-full h-12"
                 >
-                  Добавить в корзину
+                  {t('cart_actions.add_to_cart')}
                 </Button>
               )}
             </div>
             <div className="w-60">
               <Button size="sm" borderRadius="lg" className="font-medium w-full h-12" onClick={handleBuy}>
-                Купить в 1 клик
+                {t('cart_actions.buy_now')}
               </Button>
             </div>
           </div>

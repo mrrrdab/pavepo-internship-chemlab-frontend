@@ -6,8 +6,19 @@ import arrowRightDarkSmallIcon from '@/assets/icons/arrow-right-dark-sm.svg';
 import { ROUTES } from '@/constants';
 import { ProductBaseRecord } from '@/types';
 import { Card, CardTitle, CardDescription, CardContent, CardFooter } from '@/components';
+import { GetSpecialOffersSectionDTO } from '@/api';
 
-const SpecialOfferItem: React.FC<ProductBaseRecord> = ({ id, category, productType, manufacturer, model, images }) => {
+type SpecialOfferItemProps = ProductBaseRecord & Pick<GetSpecialOffersSectionDTO, 'offerLinkTitle'>;
+
+const SpecialOfferItem: React.FC<SpecialOfferItemProps> = ({
+  id,
+  category,
+  productType,
+  manufacturer,
+  model,
+  images,
+  offerLinkTitle,
+}) => {
   return (
     <Card className="flex flex-col gap-6">
       <CardContent className="bg-secondary rounded-xl flex justify-center items-center h-104 px-8 py-12">
@@ -32,7 +43,7 @@ const SpecialOfferItem: React.FC<ProductBaseRecord> = ({ id, category, productTy
           to={`${ROUTES[category]}/${id}`}
           className="group text-xl bg-white border border-black rounded-xl flex justify-center 2xl:justify-between items-center hover:bg-neutral-200 w-fit 2xl:w-full 3xl:w-60 h-15 p-8 2xl:px-5 2xl:py-2.5"
         >
-          <p className="hidden 2xl:block">Подробнее</p>
+          <p className="hidden 2xl:block">{offerLinkTitle}</p>
           <div className="flex-shrink-0 bg-white border border-black text-neutral-900 rounded-3xl group-hover:bg-neutral-300 p-2.5">
             <img src={arrowRightDarkSmallIcon} alt="Arrow Right" />
           </div>

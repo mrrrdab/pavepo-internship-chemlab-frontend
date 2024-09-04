@@ -1,2 +1,2 @@
-export * from './PrimaryContactsSection';
+export * from './ContactsSection';
 export * from './DepartmentsSection';

@@ -1,72 +1,44 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Popup } from 'reactjs-popup';
+import { useTranslation } from 'react-i18next';
+import { useQuery } from 'react-query';
 
-import { ROUTES } from '@/constants';
 import { cn } from '@/utils';
+import { getCategories } from '@/api';
 
-const categories = [
-  {
-    title: 'Акции',
-    link: ROUTES.SPECIAL_OFFERS,
-  },
-  {
-    title: 'Поставщики',
-    link: ROUTES.SUPPLIERS,
-  },
-  {
-    title: 'Склад',
-    link: ROUTES.WAREHOUSE,
-  },
-  {
-    title: 'Реактивы и Стандарты',
-    link: ROUTES.REAGENTS_STANDARTS,
-  },
-  {
-    title: 'Клиника и Диагностика',
-    link: ROUTES.CLINIC_DIAGNISTICS,
-  },
-  {
-    title: 'Биохимия и Биотехнологии',
-    link: ROUTES.BIOCHEMISTRY_BIOTECHNOLOGY,
-  },
-  {
-    title: 'Космецевтика',
-    link: ROUTES.COSMECEUTICALS,
-  },
-  {
-    title: 'Аналитическое оборудование',
-    link: ROUTES.ANALYTICAL_EQUIPMENT,
-  },
-  {
-    title: 'Лабораторное оборудование',
-    link: ROUTES.LAB_EQUIPMENT,
-  },
-  {
-    title: 'Оборудование Life Sciences',
-    link: ROUTES.LIFE_SCIENCES_EQUIPMENT,
-  },
-  {
-    title: 'Расходные материалы',
-    link: ROUTES.CONSUMABLES,
-  },
-  {
-    title: 'Фармацевтика',
-    link: ROUTES.PHARMACEUTICALS,
-  },
-  {
-    title: 'Ветеринария',
-    link: ROUTES.VETERINARY,
-  },
-  {
-    title: 'Микроэлектроника',
-    link: ROUTES.MICROELECTRONICS,
-  },
-];
+import { Loader } from '../Loader';
 
 type CatalogPopupProps = { isHomePage?: boolean; trigger: JSX.Element };
 
 const CatalogPopup: React.FC<CatalogPopupProps> = ({ isHomePage = false, trigger }) => {
+  const { t, i18n } = useTranslation();
+
+  const {
+    data: categories,
+    isLoading,
+    isError,
+  } = useQuery(['categories', i18n.language], () => getCategories(i18n.language), {
+    refetchOnWindowFocus: false,
+    retry: 2,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="w-fit mx-auto">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (isError || !categories) {
+    return (
+      <div className="w-fit mx-auto">
+        <p className="text-error text-xl 2xl:text-2xl">{t('common_messages.server_error')}</p>
+      </div>
+    );
+  }
+
   return (
     <Popup trigger={trigger} arrow={false} position="bottom left">
       <div
@@ -75,8 +47,8 @@ const CatalogPopup: React.FC<CatalogPopupProps> = ({ isHomePage = false, trigger
           isHomePage ? 'border-white' : 'border-black',
         )}
       >
-        {categories.map((category, index) => (
-          <Link key={index} to={category.link} className="block text-xl hover:text-primary">
+        {categories.map(category => (
+          <Link key={category.id} to={category.url} className="block text-xl hover:text-primary">
             {category.title}
           </Link>
         ))}

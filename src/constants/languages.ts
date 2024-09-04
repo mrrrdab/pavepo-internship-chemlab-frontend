@@ -1,6 +1,6 @@
 const LANGUAGES = [
-  { code: 'en', label: 'English' },
-  { code: 'ru', label: 'Русский' },
+  { code: 'en', label: 'English', shortCode: 'ENG' },
+  { code: 'ru', label: 'Русский', shortCode: 'РУС' },
 ];
 
 export { LANGUAGES };

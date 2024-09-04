@@ -2,13 +2,13 @@ import React from 'react';
 
 type SupplierItemProps = {
   image: string;
-  title: string;
+  alt: string;
 };
 
-const SupplierItem: React.FC<SupplierItemProps> = ({ image, title }) => {
+const SupplierItem: React.FC<SupplierItemProps> = ({ image, alt }) => {
   return (
-    <div className="bg-secondary rounded-xl flex justify-center items-center h-32 px-2 py-4 xs:py-8 xs:px-16">
-      <img src={image} alt={title} className="object-contain w-full h-full" />
+    <div className="bg-secondary rounded-xl flex justify-center items-center h-32 p-4">
+      <img src={image} alt={alt} className="object-contain w-full h-full" />
     </div>
   );
 };

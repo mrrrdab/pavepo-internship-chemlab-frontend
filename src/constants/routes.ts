@@ -23,29 +23,4 @@ const ROUTES: Record<string, string> = {
   PRODUCTS_SEARCH: '/catalog/products-search',
 } as const;
 
-const ROUTE_SEGMENTS_LABELS: Record<string, string> = {
-  '': 'Главная',
-  catalog: 'Каталог',
-  'special-offers': 'Акции',
-  suppliers: 'Поставщики',
-  warehouse: 'Склад',
-  'reagents-standarts': 'Реактивы и Стандарты',
-  'clinic-diagnostics': 'Клиника и Диагностика',
-  'biochemistry-biotechnology': 'Биохимия и Биотехнологии',
-  cosmeceuticals: 'Космецевтика',
-  'analytical-equipment': 'Аналитическое оборудование',
-  'lab-equipment': 'Лабораторное оборудование',
-  'life-science-equipment': 'Оборудование Life Sciences',
-  consumables: 'Расходные материалы',
-  pharmaceuticals: 'Фармацевтика',
-  veterinary: 'Ветеринария',
-  microelectronics: 'Микроэлектроника',
-  delivery: 'Доставка',
-  about: 'О Нас',
-  contacts: 'Контакты',
-  'shopping-cart': 'Корзина',
-  checkout: 'Оформление заказа',
-  'products-search': 'Поиск товаров',
-};
-
-export { ROUTES, ROUTE_SEGMENTS_LABELS };
+export { ROUTES };

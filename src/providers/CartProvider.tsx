@@ -1,8 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { DeleteProductCartRecord, DeliveryOption, ProductCartRecord, UpdateProductCartRecord } from '@/types';
+import { DeleteProductCartRecord, ProductCartRecord, UpdateProductCartRecord } from '@/types';
 import { getProductsFromStorage, putProductsToStorage } from '@/utils';
-import { GetDelivereyOptionsDTO, getAllDeliveryOptions } from '@/api';
+import { GetDeliveryOptionDTO, getDeliveryOptions } from '@/api';
 
 type CartProviderProps = {
   children: React.ReactNode;
@@ -18,20 +19,25 @@ type CartContextType = {
   selectedProductsQuantity: number;
   netPrice: number;
   discount: number;
-  deliveryOptions?: DeliveryOption[];
+  deliveryOptions?: GetDeliveryOptionDTO[];
 };
 
 const CartContext = createContext<CartContextType>({} as CartContextType);
 
 const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+  const { i18n } = useTranslation();
   const [cartItems, setCartItems] = useState<ProductCartRecord[]>(() => getProductsFromStorage() || []);
 
-  const [deliveryOptions, setDeliveryOptions] = useState<GetDelivereyOptionsDTO | null>(null);
+  const [deliveryOptions, setDeliveryOptions] = useState<GetDeliveryOptionDTO[] | null>(null);
+
+  useEffect(() => {
+    deleteProducts();
+  }, [i18n.language]);
 
   useEffect(() => {
     const fetchDeliveryOptions = async () => {
       try {
-        const options = await getAllDeliveryOptions();
+        const options = await getDeliveryOptions(i18n.language);
         setDeliveryOptions(options);
       } catch (error) {
         console.error('Failed to fetch delivery options:', error);
@@ -39,7 +45,7 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     };
 
     fetchDeliveryOptions();
-  }, []);
+  }, [i18n.language]);
 
   const selectedProductsQuantity = cartItems.filter(cartItem => cartItem.selected).length;
   const netPrice = cartItems.reduce((sum, item) => (item.selected ? sum + item.price * item.quantity : sum), 0);
@@ -106,7 +112,7 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   if (deliveryOptions) {
-    value.deliveryOptions = deliveryOptions.data;
+    value.deliveryOptions = deliveryOptions;
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
