@@ -57,8 +57,7 @@ const ProductDetailsTabs: React.FC<ProductDetailsTabsProps> = ({
                   <img src={file.preview.url} alt={file.title} className="min-w-28 w-28 h-36 object-cover" />
                   <div className="flex flex-col gap-8 justify-between">
                     <p>{file.title}</p>
-                    <a href="" className="border-b border-b-white flex items-center gap-2 w-fit">
-                      <p className="opacity-65">Скачать</p>
+                    <a href={file.url} className="border-b border-b-white flex items-center gap-2 w-fit">
                       <img src={arrowDownDarkSmallIcon} alt="Arrow Down" />
                     </a>
                   </div>
