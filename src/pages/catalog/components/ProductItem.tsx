@@ -84,7 +84,7 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
   };
 
   return (
-    <div className="bg-secondary border-[0.5px] border-black/20 rounded-xl flex flex-col overflow-hidden">
+    <div className="bg-secondary border-[0.5px] border-black/20 rounded-xl flex flex-col overflow-hidden h-full">
       <img
         src={images.sort((a, b) => a.priority! - b.priority!)[0].url}
         alt={`${productType} ${model} ${manufacturer}`}

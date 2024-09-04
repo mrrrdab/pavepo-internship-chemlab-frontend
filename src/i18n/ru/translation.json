@@ -50,7 +50,8 @@
   },
 
   "catalog_page": {
-    "go_to_catalog_button": "В каталог"
+    "go_to_catalog_button": "В каталог",
+    "go_to_home_page_button": "На главную"
   },
 
   "about_page": {

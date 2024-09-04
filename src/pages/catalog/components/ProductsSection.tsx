@@ -82,7 +82,7 @@ const ProductsSection: React.FC<ProductsSectionProps> = ({ filters, fetchProduct
               borderRadius="lg"
               className="group flex justify-center xs:justify-between items-center w-1/2 sm:w-1/3 h-16 mx-auto"
             >
-              <p className="hidden xs:block">На главную</p>
+              <p className="hidden xs:block">{t('catalog_page.go_to_home_page_button')}</p>
               <div className="flex-shrink-0 bg-white border border-black text-neutral-900 rounded-3xl group-hover:bg-neutral-300 p-2.5">
                 <img src={arrowRightDarkSmallIcon} alt="Arrow Right" />
               </div>

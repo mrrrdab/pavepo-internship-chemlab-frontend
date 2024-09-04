@@ -50,7 +50,8 @@
   },
 
   "catalog_page": {
-    "go_to_catalog_button": "Go to catalog"
+    "go_to_catalog_button": "Go to catalog",
+    "go_to_home_page_button": "Go to home page"
   },
 
   "about_page": {
