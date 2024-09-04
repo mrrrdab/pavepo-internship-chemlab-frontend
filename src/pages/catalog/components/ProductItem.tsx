@@ -6,6 +6,7 @@ import { ROUTES } from '@/constants';
 import { CatalogProductRecord, ProductCartRecord } from '@/types';
 import { useCart } from '@/hooks';
 import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components';
+import { cn } from '@/utils';
 
 const ProductItem: React.FC<CatalogProductRecord> = ({
   id,
@@ -84,7 +85,7 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
   };
 
   return (
-    <div className="bg-secondary border-[0.5px] border-black/20 rounded-xl flex flex-col overflow-hidden h-full">
+    <div className="bg-secondary border-[0.5px] border-black/20 rounded-xl flex flex-col overflow-hidden">
       <img
         src={images.sort((a, b) => a.priority! - b.priority!)[0].url}
         alt={`${productType} ${model} ${manufacturer}`}
@@ -119,7 +120,7 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
             <p className="text-base">{t('product_info.price')}:</p>
             <div className="flex flex-col gap-1">
               <p className="text-xl 2xl:text-2xl font-medium">{price} ₽</p>
-              {discount !== 0 && <p className="ml-auto opacity-65 text-xl">-{discount} ₽</p>}
+              <p className={cn('ml-auto opacity-65 text-xl', discount === 0 ? 'invisible' : '')}>-{discount} ₽</p>
             </div>
           </div>
         </CardContent>
