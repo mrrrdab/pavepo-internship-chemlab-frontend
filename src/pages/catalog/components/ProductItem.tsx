@@ -8,7 +8,9 @@ import { useCart } from '@/hooks';
 import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components';
 import { cn } from '@/utils';
 
-const ProductItem: React.FC<CatalogProductRecord> = ({
+type ProductItemProps = CatalogProductRecord & { imageStyles?: string; className?: string };
+
+const ProductItem: React.FC<ProductItemProps> = ({
   id,
   category,
   productType,
@@ -19,6 +21,8 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
   images,
   price,
   discount,
+  className,
+  imageStyles,
 }) => {
   const { t } = useTranslation();
 
@@ -85,11 +89,13 @@ const ProductItem: React.FC<CatalogProductRecord> = ({
   };
 
   return (
-    <div className="bg-secondary border-[0.5px] border-black/20 rounded-xl flex flex-col overflow-hidden">
+    <div
+      className={cn('bg-secondary border-[0.5px] border-black/20 rounded-xl flex flex-col overflow-hidden', className)}
+    >
       <img
         src={images.sort((a, b) => a.priority! - b.priority!)[0].url}
         alt={`${productType} ${model} ${manufacturer}`}
-        className="rounded-xl w-full h-72 object-cover"
+        className={cn('rounded-xl w-full h-72 object-cover', imageStyles)}
       />
       <Card className="flex flex-col justify-between gap-5 px-5 py-6 h-full">
         <CardHeader className="flex flex-col gap-2.5">

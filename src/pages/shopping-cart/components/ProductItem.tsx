@@ -108,11 +108,13 @@ const ProductItem: React.FC<ProductCartRecord> = ({
           <div className="flex items-center gap-6">
             <Checkbox name={id.toString()} size="lg" checked={selected} onChange={handleSelect} />
             <div className="flex gap-6 3xl:gap-10">
-              <img
-                src={images.sort((a, b) => a.priority! - b.priority!)[0].url}
-                alt={`${productType} ${model} ${manufacturer}`}
-                className="min-w-32 w-32 min-h-32 h-32 object-cover"
-              />
+              <div className="border-[0.5px] border-neutral-900/25 rounded-xl min-w-32 w-32 min-h-32 h-32 p-5">
+                <img
+                  src={images.sort((a, b) => a.priority! - b.priority!)[0].url}
+                  alt={`${productType} ${model} ${manufacturer}`}
+                  className="h-full w-full object-cover"
+                />
+              </div>
               <div className="2xl:w-80 3xl:w-98">
                 <div className="flex flex-col gap-5 2xl:justify-between h-full">
                   <Link to={`${ROUTES.LAB_EQUIPMENT}/${id}`} className="block">

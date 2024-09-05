@@ -83,7 +83,7 @@ const LicensesSection: React.FC = () => {
         <Button variant="text" onClick={() => handleScroll(-1)} className="hidden md:block flex-shrink-0 p-0">
           <img src={arrowLeftDarkIcon} alt="Arrow Left" />
         </Button>
-        <div ref={scrollContainerRef} className="whitespace-nowrap overflow-x-auto scroll-smooth">
+        <div ref={scrollContainerRef} className="whitespace-nowrap overflow-x-auto scroll-smooth w-full">
           {licensesSection.licenses.map((license, index) => (
             <div
               key={license.id}

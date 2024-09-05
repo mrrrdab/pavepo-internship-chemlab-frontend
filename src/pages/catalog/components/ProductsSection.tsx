@@ -105,42 +105,45 @@ const ProductsSection: React.FC<ProductsSectionProps> = ({ filters, fetchProduct
                 images={product.images}
                 price={product.price}
                 discount={product.discount}
+                imageStyles="bg-white"
               />
             ))}
           </div>
-          <div className="flex flex-col items-center gap-5">
-            <div className="flex items-center">
-              <Button
-                variant="text"
-                className={cn('flex-shrink-0 p-0 mr-5', page === 1 ? 'invisible' : '')}
-                onClick={() => setPage(page - 1)}
-              >
-                <img src={arrowLeftDarkIcon} alt="Arrow Left" />
-              </Button>
-              <div className="grow flex gap-5 justify-center">
-                {pageNumbers.map(num => (
-                  <Button
-                    key={num}
-                    variant={num === page ? 'primary' : 'outline'}
-                    className={cn(
-                      'flex-shrink-0 flex items-center justify-center w-16 h-12 md:w-20 lg:h-14 xl:w-24 2xl:w-28 2xl:h-16',
-                      num === page ? 'text-white' : '',
-                    )}
-                    onClick={() => setPage(num)}
-                  >
-                    {num}
-                  </Button>
-                ))}
+          {totalPages > 1 && (
+            <div className="flex flex-col items-center gap-5">
+              <div className="flex items-center">
+                <Button
+                  variant="text"
+                  className={cn('flex-shrink-0 p-0 mr-5', page === 1 ? 'invisible' : '')}
+                  onClick={() => setPage(page - 1)}
+                >
+                  <img src={arrowLeftDarkIcon} alt="Arrow Left" />
+                </Button>
+                <div className="grow flex gap-5 justify-center">
+                  {pageNumbers.map(num => (
+                    <Button
+                      key={num}
+                      variant={num === page ? 'primary' : 'outline'}
+                      className={cn(
+                        'flex-shrink-0 flex items-center justify-center w-16 h-12 md:w-20 lg:h-14 xl:w-24 2xl:w-28 2xl:h-16',
+                        num === page ? 'text-white' : '',
+                      )}
+                      onClick={() => setPage(num)}
+                    >
+                      {num}
+                    </Button>
+                  ))}
+                </div>
+                <Button
+                  variant="text"
+                  className={cn('flex-shrink-0 p-0 ml-5', !hasNext ? 'invisible' : '')}
+                  onClick={() => setPage(page + 1)}
+                >
+                  <img src={arrowRightDarkMediumIcon} alt="Arrow Right" />
+                </Button>
               </div>
-              <Button
-                variant="text"
-                className={cn('flex-shrink-0 p-0 ml-5', !hasNext ? 'invisible' : '')}
-                onClick={() => setPage(page + 1)}
-              >
-                <img src={arrowRightDarkMediumIcon} alt="Arrow Right" />
-              </Button>
             </div>
-          </div>
+          )}
         </div>
       )}
     </section>
