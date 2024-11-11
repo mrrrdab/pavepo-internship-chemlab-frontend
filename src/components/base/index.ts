@@ -4,4 +4,4 @@ export * from './Checkbox';
 export * from './ColorCheckbox';
 export * from './input-range';
 export * from './Radio';
-export * from './tabs';
+export * from './Tabs';
