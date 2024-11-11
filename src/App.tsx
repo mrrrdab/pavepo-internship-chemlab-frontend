@@ -39,7 +39,7 @@ const App: React.FC = () => {
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter basename="/chemlab-test-project">
+        <BrowserRouter>
           <ScrollToTop />
           <SearchProvider>
             <CartProvider>
